@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "advan-site",
+  "compatibility_date": "2025-01-01",
+  // فقط فایل‌های استاتیک؛ no build
+  "assets": {
+    "directory": "./public",
+    // html rendering: strict → index.html روی / سرو می‌شود
+    "html_handling": "auto-trailing-slash"
+  },
+  // آدرس موقت workers.dev برای پیش‌نمایش؛ دامنهٔ اختصاصی بعداً با custom_domain اضافه می‌شود
+  "workers_dev": true
+}
