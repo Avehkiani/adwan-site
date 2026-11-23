@@ -10,7 +10,8 @@
 
 | فایل | توضیح |
 | --- | --- |
-| `index.html` | کل وب‌سایت در یک فایل (HTML + CSS + JS داخلی) |
+| `public/index.html` | کل وب‌سایت در یک فایل (HTML + CSS + JS داخلی) |
+| `wrangler.jsonc` | تنظیمات انتشار روی Cloudflare Workers (Static Assets) |
 | `README.md` | همین راهنما |
 
 ## ✨ امکانات
@@ -37,19 +38,22 @@
 ⚠️ **بعد از اولین ورود، از پنل مدیریت ← تنظیمات ← تغییر رمز مدیر، رمز را عوض کنید.**
 دسترسی به پنل: کلیک روی نام کاربر پس از ورود ← «پنل مدیریت»، یا آدرس `آدرس-سایت/#admin`
 
-## 🚀 انتشار روی GitHub Pages
+## 🚀 معماری انتشار (GitHub + Cloudflare Workers)
 
-1. مخزن (Repository) جدیدی در گیت‌هاب بسازید.
-2. فایل `index.html` را آپلود کنید (Upload files).
-3. از `Settings ← Pages` گزینهٔ `Deploy from a branch` و برنچ `main` / پوشهٔ `/ (root)` را انتخاب کنید.
-4. بعد از حدود یک دقیقه، سایت روی `https://USERNAME.github.io/REPO/` در دسترس است.
+این سایت بدون هیچ Pages (نه GitHub Pages، نه Cloudflare Pages) منتشر می‌شود:
 
-## ☁️ انتشار روی Cloudflare Pages
+1. **گیت‌هاب** فقط مخزن کد است — هر Push به `main` تریگر انتشار است.
+2. **Cloudflare Worker** با Static Assets، فایل `public/index.html` را مستقیم سرو می‌کند (بدون بیلد).
+3. اتصال مخزن به کلادفلر از طریق **Workers Builds** انجام شده و هر Push به‌صورت خودکار منتشر می‌شود.
+4. دامنهٔ `adwan.ir` به‌صورت Custom Domain به Worker وصل است؛ DNS و SSL خودکار.
 
-1. در داشبورد Cloudflare ← `Workers & Pages ← Create ← Pages ← Upload assets`.
-2. پوشه‌ای که فقط `index.html` در آن است را بکشید و رها کنید (Drag & Drop).
-3. نام پروژه را انتخاب کنید؛ سایت روی `PROJECT.pages.dev` منتشر می‌شود.
-   (یا اگر از گیت‌هاب متصل کنید: Build command را خالی و Output directory را `/` بگذارید.)
+### انتشار مجدد پس از تغییر
+
+فایل `public/index.html` جدید را کامیت و Push کنید؛ Workers Builds در کلادفلر خودکار همان نسخه را منتشر می‌کند (حدود یک دقیقه).
+
+```bash
+git add public/index.html && git commit -m "update" && git push
+```
 
 ## ✏️ ویرایش محتوا
 

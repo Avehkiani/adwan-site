@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "advan-site",
+  "name": "adwan-site",
   "compatibility_date": "2025-01-01",
   // فقط فایل‌های استاتیک؛ no build
   "assets": {
