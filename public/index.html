@@ -31,8 +31,10 @@
   --wrap:1180px;
   --font:'Vazirmatn','Segoe UI',Tahoma,sans-serif;
   --radius:16px;--radius-lg:24px;--radius-sm:12px;
-  --tr:.25s cubic-bezier(.4,0,.2,1);
-  --tr-slow:.55s cubic-bezier(.22,1,.36,1);
+  --tr:.4s cubic-bezier(.25,.85,.3,1);
+  --tr-slow:.85s cubic-bezier(.22,1,.36,1);
+  --ease-soft:cubic-bezier(.22,1,.36,1);
+  --ease-spring:cubic-bezier(.34,1.45,.5,1);
   --hdr:68px;
   --c1:#0a84ff;--c2:#5e5ce6;   /* رنگ‌های نمونه کارت‌ها (بازنویسی در JS) */
 }
@@ -166,7 +168,7 @@ header.open + .mnav-open .mnav,header.open .mnav{opacity:1;transform:none;pointe
 .chip:hover{border-color:var(--accent);color:var(--text)}
 .chip.active{background:var(--accent);background-image:var(--grad);color:#fff;border-color:transparent;box-shadow:0 6px 16px -8px var(--accent)}
 .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm)}
-.ripple{position:absolute;border-radius:50%;background:currentColor;opacity:.22;transform:scale(0);animation:ripple .55s ease-out forwards;pointer-events:none}
+.ripple{position:absolute;border-radius:50%;background:currentColor;opacity:.15;transform:scale(0);animation:ripple .75s cubic-bezier(.22,1,.36,1) forwards;pointer-events:none}
 @keyframes ripple{to{transform:scale(3.4);opacity:0}}
 .grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 /* بخش‌ها */
@@ -186,8 +188,8 @@ section{padding-block:clamp(4rem,9vw,7rem);position:relative}
 .hero-grid-lines{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse 75% 65% at 50% 40%,#000 25%,transparent 72%);-webkit-mask-image:radial-gradient(ellipse 75% 65% at 50% 40%,#000 25%,transparent 72%);opacity:.5}
 .hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1.08fr .92fr;gap:2.5rem;align-items:center;width:min(var(--wrap),100% - 2.5rem);margin-inline:auto}
 .hero-badge{display:inline-flex;align-items:center;gap:.55rem;font-size:.83rem;font-weight:700;color:var(--text);background:var(--glass);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:99px;padding:.42rem 1.1rem;margin-bottom:1.3rem;box-shadow:var(--shadow-sm)}
-.hero-badge .dot{width:8px;height:8px;border-radius:50%;background:#30d158;box-shadow:0 0 0 0 rgba(48,209,88,.5);animation:pulseDot 2s infinite}
-@keyframes pulseDot{0%{box-shadow:0 0 0 0 rgba(48,209,88,.45)}70%{box-shadow:0 0 0 9px rgba(48,209,88,0)}100%{box-shadow:0 0 0 0 rgba(48,209,88,0)}}
+.hero-badge .dot{width:8px;height:8px;border-radius:50%;background:#30d158;box-shadow:0 0 0 0 rgba(48,209,88,.5);animation:pulseDot 2.8s infinite}
+@keyframes pulseDot{0%{box-shadow:0 0 0 0 rgba(48,209,88,.38)}70%{box-shadow:0 0 0 8px rgba(48,209,88,0)}100%{box-shadow:0 0 0 0 rgba(48,209,88,0)}}
 #heroTitle{font-size:clamp(2.1rem,5.6vw,3.9rem);font-weight:900;line-height:1.55;margin-bottom:1.1rem;letter-spacing:-.01em}
 .hero-lead{color:var(--muted);font-size:clamp(1rem,1.8vw,1.18rem);max-width:34rem;margin-bottom:2rem}
 .hero-hello{display:none;align-items:center;gap:.55rem;color:var(--accent-text);font-weight:800;font-size:.95rem;margin-bottom:.9rem}
@@ -207,7 +209,7 @@ section{padding-block:clamp(4rem,9vw,7rem);position:relative}
 .trust-stars svg{width:14px;height:14px}
 /* صحنهٔ سه‌بعدی */
 .scene-wrap{position:relative;display:grid;place-items:center;min-height:min(420px,58vw)}
-.scene{perspective:1150px;width:min(330px,66vw);aspect-ratio:1;will-change:transform;transition:transform .2s ease-out}
+.scene{perspective:1150px;width:min(330px,66vw);aspect-ratio:1;will-change:transform;transition:transform .3s cubic-bezier(.3,.8,.4,1)}
 .cube{position:relative;width:100%;height:100%;transform-style:preserve-3d;animation:cubeSpin 26s linear infinite}
 @keyframes cubeSpin{from{transform:rotateX(-18deg) rotateY(0deg)}to{transform:rotateX(-18deg) rotateY(-360deg)}}
 .face{position:absolute;inset:0;display:grid;place-items:center;align-content:center;gap:.7rem;border-radius:26px;background:color-mix(in srgb,var(--card) 78%,transparent);border:1px solid var(--border-2);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px);box-shadow:inset 0 0 46px color-mix(in srgb,var(--accent) 9%,transparent),0 0 30px color-mix(in srgb,var(--accent) 7%,transparent)}
@@ -228,7 +230,7 @@ html:not([data-theme]) .scene{--hz:165px}
 .fc-1{top:6%;inset-inline-start:-4%;animation-delay:.2s}
 .fc-2{bottom:16%;inset-inline-start:-7%;animation-delay:1.4s;animation-duration:6.5s}
 .fc-3{top:22%;inset-inline-end:-6%;animation-delay:.8s;animation-duration:7.2s}
-@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-13px)}}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
 .scroll-hint{position:absolute;bottom:1.6rem;inset-inline-start:50%;transform:translateX(50%);display:grid;justify-items:center;gap:.3rem;color:var(--muted);font-size:.72rem;font-weight:700;z-index:1}
 .scroll-hint .mouse{width:22px;height:34px;border:2px solid var(--border-2);border-radius:12px;display:flex;justify-content:center;padding-top:5px}
 .scroll-hint .mouse i{width:3px;height:7px;border-radius:3px;background:var(--accent);animation:wheel 1.6s ease-in-out infinite}
@@ -413,9 +415,9 @@ footer{background:var(--bg-2);border-top:1px solid var(--border);padding:3.5rem 
 </style>
 <style>
 /* ============ مودال‌ها و اورلی‌ها ============ */
-.overlay{position:fixed;inset:0;background:var(--scrim);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);z-index:80;display:grid;place-items:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .28s}
+.overlay{position:fixed;inset:0;background:var(--scrim);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);z-index:80;display:grid;place-items:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .4s}
 .overlay.open{opacity:1;pointer-events:auto}
-.overlay .sheet{width:min(560px,100%);max-height:88vh;overflow:auto;background:var(--card);border:1px solid var(--border);border-radius:24px;box-shadow:var(--shadow);padding:1.7rem;transform:translateY(18px) scale(.96);transition:transform .34s var(--tr-slow);scrollbar-width:thin}
+.overlay .sheet{width:min(560px,100%);max-height:88vh;overflow:auto;background:var(--card);border:1px solid var(--border);border-radius:24px;box-shadow:var(--shadow);padding:1.7rem;transform:translateY(24px) scale(.95);transition:transform .55s var(--ease-spring);scrollbar-width:thin}
 .overlay.open .sheet{transform:none}
 .sheet-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.2rem}
 .sheet-head h3{font-size:1.15rem;font-weight:800}
@@ -431,7 +433,7 @@ footer{background:var(--bg-2);border-top:1px solid var(--border);padding:3.5rem 
 .s-input .kbd-hint{position:absolute;top:50%;inset-inline-end:.8rem;transform:translateY(-50%);font-size:.65rem;font-weight:800;color:var(--muted);border:1px solid var(--border-2);border-radius:7px;padding:.15rem .45rem}
 .s-results{margin-top:.9rem;overflow:auto;display:grid;gap:.9rem;scrollbar-width:thin}
 .s-group b{display:block;font-size:.72rem;font-weight:800;color:var(--muted);margin:.2rem 0 .5rem;padding-inline-start:.4rem}
-.s-item{display:flex;align-items:center;gap:.8rem;width:100%;text-align:start;padding:.7rem .85rem;border-radius:13px;font-weight:600;font-size:.9rem;transition:background .15s}
+.s-item{display:flex;align-items:center;gap:.8rem;width:100%;text-align:start;padding:.7rem .85rem;border-radius:13px;font-weight:600;font-size:.9rem;transition:background .25s var(--ease-soft)}
 .s-item:hover,.s-item.active{background:var(--soft)}
 .s-item .s-ic{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;background:color-mix(in srgb,var(--accent) 11%,transparent);color:var(--accent-text);flex:none}
 .s-item .s-ic svg{width:17px;height:17px}
@@ -439,7 +441,7 @@ footer{background:var(--bg-2);border-top:1px solid var(--border);padding:3.5rem 
 .s-item mark{background:var(--mark);color:inherit;border-radius:4px;padding:0 .1em}
 .s-empty{text-align:center;color:var(--muted);font-size:.9rem;padding:2rem 0 1.4rem}
 /* چت */
-#chatPanel{position:fixed;bottom:6.2rem;inset-inline-end:1.1rem;width:min(390px,calc(100vw - 2.2rem));height:min(590px,calc(100dvh - 8.5rem));z-index:70;display:flex;flex-direction:column;border-radius:22px;background:var(--card);border:1px solid var(--border);box-shadow:var(--shadow);overflow:hidden;opacity:0;transform:translateY(16px) scale(.94);transform-origin:bottom;pointer-events:none;transition:all .32s var(--tr-slow)}
+#chatPanel{position:fixed;bottom:6.2rem;inset-inline-end:1.1rem;width:min(390px,calc(100vw - 2.2rem));height:min(590px,calc(100dvh - 8.5rem));z-index:70;display:flex;flex-direction:column;border-radius:22px;background:var(--card);border:1px solid var(--border);box-shadow:var(--shadow);overflow:hidden;opacity:0;transform:translateY(20px) scale(.94);transform-origin:bottom;pointer-events:none;transition:all .5s var(--ease-spring)}
 #chatPanel.open{opacity:1;transform:none;pointer-events:auto}
 .chat-head{display:flex;align-items:center;gap:.75rem;padding:.95rem 1.2rem;background:var(--accent);background-image:var(--grad);color:#fff}
 .chat-head .avatar{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35)}
@@ -449,7 +451,7 @@ footer{background:var(--bg-2);border-top:1px solid var(--border);padding:3.5rem 
 .chat-head .sheet-close{color:#fff}
 .chat-head .sheet-close:hover{background:rgba(255,255,255,.18);color:#fff}
 .chat-log{flex:1;overflow-y:auto;padding:1.1rem;display:flex;flex-direction:column;gap:.7rem;scrollbar-width:thin}
-.msg{max-width:82%;padding:.65rem .95rem;border-radius:16px;font-size:.86rem;line-height:1.8;animation:msgIn .3s var(--tr-slow);white-space:pre-line}
+.msg{max-width:82%;padding:.65rem .95rem;border-radius:16px;font-size:.86rem;line-height:1.8;animation:msgIn .45s var(--ease-spring);white-space:pre-line}
 @keyframes msgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .msg.bot{align-self:flex-start;background:var(--soft);border-start-start-radius:5px}
 .msg.user{align-self:flex-end;background:var(--accent);background-image:var(--grad);color:#fff;border-start-end-radius:5px}
@@ -482,14 +484,14 @@ footer{background:var(--bg-2);border-top:1px solid var(--border);padding:3.5rem 
 #chatFab.on .fab-x{opacity:1;transform:none}
 #chatFab .ping{position:absolute;top:4px;inset-inline-end:4px;width:11px;height:11px;border-radius:50%;background:#4ade80;border:2px solid var(--bg);animation:pulseDot 2s infinite}
 #chatFab.on .ping{display:none}
-#topBtn{position:fixed;bottom:1.4rem;inset-inline-end:5rem;width:44px;height:44px;border-radius:14px;background:var(--card);border:1px solid var(--border);color:var(--muted);display:grid;place-items:center;z-index:65;opacity:0;pointer-events:none;transform:translateY(10px);transition:all .3s;box-shadow:var(--shadow-sm)}
+#topBtn{position:fixed;bottom:1.4rem;inset-inline-end:5rem;width:44px;height:44px;border-radius:14px;background:var(--card);border:1px solid var(--border);color:var(--muted);display:grid;place-items:center;z-index:65;opacity:0;pointer-events:none;transform:translateY(10px);transition:all .45s var(--ease-soft);box-shadow:var(--shadow-sm)}
 #topBtn.show{opacity:1;pointer-events:auto;transform:none}
 #topBtn:hover{color:var(--accent-text);border-color:var(--accent)}
 #topBtn svg{width:18px;height:18px}
 @media (max-width:560px){#topBtn{inset-inline-end:auto;inset-inline-start:1.1rem}}
 /* توست */
 #toasts{position:fixed;bottom:1.3rem;inset-inline-start:50%;transform:translateX(50%);z-index:110;display:grid;gap:.6rem;justify-items:center;pointer-events:none;width:max-content;max-width:calc(100vw - 2rem)}
-.toast{display:flex;align-items:center;gap:.6rem;background:var(--card);border:1px solid var(--border);color:var(--text);padding:.7rem 1.15rem;border-radius:14px;box-shadow:var(--shadow);font-size:.87rem;font-weight:700;opacity:0;transform:translateY(14px) scale(.95);transition:all .32s var(--tr-slow);max-width:calc(100vw - 2rem)}
+.toast{display:flex;align-items:center;gap:.6rem;background:var(--card);border:1px solid var(--border);color:var(--text);padding:.7rem 1.15rem;border-radius:14px;box-shadow:var(--shadow);font-size:.87rem;font-weight:700;opacity:0;transform:translateY(16px) scale(.95);transition:all .45s var(--ease-spring);max-width:calc(100vw - 2rem)}
 .toast.show{opacity:1;transform:none}
 .toast svg{width:18px;height:18px;flex:none}
 .toast.t-ok svg{color:#22c55e}
@@ -598,17 +600,41 @@ footer{background:var(--bg-2);border-top:1px solid var(--border);padding:3.5rem 
   .adm-side .adm-foot{border:none;margin:0;padding:0;display:flex;flex-direction:row}
 }
 /* ============ انیمیشن‌های عمومی ============ */
-.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s var(--tr-slow)}
-.reveal.in{opacity:1;transform:none}
-[data-stagger]>*{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s var(--tr-slow)}
-[data-stagger].in>*{opacity:1;transform:none}
+.reveal{opacity:0;transform:translateY(36px) scale(.985);filter:blur(6px);transition:opacity .95s var(--ease-soft),transform .95s var(--ease-soft),filter .95s var(--ease-soft)}
+.reveal.in{opacity:1;transform:none;filter:none}
+[data-stagger]>*{opacity:0;transform:translateY(30px) scale(.99);filter:blur(4px);transition:opacity .85s var(--ease-soft),transform .85s var(--ease-soft),filter .85s var(--ease-soft)}
+[data-stagger].in>*{opacity:1;transform:none;filter:none}
+/* ============ نرمی و جانِ محیطی ============ */
+.orb-1{animation:orbFloat 13s ease-in-out infinite alternate,orbBreath 9.5s ease-in-out infinite}
+.orb-2{animation:orbFloat 15s ease-in-out infinite alternate-reverse,orbBreath 11.5s ease-in-out infinite reverse}
+@keyframes orbBreath{0%,100%{opacity:.5}50%{opacity:.92}}
+.hero-grid-lines{animation:gridBreath 12s ease-in-out infinite}
+@keyframes gridBreath{0%,100%{opacity:.32}50%{opacity:.62}}
+body::before{content:"";position:fixed;inset:-20%;z-index:-1;pointer-events:none;background:radial-gradient(42% 34% at 18% 22%,color-mix(in srgb,var(--accent) 7%,transparent),transparent 70%),radial-gradient(36% 30% at 82% 78%,color-mix(in srgb,var(--accent-2) 6%,transparent),transparent 70%);filter:blur(60px);animation:auroraDrift 22s ease-in-out infinite alternate}
+@keyframes auroraDrift{from{transform:translate3d(0,-2%,0) scale(1)}to{transform:translate3d(3%,3%,0) scale(1.08)}}
+.hero-badge,.hero-hello,#heroTitle,.hero-lead,.hero-cta,.hero-trust,.scene-wrap{animation:heroIn .95s var(--ease-soft) backwards}
+.hero-badge{animation-delay:.02s}
+#heroTitle{animation-delay:.1s}
+.hero-lead{animation-delay:.18s}
+.hero-cta{animation-delay:.28s}
+.hero-trust{animation-delay:.4s}
+.scene-wrap{animation-delay:.22s}
+@keyframes heroIn{from{opacity:0;transform:translateY(30px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+.btn{transition:transform .5s var(--ease-spring),box-shadow .5s var(--ease-soft),background .35s var(--ease-soft),border-color .35s var(--ease-soft),color .35s var(--ease-soft)}
+.btn:active{transition-duration:.18s}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 18px 42px -14px var(--accent)}
+.btn-ghost:hover,.btn-soft:hover,.btn-white:hover{transform:translateY(-2px)}
+.vcard,.bcard,.cinfo-card{position:relative;overflow:hidden}
+.vcard::after,.bcard::after,.cinfo-card::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(115deg,transparent 40%,color-mix(in srgb,var(--accent) 9%,transparent) 50%,transparent 60%);transform:translateX(-135%);transition:transform 1.15s var(--ease-soft);pointer-events:none}
+.vcard:hover::after,.bcard:hover::after,.cinfo-card:hover::after{transform:translateX(135%)}
+.adv-opt{transition:transform .5s var(--ease-spring),box-shadow .5s var(--ease-soft),background .35s,border-color .35s}
 /* ============ کاهش حرکت / غیرفعال‌سازی انیمیشن ============ */
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}
 }
 html.no-anim *,html.no-anim *::before,html.no-anim *::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
 html.no-anim{scroll-behavior:auto}
-html.no-anim [data-stagger]>*,html.no-anim .reveal{opacity:1 !important;transform:none !important}
+html.no-anim [data-stagger]>*,html.no-anim .reveal{opacity:1 !important;transform:none !important;filter:none !important}
 </style>
 </head>
 <body>
@@ -1228,7 +1254,7 @@ function renderAll(){
 /* ---------- میکرودی تعاملات ---------- */
 function initStagger(){
   $$('[data-stagger]').forEach(g=>{
-    [...g.children].forEach((c,i)=>c.style.transitionDelay=Math.min(i*70,420)+'ms');
+    [...g.children].forEach((c,i)=>c.style.transitionDelay=Math.min(i*95,560)+'ms');
   });
 }
 const revealIO=new IntersectionObserver(es=>{
@@ -1243,8 +1269,8 @@ function initCounters(){
   const io=new IntersectionObserver(es=>{
     es.forEach(e=>{
       if(!e.isIntersecting)return;io.unobserve(e.target);
-      const n=Number(e.target.dataset.count)||0,t0=performance.now(),dur=isReduced()?1:1300;
-      const step=t=>{const p=Math.min((t-t0)/dur,1),v=Math.round(n*(1-Math.pow(1-p,3)));
+      const n=Number(e.target.dataset.count)||0,t0=performance.now(),dur=isReduced()?1:1700;
+      const step=t=>{const p=Math.min((t-t0)/dur,1),v=Math.round(n*(1-Math.pow(1-p,4)));
         e.target.textContent=faNum(v);if(p<1)requestAnimationFrame(step)};
       requestAnimationFrame(step);
     });
