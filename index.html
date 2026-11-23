@@ -1,0 +1,2137 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="آدوان — مجموعه محصولات نرم‌افزاری، سرویس‌های ابری و راه‌حل‌های هوش مصنوعی برای کسب‌وکارها">
+<meta name="theme-color" content="#f7f7f8" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
+<title>آدوان | مسیر شما به سوی آیندهٔ دیجیتال</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44'%3E%3Crect x='2' y='2' width='40' height='40' rx='12' fill='%230a6ee0'/%3E%3Cpath d='M12 30c4-1 6-3 6.5-6.5C19 20 21 18 25 17.5 28.5 17 30.5 15 31.5 12' stroke='%23fff' stroke-width='2.6' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='12' cy='30' r='2.6' fill='%23fff'/%3E%3Ccircle cx='31.5' cy='12' r='2.6' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
+<script>
+/* اعمال تنظیمات ذخیره‌شدهٔ کاربر قبل از رندر (جلوگیری از فلش تغییر تم) */
+(function(){try{
+  var p=JSON.parse(localStorage.getItem('advan-prefs')||'{}');
+  var t=p.theme||'auto';
+  var dark=(t==='dark')||(t==='auto'&&window.matchMedia('(prefers-color-scheme: dark)').matches);
+  var h=document.documentElement;
+  h.dataset.theme=dark?'dark':'light';
+  if(p.accent)h.dataset.accent=p.accent;
+  if(p.fs)h.dataset.fs=p.fs;
+  if(p.anim===false)h.classList.add('no-anim');
+}catch(e){document.documentElement.dataset.theme='light'}})();
+</script>
+<style>
+/* ============ ریست و توکن‌های طراحی ============ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --wrap:1180px;
+  --font:'Vazirmatn','Segoe UI',Tahoma,sans-serif;
+  --radius:16px;--radius-lg:24px;--radius-sm:12px;
+  --tr:.25s cubic-bezier(.4,0,.2,1);
+  --tr-slow:.55s cubic-bezier(.22,1,.36,1);
+  --hdr:68px;
+  --c1:#0a84ff;--c2:#5e5ce6;   /* رنگ‌های نمونه کارت‌ها (بازنویسی در JS) */
+}
+html[data-fs="s"]{font-size:14px}
+html[data-fs="m"]{font-size:16px}
+html[data-fs="l"]{font-size:18px}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--hdr) + 18px)}
+html[data-theme="light"]{
+  --bg:#f7f7f8;--bg-2:#ffffff;--card:#ffffff;--soft:#f0f0f3;--soft-2:#e9e9ee;
+  --text:#17171a;--muted:#66666e;--border:rgba(23,23,26,.09);--border-2:rgba(23,23,26,.16);
+  --shadow:0 1px 2px rgba(23,23,26,.04),0 14px 34px -14px rgba(23,23,26,.16);
+  --shadow-sm:0 1px 3px rgba(23,23,26,.06),0 6px 18px -8px rgba(23,23,26,.12);
+  --glass:rgba(255,255,255,.74);
+  --glow:rgba(10,110,224,.13);
+  --mark:rgba(10,110,224,.18);
+  --scrim:rgba(10,10,16,.5);
+}
+html[data-theme="dark"]{
+  --bg:#09090b;--bg-2:#0d0d10;--card:#151518;--soft:#1d1d22;--soft-2:#26262c;
+  --text:#f4f4f5;--muted:#9d9da6;--border:rgba(255,255,255,.09);--border-2:rgba(255,255,255,.18);
+  --shadow:0 1px 2px rgba(0,0,0,.35),0 18px 44px -16px rgba(0,0,0,.65);
+  --shadow-sm:0 1px 3px rgba(0,0,0,.3),0 8px 22px -10px rgba(0,0,0,.55);
+  --glass:rgba(13,13,16,.72);
+  --glow:rgba(80,160,255,.14);
+  --mark:rgba(120,180,255,.28);
+  --scrim:rgba(4,4,8,.62);
+}
+html[data-accent="blue"]{--accent:#0a6ee0;--accent-2:#4aa3ff;--accent-text:#0857b8;--grad:linear-gradient(120deg,#0a6ee0,#4aa3ff)}
+html[data-theme="dark"][data-accent="blue"]{--accent:#4a9bff;--accent-2:#8ec2ff;--accent-text:#9ccbff}
+html[data-accent="violet"]{--accent:#6d3ae8;--accent-2:#a78bfa;--accent-text:#5a26cf;--grad:linear-gradient(120deg,#6d3ae8,#a78bfa)}
+html[data-theme="dark"][data-accent="violet"]{--accent:#a78bfa;--accent-2:#c4b5fd;--accent-text:#c9b8fd}
+html[data-accent="green"]{--accent:#0e9f6e;--accent-2:#34d399;--accent-text:#0a7d57;--grad:linear-gradient(120deg,#0e9f6e,#34d399)}
+html[data-theme="dark"][data-accent="green"]{--accent:#2ec48b;--accent-2:#6ee7b7;--accent-text:#7ceec0}
+html[data-accent="orange"]{--accent:#ea580c;--accent-2:#fb923c;--accent-text:#c2410c;--grad:linear-gradient(120deg,#ea580c,#fb923c)}
+html[data-theme="dark"][data-accent="orange"]{--accent:#fb923c;--accent-2:#fdba74;--accent-text:#fdba74}
+html[data-accent="pink"]{--accent:#db2777;--accent-2:#f472b6;--accent-text:#be185d;--grad:linear-gradient(120deg,#db2777,#f472b6)}
+html[data-theme="dark"][data-accent="pink"]{--accent:#f472b6;--accent-2:#f9a8d4;--accent-text:#f9a8d4}
+html[data-accent="teal"]{--accent:#0d9488;--accent-2:#2dd4bf;--accent-text:#0f766e;--grad:linear-gradient(120deg,#0d9488,#2dd4bf)}
+html[data-theme="dark"][data-accent="teal"]{--accent:#2dd4bf;--accent-2:#5eead4;--accent-text:#5eead4}
+body{
+  font-family:var(--font);background:var(--bg);color:var(--text);
+  line-height:1.85;font-size:1rem;min-height:100vh;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  transition:background .35s ease,color .35s ease;
+}
+body.locked{overflow:hidden}
+img,svg{max-width:100%;display:inline-block;vertical-align:middle}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+input,textarea,select{font:inherit;color:inherit}
+a{color:inherit;text-decoration:none}
+ul,ol{list-style:none}
+::selection{background:var(--mark)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+:focus:not(:focus-visible){outline:none}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-thumb{background:var(--border-2);border-radius:99px;border:2px solid var(--bg)}
+::-webkit-scrollbar-thumb:hover{background:var(--accent)}
+::-webkit-scrollbar-track{background:transparent}
+.ic{flex:none}
+/* اسکیپ‌لینک دسترسی‌پذیری */
+.skip{position:fixed;top:-60px;inset-inline-start:1rem;z-index:200;background:var(--accent);color:#fff;padding:.6rem 1.2rem;border-radius:0 0 12px 12px;font-weight:700;transition:top .25s}
+.skip:focus{top:0}
+.wrap{width:min(var(--wrap),100% - 2.5rem);margin-inline:auto}
+main{display:block}
+/* ============ نوار پیشرفت + هدر ============ */
+#progress{position:fixed;top:0;right:0;height:3px;width:0;background:var(--grad);z-index:60;border-radius:0 0 0 4px;transition:width .12s linear}
+header#topbar{position:fixed;inset-inline:0;top:0;height:var(--hdr);z-index:50;display:flex;align-items:center;transition:box-shadow var(--tr),background var(--tr);background:transparent}
+header#topbar.scrolled{background:var(--glass);-webkit-backdrop-filter:blur(18px) saturate(1.6);backdrop-filter:blur(18px) saturate(1.6);box-shadow:0 1px 0 var(--border),0 8px 28px -18px rgba(0,0,0,.35)}
+header#topbar .wrap{display:flex;align-items:center;gap:1.1rem;width:min(var(--wrap),100% - 2rem)}
+.logo{display:inline-flex;align-items:center;gap:.65rem;font-weight:800;font-size:1.25rem}
+.logo .mark{width:40px;height:40px;flex:none;filter:drop-shadow(0 4px 10px var(--glow));transition:transform var(--tr)}
+.logo:hover .mark{transform:rotate(-8deg) scale(1.06)}
+.logo small{font-size:.66rem;font-weight:600;color:var(--muted);letter-spacing:.12em;display:block;line-height:1}
+nav#mainnav{display:flex;align-items:center;gap:.35rem;margin-inline-start:.6rem}
+nav#mainnav a{position:relative;padding:.5rem .8rem;border-radius:10px;font-size:.95rem;font-weight:600;color:var(--muted);transition:color var(--tr),background var(--tr)}
+nav#mainnav a::after{content:"";position:absolute;bottom:.28rem;inset-inline:50%;height:2px;width:0;background:var(--grad);border-radius:2px;transition:width .28s var(--tr),inset-inline-start .28s var(--tr)}
+nav#mainnav a:hover{color:var(--text);background:var(--soft)}
+nav#mainnav a.active{color:var(--accent-text)}
+nav#mainnav a.active::after{width:16px;inset-inline-start:calc(50% - 8px)}
+.actions{display:flex;align-items:center;gap:.45rem;margin-inline-start:auto}
+.icon-btn{position:relative;overflow:hidden;width:42px;height:42px;border-radius:12px;display:grid;place-items:center;color:var(--muted);border:1px solid transparent;transition:all var(--tr)}
+.icon-btn:hover{background:var(--soft);color:var(--text);border-color:var(--border)}
+.icon-btn svg{width:20px;height:20px}
+.kbd{position:absolute;bottom:3px;inset-inline-end:5px;font-size:.5rem;color:var(--muted);font-weight:700;opacity:.75}
+#themeBtn .sun,#themeBtn .moon{position:absolute;transition:transform .45s var(--tr-slow),opacity .3s}
+html[data-theme="light"] #themeBtn .moon{opacity:0;transform:rotate(-90deg) scale(.4)}
+html[data-theme="dark"] #themeBtn .sun{opacity:0;transform:rotate(90deg) scale(.4)}
+.user-chip{display:inline-flex;align-items:center;gap:.5rem;padding:.3rem .8rem .3rem .4rem;border-radius:99px;border:1px solid var(--border);background:var(--card);font-size:.85rem;font-weight:700;transition:all var(--tr)}
+.user-chip:hover{border-color:var(--accent);box-shadow:var(--shadow-sm)}
+.avatar{width:30px;height:30px;border-radius:50%;background:var(--grad);color:#fff;display:grid;place-items:center;font-size:.8rem;font-weight:800}
+.user-menu{position:absolute;top:calc(100% + 10px);inset-inline-end:0;min-width:190px;background:var(--card);border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);padding:.4rem;opacity:0;transform:translateY(-6px) scale(.97);pointer-events:none;transition:all .22s var(--tr);z-index:55}
+.user-menu.open{opacity:1;transform:none;pointer-events:auto}
+.user-menu .um-head{padding:.5rem .7rem;font-size:.78rem;color:var(--muted);border-bottom:1px solid var(--border);margin-bottom:.3rem}
+.user-menu button,.user-menu a{display:flex;align-items:center;gap:.6rem;width:100%;padding:.55rem .7rem;border-radius:10px;font-size:.88rem;font-weight:600;text-align:start;transition:background var(--tr)}
+.user-menu button:hover,.user-menu a:hover{background:var(--soft)}
+.user-menu button svg,.user-menu a svg{width:16px;height:16px;color:var(--muted)}
+/* منوی موبایل */
+#menuBtn{display:none}
+.mnav{position:fixed;top:calc(var(--hdr) + 6px);inset-inline:1rem;z-index:49;background:var(--card);border:1px solid var(--border);border-radius:18px;box-shadow:var(--shadow);padding:.7rem;display:grid;gap:.15rem;opacity:0;transform:translateY(-10px) scale(.98);pointer-events:none;transition:all .28s var(--tr-slow)}
+header.open + .mnav-open .mnav,header.open .mnav{opacity:1;transform:none;pointer-events:auto}
+.mnav a{padding:.8rem 1rem;border-radius:12px;font-weight:700;display:flex;align-items:center;gap:.6rem}
+.mnav a:hover,.mnav a.active{background:var(--soft);color:var(--accent-text)}
+.mnav a svg{width:17px;height:17px;color:var(--accent)}
+@media (max-width:920px){
+  nav#mainnav{display:none}
+  #menuBtn{display:grid}
+  .actions .kbd{display:none}
+}
+@media (max-width:430px){
+  .user-chip>span:not(.avatar){display:none}
+  .user-chip{padding:.3rem}
+}
+</style>
+<style>
+/* ============ دکمه‌ها و اجزای پایه ============ */
+.btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:.55rem;padding:.8rem 1.5rem;border-radius:14px;font-weight:700;font-size:.95rem;line-height:1.4;cursor:pointer;border:1px solid transparent;user-select:none;transition:transform var(--tr),box-shadow var(--tr),background var(--tr),border-color var(--tr),color var(--tr);white-space:nowrap}
+.btn svg{width:18px;height:18px}
+.btn-primary{background:var(--accent);background-image:var(--grad);color:#fff;box-shadow:0 10px 26px -12px var(--accent)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 34px -12px var(--accent)}
+.btn-primary:active{transform:translateY(0) scale(.97)}
+.btn-ghost{border-color:var(--border-2);color:var(--text);background:transparent}
+.btn-ghost:hover{background:var(--soft);border-color:var(--accent)}
+.btn-ghost:active{transform:scale(.97)}
+.btn-soft{background:var(--soft);color:var(--accent-text)}
+.btn-soft:hover{background:var(--soft-2)}
+.btn-danger{background:#e11d48;color:#fff}
+.btn-sm{padding:.45rem .9rem;font-size:.82rem;border-radius:10px}
+.btn-sm svg{width:15px;height:15px}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+.chip{position:relative;overflow:hidden;padding:.5rem 1.05rem;border-radius:99px;border:1px solid var(--border);background:var(--card);font-size:.86rem;font-weight:700;color:var(--muted);transition:all var(--tr)}
+.chip:hover{border-color:var(--accent);color:var(--text)}
+.chip.active{background:var(--accent);background-image:var(--grad);color:#fff;border-color:transparent;box-shadow:0 6px 16px -8px var(--accent)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm)}
+.ripple{position:absolute;border-radius:50%;background:currentColor;opacity:.22;transform:scale(0);animation:ripple .55s ease-out forwards;pointer-events:none}
+@keyframes ripple{to{transform:scale(3.4);opacity:0}}
+.grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+/* بخش‌ها */
+section{padding-block:clamp(4rem,9vw,7rem);position:relative}
+.sec-head{max-width:640px;margin-inline:auto;text-align:center;margin-bottom:clamp(2.2rem,5vw,3.4rem)}
+.kicker{display:inline-flex;align-items:center;gap:.5rem;font-size:.82rem;font-weight:800;color:var(--accent-text);background:color-mix(in srgb,var(--accent) 10%,transparent);border:1px solid color-mix(in srgb,var(--accent) 25%,transparent);padding:.3rem .95rem;border-radius:99px;margin-bottom:1rem}
+.kicker::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.sec-head h2{font-size:clamp(1.65rem,3.6vw,2.4rem);font-weight:800;line-height:1.5;margin-bottom:.7rem}
+.sec-head p{color:var(--muted);font-size:1.02rem}
+/* ============ هیرو ============ */
+#home{min-height:100vh;min-height:100svh;display:flex;align-items:center;padding-block:calc(var(--hdr) + 2.5rem) 3rem;overflow:hidden}
+.hero-bg{position:absolute;inset:0;pointer-events:none;z-index:0}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.8;will-change:transform}
+.orb-1{width:min(46vw,540px);aspect-ratio:1;background:var(--glow);top:-14%;inset-inline-start:-8%;animation:orbFloat 11s ease-in-out infinite alternate}
+.orb-2{width:min(34vw,400px);aspect-ratio:1;background:color-mix(in srgb,var(--accent-2) 16%,transparent);bottom:-16%;inset-inline-end:-6%;animation:orbFloat 13s ease-in-out infinite alternate-reverse}
+@keyframes orbFloat{from{transform:translate(0,0) scale(1)}to{transform:translate(3vw,4vh) scale(1.12)}}
+.hero-grid-lines{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse 75% 65% at 50% 40%,#000 25%,transparent 72%);-webkit-mask-image:radial-gradient(ellipse 75% 65% at 50% 40%,#000 25%,transparent 72%);opacity:.5}
+.hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1.08fr .92fr;gap:2.5rem;align-items:center;width:min(var(--wrap),100% - 2.5rem);margin-inline:auto}
+.hero-badge{display:inline-flex;align-items:center;gap:.55rem;font-size:.83rem;font-weight:700;color:var(--text);background:var(--glass);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:99px;padding:.42rem 1.1rem;margin-bottom:1.3rem;box-shadow:var(--shadow-sm)}
+.hero-badge .dot{width:8px;height:8px;border-radius:50%;background:#30d158;box-shadow:0 0 0 0 rgba(48,209,88,.5);animation:pulseDot 2s infinite}
+@keyframes pulseDot{0%{box-shadow:0 0 0 0 rgba(48,209,88,.45)}70%{box-shadow:0 0 0 9px rgba(48,209,88,0)}100%{box-shadow:0 0 0 0 rgba(48,209,88,0)}}
+#heroTitle{font-size:clamp(2.1rem,5.6vw,3.9rem);font-weight:900;line-height:1.55;margin-bottom:1.1rem;letter-spacing:-.01em}
+.hero-lead{color:var(--muted);font-size:clamp(1rem,1.8vw,1.18rem);max-width:34rem;margin-bottom:2rem}
+.hero-hello{display:none;align-items:center;gap:.55rem;color:var(--accent-text);font-weight:800;font-size:.95rem;margin-bottom:.9rem}
+.hero-hello.on{display:inline-flex}
+.hero-hello svg{width:18px;height:18px}
+.hero-cta{display:flex;flex-wrap:wrap;gap:.9rem;align-items:center}
+.hero-trust{display:flex;align-items:center;gap:1rem;margin-top:2.4rem;flex-wrap:wrap}
+.t-avatars{display:flex}
+.t-avatars span{width:34px;height:34px;border-radius:50%;border:2px solid var(--bg);display:grid;place-items:center;font-size:.72rem;font-weight:800;color:#fff;margin-inline-start:-9px}
+.t-avatars span:first-child{margin-inline-start:0}
+.t-avatars span:nth-child(1){background:linear-gradient(135deg,#0a84ff,#5e5ce6)}
+.t-avatars span:nth-child(2){background:linear-gradient(135deg,#bf5af2,#ff375f)}
+.t-avatars span:nth-child(3){background:linear-gradient(135deg,#30d158,#64d2ff)}
+.trust-text{font-size:.85rem;color:var(--muted);font-weight:600}
+.trust-text b{color:var(--text)}
+.trust-stars{display:inline-flex;gap:2px;color:#ffb400}
+.trust-stars svg{width:14px;height:14px}
+/* صحنهٔ سه‌بعدی */
+.scene-wrap{position:relative;display:grid;place-items:center;min-height:min(420px,58vw)}
+.scene{perspective:1150px;width:min(330px,66vw);aspect-ratio:1;will-change:transform;transition:transform .2s ease-out}
+.cube{position:relative;width:100%;height:100%;transform-style:preserve-3d;animation:cubeSpin 26s linear infinite}
+@keyframes cubeSpin{from{transform:rotateX(-18deg) rotateY(0deg)}to{transform:rotateX(-18deg) rotateY(-360deg)}}
+.face{position:absolute;inset:0;display:grid;place-items:center;align-content:center;gap:.7rem;border-radius:26px;background:color-mix(in srgb,var(--card) 78%,transparent);border:1px solid var(--border-2);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px);box-shadow:inset 0 0 46px color-mix(in srgb,var(--accent) 9%,transparent),0 0 30px color-mix(in srgb,var(--accent) 7%,transparent)}
+.face svg{width:clamp(40px,9vw,58px);height:clamp(40px,9vw,58px);color:var(--accent)}
+.face b{font-size:clamp(.82rem,1.8vw,1.02rem);font-weight:800;color:var(--text);opacity:.9}
+.f-front{transform:translateZ(var(--hz))}
+.f-back{transform:rotateY(180deg) translateZ(var(--hz))}
+.f-right{transform:rotateY(90deg) translateZ(var(--hz))}
+.f-left{transform:rotateY(-90deg) translateZ(var(--hz))}
+.f-top{transform:rotateX(90deg) translateZ(var(--hz))}
+.f-bottom{transform:rotateX(-90deg) translateZ(var(--hz))}
+html:not([data-theme]) .scene{--hz:165px}
+.scene{--hz:min(165px,33vw)}
+.cube-shadow{position:absolute;bottom:-9%;width:58%;height:26px;background:radial-gradient(ellipse,var(--scrim) 0%,transparent 70%);filter:blur(8px);opacity:.45;animation:shadowPulse 5s ease-in-out infinite}
+@keyframes shadowPulse{0%,100%{transform:scaleX(1);opacity:.45}50%{transform:scaleX(.82);opacity:.3}}
+.float-chip{position:absolute;display:inline-flex;align-items:center;gap:.55rem;padding:.6rem 1.05rem;border-radius:16px;background:var(--glass);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--border);box-shadow:var(--shadow);font-size:.8rem;font-weight:800;z-index:2;animation:floaty 5.5s ease-in-out infinite}
+.float-chip svg{width:17px;height:17px;color:var(--accent)}
+.fc-1{top:6%;inset-inline-start:-4%;animation-delay:.2s}
+.fc-2{bottom:16%;inset-inline-start:-7%;animation-delay:1.4s;animation-duration:6.5s}
+.fc-3{top:22%;inset-inline-end:-6%;animation-delay:.8s;animation-duration:7.2s}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-13px)}}
+.scroll-hint{position:absolute;bottom:1.6rem;inset-inline-start:50%;transform:translateX(50%);display:grid;justify-items:center;gap:.3rem;color:var(--muted);font-size:.72rem;font-weight:700;z-index:1}
+.scroll-hint .mouse{width:22px;height:34px;border:2px solid var(--border-2);border-radius:12px;display:flex;justify-content:center;padding-top:5px}
+.scroll-hint .mouse i{width:3px;height:7px;border-radius:3px;background:var(--accent);animation:wheel 1.6s ease-in-out infinite}
+@keyframes wheel{0%{transform:translateY(0);opacity:1}70%{transform:translateY(9px);opacity:0}100%{transform:translateY(0);opacity:0}}
+@media (max-width:920px){
+  .hero-inner{grid-template-columns:1fr;gap:3rem;text-align:center}
+  .hero-lead{margin-inline:auto}
+  .hero-cta,.hero-trust{justify-content:center}
+  .scene-wrap{min-height:min(360px,80vw)}
+  .fc-1{inset-inline-start:2%}.fc-2{inset-inline-start:0}.fc-3{inset-inline-end:2%}
+  .scroll-hint{display:none}
+}
+@media (max-height:840px) and (min-width:921px){
+  #home{padding-block:calc(var(--hdr) + 1.2rem) 1.6rem}
+  .scene{width:min(270px,26vw)}
+  .scene{--hz:min(135px,13vw)}
+  #heroTitle{font-size:clamp(1.9rem,4.4vw,3rem)}
+  .hero-trust{margin-top:1.3rem}
+  .hero-badge{margin-bottom:.9rem}
+}
+</style>
+<style>
+/* ============ محصولات ============ */
+#products{background:var(--bg-2);border-block:1px solid var(--border)}
+.filters{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin-bottom:1.6rem}
+.psearch{position:relative;max-width:430px;margin:0 auto 2.2rem}
+.psearch input{width:100%;padding:.85rem 3rem .85rem 1.2rem;border-radius:16px;border:1px solid var(--border-2);background:var(--card);color:var(--text);font-size:.95rem;transition:all var(--tr);box-shadow:var(--shadow-sm)}
+.psearch input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 14%,transparent)}
+.psearch>svg{position:absolute;top:50%;inset-inline-start:1rem;transform:translateY(-50%);width:19px;height:19px;color:var(--muted);pointer-events:none}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(305px,1fr));gap:1.5rem;perspective:1400px}
+.pcard{position:relative;padding:1.7rem;display:flex;flex-direction:column;gap:.65rem;transform-style:preserve-3d;transition:box-shadow var(--tr),border-color var(--tr);will-change:transform}
+.pcard:hover{border-color:color-mix(in srgb,var(--accent) 40%,var(--border));box-shadow:var(--shadow)}
+.pcard .glare{position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(420px circle at var(--gx,50%) var(--gy,50%),color-mix(in srgb,var(--accent) 10%,transparent),transparent 55%);opacity:0;transition:opacity .3s}
+.pcard:hover .glare{opacity:1}
+.ptile{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(135deg,var(--pc1,#0a84ff),var(--pc2,#5e5ce6));color:#fff;box-shadow:0 10px 22px -10px var(--pc1,#0a84ff);transform:translateZ(26px);transition:transform var(--tr)}
+.pcard:hover .ptile{transform:translateZ(38px) scale(1.04)}
+.ptile svg{width:26px;height:26px}
+.pbadge{position:absolute;top:1.4rem;inset-inline-end:1.4rem;font-size:.68rem;font-weight:800;padding:.28rem .7rem;border-radius:99px;background:var(--grad);color:#fff;box-shadow:0 6px 14px -6px var(--accent)}
+.pcard h3{font-size:1.18rem;font-weight:800;transform:translateZ(14px)}
+.ptag{color:var(--accent-text);font-size:.85rem;font-weight:700;transform:translateZ(10px)}
+.pdesc{color:var(--muted);font-size:.9rem;line-height:1.9;flex:1}
+.pfeat{display:grid;gap:.4rem;margin-block:.4rem .6rem}
+.pfeat li{display:flex;align-items:center;gap:.5rem;font-size:.82rem;color:var(--muted);font-weight:600}
+.pfeat li svg{width:14px;height:14px;color:var(--accent)}
+.pfoot{display:flex;align-items:center;justify-content:space-between;gap:.8rem;border-top:1px dashed var(--border);padding-top:1rem;margin-top:auto;transform:translateZ(14px)}
+.pprice{font-size:.88rem;font-weight:800;color:var(--text)}
+.empty-state{text-align:center;padding:3.5rem 1rem;color:var(--muted);grid-column:1/-1}
+.empty-state svg{width:44px;height:44px;color:var(--border-2);margin-bottom:.8rem}
+.empty-state b{display:block;font-size:1.05rem;color:var(--text);margin-bottom:.3rem}
+/* ============ توصیه‌گر هوشمند ============ */
+#advisor .adv-card{max-width:760px;margin-inline:auto;padding:clamp(1.6rem,4vw,2.6rem);position:relative;overflow:hidden}
+#advisor .adv-card::before{content:"";position:absolute;top:-70px;inset-inline-end:-70px;width:240px;height:240px;border-radius:50%;background:var(--glow);filter:blur(30px)}
+.adv-steps{display:flex;align-items:center;justify-content:center;gap:.55rem;margin-bottom:1.8rem}
+.adv-dot{width:9px;height:9px;border-radius:50%;background:var(--border-2);transition:all .3s}
+.adv-dot.on{background:var(--accent);transform:scale(1.3);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 18%,transparent)}
+.adv-dot.done{background:var(--accent);opacity:.45}
+.adv-line{width:34px;height:2px;background:var(--border-2);border-radius:2px}
+.adv-line.done{background:var(--accent)}
+.adv-q{font-size:1.25rem;font-weight:800;text-align:center;margin-bottom:1.5rem;min-height:2.2em}
+.adv-opts{display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem;max-width:520px;margin-inline:auto}
+.adv-opt{position:relative;overflow:hidden;padding:1.05rem 1.1rem;border-radius:16px;border:1.5px solid var(--border-2);background:var(--card);font-weight:700;font-size:.92rem;text-align:center;transition:all var(--tr);display:flex;align-items:center;justify-content:center;gap:.55rem}
+.adv-opt:hover{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 6%,var(--card));transform:translateY(-2px);box-shadow:var(--shadow-sm)}
+.adv-opt.sel{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,var(--card));color:var(--accent-text)}
+.adv-opt svg{width:17px;height:17px;color:var(--accent)}
+.adv-nav{display:flex;justify-content:space-between;align-items:center;margin-top:1.7rem;max-width:520px;margin-inline:auto}
+.adv-result{text-align:center;animation:popIn .5s var(--tr-slow)}
+.adv-result .ptile{margin:0 auto 1rem;width:70px;height:70px;border-radius:20px}
+.adv-result .ptile svg{width:32px;height:32px}
+.adv-result h3{font-size:1.45rem;font-weight:900;margin-bottom:.3rem}
+.adv-result .ptag{font-size:.95rem;margin-bottom:.9rem}
+.adv-reason{max-width:430px;margin:0 auto 1.5rem;color:var(--muted);font-size:.95rem;background:var(--soft);border:1px solid var(--border);border-radius:16px;padding:1rem 1.2rem}
+.adv-actions{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap}
+@keyframes popIn{from{opacity:0;transform:scale(.9) translateY(14px)}to{opacity:1;transform:none}}
+/* ============ دربارهٔ ما ============ */
+.about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(2rem,5vw,4rem);align-items:center;margin-bottom:3.2rem}
+.about-copy p{color:var(--muted);margin-bottom:1rem;font-size:.98rem}
+.about-copy p:first-of-type{font-size:1.06rem;color:var(--text);font-weight:500}
+.about-art{position:relative;display:grid;place-items:center;min-height:300px}
+.about-art .aa-card{position:absolute;width:min(78%,340px);border-radius:22px;padding:1.4rem 1.6rem;background:var(--glass);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid var(--border);box-shadow:var(--shadow)}
+.aa-1{transform:translateY(-34px) rotate(3deg);z-index:1}
+.aa-2{transform:translateY(30px) rotate(-2.5deg);z-index:2}
+.aa-card .aa-row{display:flex;align-items:center;gap:.7rem;font-size:.88rem;font-weight:700;margin-bottom:.7rem}
+.aa-row svg{width:18px;height:18px;color:var(--accent)}
+.aa-bar{height:7px;border-radius:99px;background:var(--soft-2);overflow:hidden}
+.aa-bar i{display:block;height:100%;border-radius:99px;background:var(--grad);width:0;transition:width 1.2s var(--tr-slow)}
+.aa-badge{position:absolute;top:6%;inset-inline-end:8%;z-index:3;padding:.55rem 1.05rem;border-radius:99px;background:var(--grad);color:#fff;font-size:.8rem;font-weight:800;box-shadow:0 10px 22px -8px var(--accent);animation:floaty 6s ease-in-out infinite}
+.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;margin-bottom:3rem}
+.vcard{padding:1.6rem;text-align:start;transition:all var(--tr)}
+.vcard:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+.vcard .ptile{width:50px;height:50px;margin-bottom:1rem}
+.vcard h3{font-size:1.05rem;font-weight:800;margin-bottom:.45rem}
+.vcard p{color:var(--muted);font-size:.88rem}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem}
+.stat{text-align:center;padding:1.6rem .8rem;border-radius:var(--radius-lg);background:var(--card);border:1px solid var(--border)}
+.stat b{display:block;font-size:clamp(1.7rem,3.4vw,2.4rem);font-weight:900;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.3}
+.stat span{font-size:.82rem;color:var(--muted);font-weight:700}
+@media (max-width:920px){
+  .about-grid{grid-template-columns:1fr}
+  .values-grid{grid-template-columns:1fr}
+  .stats-row{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:520px){.adv-opts{grid-template-columns:1fr}}
+/* ============ بلاگ ============ */
+#blog{background:var(--bg-2);border-block:1px solid var(--border)}
+.blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem}
+.bcard{overflow:hidden;transition:all var(--tr);cursor:pointer}
+.bcard:hover{transform:translateY(-6px);box-shadow:var(--shadow);border-color:color-mix(in srgb,var(--accent) 35%,var(--border))}
+.bmedia{height:150px;position:relative;display:grid;place-items:center;background:linear-gradient(135deg,color-mix(in srgb,var(--bc1,#0a84ff) 88%,#000),var(--bc2,#5e5ce6))}
+.bmedia svg{width:44px;height:44px;color:#fff;opacity:.95;filter:drop-shadow(0 6px 14px rgba(0,0,0,.25))}
+.bmedia::after{content:"";position:absolute;inset:0;background:radial-gradient(120px circle at 80% 15%,rgba(255,255,255,.28),transparent 60%)}
+.bcat{position:absolute;top:.9rem;inset-inline-start:.9rem;background:rgba(0,0,0,.35);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);color:#fff;font-size:.7rem;font-weight:800;padding:.3rem .75rem;border-radius:99px}
+.bbody{padding:1.3rem 1.5rem 1.5rem}
+.bbody h3{font-size:1.06rem;font-weight:800;line-height:1.7;margin-bottom:.5rem;transition:color var(--tr)}
+.bcard:hover .bbody h3{color:var(--accent-text)}
+.bbody p{color:var(--muted);font-size:.87rem;margin-bottom:1rem}
+.bmeta{display:flex;align-items:center;gap:.9rem;font-size:.76rem;color:var(--muted);font-weight:600;border-top:1px dashed var(--border);padding-top:.85rem}
+.bmeta svg{width:14px;height:14px}
+.bmeta span{display:inline-flex;align-items:center;gap:.35rem}
+/* ============ سوالات متداول ============ */
+.faq-list{max-width:740px;margin-inline:auto;display:grid;gap:.85rem}
+.acc{border:1px solid var(--border);border-radius:18px;background:var(--card);overflow:hidden;transition:border-color var(--tr),box-shadow var(--tr)}
+.acc.open{border-color:color-mix(in srgb,var(--accent) 45%,var(--border));box-shadow:var(--shadow-sm)}
+.acc-btn{width:100%;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.15rem 1.4rem;font-weight:700;font-size:.98rem;text-align:start;transition:color var(--tr)}
+.acc-btn:hover{color:var(--accent-text)}
+.acc-btn .chev{flex:none;width:30px;height:30px;border-radius:10px;display:grid;place-items:center;background:var(--soft);transition:all .35s var(--tr)}
+.acc-btn .chev svg{width:16px;height:16px;transition:transform .35s var(--tr)}
+.acc.open .acc-btn .chev{background:var(--grad);color:#fff}
+.acc.open .acc-btn .chev svg{transform:rotate(180deg)}
+.acc-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .38s var(--tr)}
+.acc.open .acc-panel{grid-template-rows:1fr}
+.acc-panel>div{overflow:hidden}
+.acc-panel p{padding:0 1.4rem 1.25rem;color:var(--muted);font-size:.92rem}
+/* ============ CTA + تماس ============ */
+.cta-band{max-width:900px;margin-inline:auto;border-radius:28px;padding:clamp(2rem,5vw,3.2rem);text-align:center;color:#fff;background:var(--accent);background-image:var(--grad);position:relative;overflow:hidden;box-shadow:0 24px 60px -20px var(--accent)}
+.cta-band::before{content:"";position:absolute;inset:0;background:radial-gradient(420px circle at 15% 20%,rgba(255,255,255,.18),transparent 55%),radial-gradient(300px circle at 85% 90%,rgba(255,255,255,.14),transparent 55%)}
+.cta-band>*{position:relative}
+.cta-band h2{font-size:clamp(1.5rem,3.4vw,2.2rem);font-weight:900;margin-bottom:.6rem}
+.cta-band p{opacity:.92;margin-bottom:1.6rem;font-size:.98rem}
+.btn-white{background:#fff;color:var(--accent-text);box-shadow:0 12px 28px -10px rgba(0,0,0,.35)}
+.btn-white:hover{transform:translateY(-2px)}
+.contact-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:1.6rem;align-items:start}
+.cinfo{display:grid;gap:1rem}
+.cinfo-card{display:flex;gap:1rem;padding:1.3rem 1.5rem;align-items:center;transition:all var(--tr);cursor:pointer}
+.cinfo-card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:color-mix(in srgb,var(--accent) 35%,var(--border))}
+.cinfo-card .ptile{width:46px;height:46px;border-radius:14px;flex:none}
+.cinfo-card .ptile svg{width:21px;height:21px}
+.cinfo-card b{display:block;font-size:.95rem}
+.cinfo-card span{color:var(--muted);font-size:.84rem;direction:ltr;unicode-bidi:embed}
+.cinfo-card span.fa-dir{direction:rtl}
+.cform{padding:clamp(1.5rem,3.5vw,2.2rem)}
+.cform h3{font-size:1.15rem;font-weight:800;margin-bottom:1.2rem}
+.field{margin-bottom:1.05rem}
+.field label{display:block;font-size:.84rem;font-weight:700;margin-bottom:.4rem;color:var(--text)}
+.field input,.field textarea,.field select{width:100%;padding:.8rem 1.05rem;border-radius:13px;border:1px solid var(--border-2);background:var(--bg);color:var(--text);font-size:.92rem;transition:all var(--tr);resize:vertical}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 13%,transparent)}
+.field.err input,.field.err textarea{border-color:#e11d48;box-shadow:0 0 0 4px rgba(225,29,72,.12)}
+.field .fe{display:none;color:#e11d48;font-size:.76rem;font-weight:700;margin-top:.35rem}
+.field.err .fe{display:block}
+.f-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media (max-width:920px){
+  .contact-grid{grid-template-columns:1fr}
+  .f-row{grid-template-columns:1fr}
+}
+/* ============ فوتر ============ */
+footer{background:var(--bg-2);border-top:1px solid var(--border);padding:3.5rem 0 0;margin-top:2rem}
+.f-cols{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.3fr;gap:2.2rem;padding-bottom:2.8rem}
+.f-col h4{font-size:.95rem;font-weight:800;margin-bottom:1rem}
+.f-col p{color:var(--muted);font-size:.88rem;margin-bottom:1.1rem}
+.f-col ul{display:grid;gap:.55rem}
+.f-col ul a,.f-col ul button{color:var(--muted);font-size:.88rem;font-weight:600;text-align:start;transition:color var(--tr);padding:0}
+.f-col ul a:hover,.f-col ul button:hover{color:var(--accent-text)}
+.socials{display:flex;gap:.6rem}
+.socials a{width:40px;height:40px;border-radius:12px;border:1px solid var(--border);display:grid;place-items:center;color:var(--muted);transition:all var(--tr)}
+.socials a:hover{color:#fff;background:var(--accent);background-image:var(--grad);border-color:transparent;transform:translateY(-3px);box-shadow:0 8px 18px -8px var(--accent)}
+.socials a svg{width:18px;height:18px}
+.newsletter{display:flex;gap:.5rem}
+.newsletter input{flex:1;min-width:0;padding:.75rem 1rem;border-radius:13px;border:1px solid var(--border-2);background:var(--bg);font-size:.88rem;transition:all var(--tr)}
+.newsletter input:focus{outline:none;border-color:var(--accent)}
+.f-bottom{border-top:1px solid var(--border);padding:1.3rem 0;display:flex;align-items:center;justify-content:space-between;gap:1rem;font-size:.8rem;color:var(--muted);flex-wrap:wrap}
+@media (max-width:920px){.f-cols{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.f-cols{grid-template-columns:1fr}}
+</style>
+<style>
+/* ============ مودال‌ها و اورلی‌ها ============ */
+.overlay{position:fixed;inset:0;background:var(--scrim);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);z-index:80;display:grid;place-items:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .28s}
+.overlay.open{opacity:1;pointer-events:auto}
+.overlay .sheet{width:min(560px,100%);max-height:88vh;overflow:auto;background:var(--card);border:1px solid var(--border);border-radius:24px;box-shadow:var(--shadow);padding:1.7rem;transform:translateY(18px) scale(.96);transition:transform .34s var(--tr-slow);scrollbar-width:thin}
+.overlay.open .sheet{transform:none}
+.sheet-head{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.2rem}
+.sheet-head h3{font-size:1.15rem;font-weight:800}
+.sheet-close{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;color:var(--muted);transition:all var(--tr);flex:none}
+.sheet-close:hover{background:var(--soft);color:var(--text);transform:rotate(90deg)}
+.sheet-close svg{width:18px;height:18px}
+/* جستجو */
+#searchModal .sheet{width:min(620px,100%);padding:1rem;place-self:start center;margin-top:8vh;max-height:76vh;display:flex;flex-direction:column}
+.s-input{position:relative}
+.s-input svg{position:absolute;top:50%;inset-inline-start:1rem;transform:translateY(-50%);width:19px;height:19px;color:var(--muted)}
+.s-input input{width:100%;padding:.9rem 3rem .9rem 1.1rem;border-radius:15px;border:1px solid var(--border-2);background:var(--bg);font-size:1rem}
+.s-input input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 13%,transparent)}
+.s-input .kbd-hint{position:absolute;top:50%;inset-inline-end:.8rem;transform:translateY(-50%);font-size:.65rem;font-weight:800;color:var(--muted);border:1px solid var(--border-2);border-radius:7px;padding:.15rem .45rem}
+.s-results{margin-top:.9rem;overflow:auto;display:grid;gap:.9rem;scrollbar-width:thin}
+.s-group b{display:block;font-size:.72rem;font-weight:800;color:var(--muted);margin:.2rem 0 .5rem;padding-inline-start:.4rem}
+.s-item{display:flex;align-items:center;gap:.8rem;width:100%;text-align:start;padding:.7rem .85rem;border-radius:13px;font-weight:600;font-size:.9rem;transition:background .15s}
+.s-item:hover,.s-item.active{background:var(--soft)}
+.s-item .s-ic{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;background:color-mix(in srgb,var(--accent) 11%,transparent);color:var(--accent-text);flex:none}
+.s-item .s-ic svg{width:17px;height:17px}
+.s-item small{display:block;color:var(--muted);font-size:.78rem;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:420px}
+.s-item mark{background:var(--mark);color:inherit;border-radius:4px;padding:0 .1em}
+.s-empty{text-align:center;color:var(--muted);font-size:.9rem;padding:2rem 0 1.4rem}
+/* چت */
+#chatPanel{position:fixed;bottom:6.2rem;inset-inline-end:1.1rem;width:min(390px,calc(100vw - 2.2rem));height:min(590px,calc(100dvh - 8.5rem));z-index:70;display:flex;flex-direction:column;border-radius:22px;background:var(--card);border:1px solid var(--border);box-shadow:var(--shadow);overflow:hidden;opacity:0;transform:translateY(16px) scale(.94);transform-origin:bottom;pointer-events:none;transition:all .32s var(--tr-slow)}
+#chatPanel.open{opacity:1;transform:none;pointer-events:auto}
+.chat-head{display:flex;align-items:center;gap:.75rem;padding:.95rem 1.2rem;background:var(--accent);background-image:var(--grad);color:#fff}
+.chat-head .avatar{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35)}
+.chat-head b{font-size:.92rem;display:block;line-height:1.4}
+.chat-head small{font-size:.7rem;opacity:.9;display:flex;align-items:center;gap:.35rem}
+.chat-head small i{width:7px;height:7px;border-radius:50%;background:#4ade80;display:inline-block;animation:pulseDot 2s infinite}
+.chat-head .sheet-close{color:#fff}
+.chat-head .sheet-close:hover{background:rgba(255,255,255,.18);color:#fff}
+.chat-log{flex:1;overflow-y:auto;padding:1.1rem;display:flex;flex-direction:column;gap:.7rem;scrollbar-width:thin}
+.msg{max-width:82%;padding:.65rem .95rem;border-radius:16px;font-size:.86rem;line-height:1.8;animation:msgIn .3s var(--tr-slow);white-space:pre-line}
+@keyframes msgIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.msg.bot{align-self:flex-start;background:var(--soft);border-start-start-radius:5px}
+.msg.user{align-self:flex-end;background:var(--accent);background-image:var(--grad);color:#fff;border-start-end-radius:5px}
+.msg .m-actions{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.6rem}
+.msg .m-actions button{font-size:.74rem;font-weight:800;padding:.35rem .8rem;border-radius:99px;border:1px solid color-mix(in srgb,var(--accent) 40%,transparent);color:var(--accent-text);background:color-mix(in srgb,var(--accent) 8%,transparent);transition:all var(--tr)}
+.msg .m-actions button:hover{background:var(--accent);color:#fff}
+.msg .m-actions button svg{width:12px;height:12px;margin-inline-start:.25rem;vertical-align:middle}
+.typing{align-self:flex-start;display:inline-flex;gap:5px;padding:.85rem 1rem;background:var(--soft);border-radius:16px;border-start-start-radius:5px}
+.typing i{width:7px;height:7px;border-radius:50%;background:var(--muted);animation:blink 1.2s infinite}
+.typing i:nth-child(2){animation-delay:.18s}
+.typing i:nth-child(3){animation-delay:.36s}
+@keyframes blink{0%,70%,100%{opacity:.3;transform:translateY(0)}35%{opacity:1;transform:translateY(-4px)}}
+.chat-chips{display:flex;gap:.45rem;overflow-x:auto;padding:.6rem 1rem 0;scrollbar-width:none}
+.chat-chips::-webkit-scrollbar{display:none}
+.chat-chips button{flex:none;font-size:.75rem;font-weight:700;padding:.42rem .85rem;border-radius:99px;border:1px solid var(--border-2);color:var(--muted);transition:all var(--tr)}
+.chat-chips button:hover{color:var(--accent-text);border-color:var(--accent);background:color-mix(in srgb,var(--accent) 7%,transparent)}
+.chat-input{display:flex;gap:.55rem;padding:.85rem;border-top:1px solid var(--border);background:var(--bg-2)}
+.chat-input input{flex:1;min-width:0;padding:.7rem 1rem;border-radius:13px;border:1px solid var(--border-2);background:var(--card);font-size:.88rem}
+.chat-input input:focus{outline:none;border-color:var(--accent)}
+.chat-input button{width:44px;height:44px;flex:none;border-radius:13px;background:var(--accent);background-image:var(--grad);color:#fff;display:grid;place-items:center;transition:all var(--tr)}
+.chat-input button:hover{transform:scale(1.06)}
+.chat-input button:active{transform:scale(.94)}
+.chat-input button svg{width:19px;height:19px}
+#chatFab{position:fixed;bottom:1.2rem;inset-inline-end:1.1rem;width:58px;height:58px;border-radius:50%;background:var(--accent);background-image:var(--grad);color:#fff;display:grid;place-items:center;z-index:69;box-shadow:0 14px 30px -10px var(--accent);transition:transform var(--tr),box-shadow var(--tr)}
+#chatFab:hover{transform:scale(1.08)}
+#chatFab:active{transform:scale(.95)}
+#chatFab svg{width:24px;height:24px;transition:transform .3s}
+#chatFab .fab-x{position:absolute;opacity:0;transform:rotate(-90deg) scale(.5)}
+#chatFab.on .fab-chat{opacity:0;transform:rotate(90deg) scale(.5)}
+#chatFab.on .fab-x{opacity:1;transform:none}
+#chatFab .ping{position:absolute;top:4px;inset-inline-end:4px;width:11px;height:11px;border-radius:50%;background:#4ade80;border:2px solid var(--bg);animation:pulseDot 2s infinite}
+#chatFab.on .ping{display:none}
+#topBtn{position:fixed;bottom:1.4rem;inset-inline-end:5rem;width:44px;height:44px;border-radius:14px;background:var(--card);border:1px solid var(--border);color:var(--muted);display:grid;place-items:center;z-index:65;opacity:0;pointer-events:none;transform:translateY(10px);transition:all .3s;box-shadow:var(--shadow-sm)}
+#topBtn.show{opacity:1;pointer-events:auto;transform:none}
+#topBtn:hover{color:var(--accent-text);border-color:var(--accent)}
+#topBtn svg{width:18px;height:18px}
+@media (max-width:560px){#topBtn{inset-inline-end:auto;inset-inline-start:1.1rem}}
+/* توست */
+#toasts{position:fixed;bottom:1.3rem;inset-inline-start:50%;transform:translateX(50%);z-index:110;display:grid;gap:.6rem;justify-items:center;pointer-events:none;width:max-content;max-width:calc(100vw - 2rem)}
+.toast{display:flex;align-items:center;gap:.6rem;background:var(--card);border:1px solid var(--border);color:var(--text);padding:.7rem 1.15rem;border-radius:14px;box-shadow:var(--shadow);font-size:.87rem;font-weight:700;opacity:0;transform:translateY(14px) scale(.95);transition:all .32s var(--tr-slow);max-width:calc(100vw - 2rem)}
+.toast.show{opacity:1;transform:none}
+.toast svg{width:18px;height:18px;flex:none}
+.toast.t-ok svg{color:#22c55e}
+.toast.t-err svg{color:#e11d48}
+.toast.t-info svg{color:var(--accent)}
+/* احراز هویت */
+.auth-tabs{display:grid;grid-template-columns:1fr 1fr;background:var(--soft);border-radius:14px;padding:.3rem;gap:.3rem;margin-bottom:1.4rem}
+.auth-tabs button{padding:.6rem;border-radius:11px;font-weight:800;font-size:.9rem;color:var(--muted);transition:all var(--tr)}
+.auth-tabs button.active{background:var(--card);color:var(--text);box-shadow:var(--shadow-sm)}
+.auth-note{font-size:.78rem;color:var(--muted);background:var(--soft);border-radius:12px;padding:.7rem .9rem;margin-top:.9rem;display:flex;gap:.5rem;align-items:flex-start}
+.auth-note svg{width:15px;height:15px;flex:none;margin-top:.15rem;color:var(--accent)}
+/* شخصی‌سازی */
+.set-group{margin-bottom:1.5rem}
+.set-group>label{display:block;font-size:.85rem;font-weight:800;margin-bottom:.65rem}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);background:var(--soft);border-radius:14px;padding:.3rem;gap:.3rem}
+.seg button{padding:.55rem .4rem;border-radius:11px;font-size:.82rem;font-weight:700;color:var(--muted);transition:all var(--tr);display:flex;align-items:center;justify-content:center;gap:.4rem}
+.seg button svg{width:15px;height:15px}
+.seg button.active{background:var(--card);color:var(--text);box-shadow:var(--shadow-sm)}
+.swatches{display:flex;gap:.7rem;flex-wrap:wrap}
+.sw{width:40px;height:40px;border-radius:14px;position:relative;transition:transform var(--tr);border:2px solid transparent}
+.sw:hover{transform:scale(1.1)}
+.sw.active{border-color:var(--text);transform:scale(1.08)}
+.sw.active::after{content:"";position:absolute;inset:0;margin:auto;width:13px;height:13px;border-radius:50%;border:2.5px solid #fff;top:0;bottom:0;left:0;right:0}
+.set-note{font-size:.76rem;color:var(--muted);margin-top:.5rem}
+/* مودال محصول/بلاگ */
+#productModal .sheet,#postModal .sheet{width:min(680px,100%)}
+.pm-head{display:flex;gap:1.2rem;align-items:center;margin-bottom:1.1rem}
+.pm-head .ptile{width:64px;height:64px;border-radius:18px;flex:none}
+.pm-head .ptile svg{width:29px;height:29px}
+.pm-head h3{font-size:1.3rem;font-weight:900}
+.pm-head .ptag{font-size:.9rem}
+.pm-desc{color:var(--muted);font-size:.94rem;margin-bottom:1.2rem}
+.pm-feats{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem;margin-bottom:1.3rem}
+.pm-feats li{display:flex;align-items:center;gap:.55rem;font-size:.85rem;font-weight:600;background:var(--soft);border-radius:12px;padding:.6rem .85rem}
+.pm-feats li svg{width:15px;height:15px;color:var(--accent);flex:none}
+.pm-foot{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;border-top:1px dashed var(--border);padding-top:1.2rem}
+.pm-price{font-size:1.05rem;font-weight:900;color:var(--accent-text)}
+.post-meta{display:flex;gap:1rem;font-size:.78rem;color:var(--muted);font-weight:600;margin-bottom:1.1rem}
+.post-meta span{display:inline-flex;align-items:center;gap:.35rem}
+.post-meta svg{width:14px;height:14px}
+.post-body p{color:var(--text);font-size:.94rem;margin-bottom:.9rem;line-height:2}
+@media (max-width:560px){.pm-feats{grid-template-columns:1fr}.pm-head{flex-direction:row}}
+</style>
+<style>
+/* ============ پنل مدیریت ============ */
+#adminPanel{z-index:90;padding:0}
+#adminPanel .sheet{width:min(1120px,100vw);height:100dvh;max-height:100dvh;border-radius:0;padding:0;display:flex;overflow:hidden}
+.adm-side{width:235px;flex:none;background:var(--bg-2);border-inline-end:1px solid var(--border);display:flex;flex-direction:column;padding:1.1rem .8rem}
+.adm-side .logo{padding:.4rem .6rem 1.1rem;font-size:1.1rem;border-bottom:1px solid var(--border);margin-bottom:.9rem}
+.adm-side .logo .mark{width:34px;height:34px}
+.adm-nav{display:grid;gap:.2rem;flex:1;overflow:auto}
+.adm-nav button{display:flex;align-items:center;gap:.7rem;padding:.72rem .85rem;border-radius:12px;font-size:.88rem;font-weight:700;color:var(--muted);text-align:start;transition:all var(--tr);width:100%}
+.adm-nav button svg{width:17px;height:17px}
+.adm-nav button:hover{background:var(--soft);color:var(--text)}
+.adm-nav button.active{background:color-mix(in srgb,var(--accent) 11%,transparent);color:var(--accent-text)}
+.adm-nav button .cnt{margin-inline-start:auto;font-size:.68rem;font-weight:800;background:var(--accent);color:#fff;border-radius:99px;padding:.1rem .5rem}
+.adm-side .adm-foot{display:grid;gap:.4rem;border-top:1px solid var(--border);padding-top:.8rem;margin-top:.8rem}
+.adm-main{flex:1;overflow:auto;padding:clamp(1.2rem,3vw,2rem);scrollbar-width:thin}
+.adm-main h2{font-size:1.25rem;font-weight:900;margin-bottom:.3rem}
+.adm-main .adm-sub{color:var(--muted);font-size:.85rem;margin-bottom:1.6rem}
+.adm-list{display:grid;gap:.8rem}
+.adm-row{display:flex;align-items:center;gap:.9rem;padding:.9rem 1.1rem;border:1px solid var(--border);border-radius:15px;background:var(--card)}
+.adm-row .adm-row-ic{width:40px;height:40px;border-radius:12px;background:color-mix(in srgb,var(--accent) 10%,transparent);color:var(--accent-text);display:grid;place-items:center;flex:none}
+.adm-row .adm-row-ic svg{width:18px;height:18px}
+.adm-row b{font-size:.92rem;display:block}
+.adm-row small{color:var(--muted);font-size:.76rem;display:block}
+.adm-row .adm-row-body{flex:1;min-width:0}
+.adm-row .adm-row-acts{display:flex;gap:.4rem;flex:none}
+.adm-row .adm-row-acts button{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;color:var(--muted);transition:all var(--tr)}
+.adm-row .adm-row-acts button:hover{background:var(--soft);color:var(--text)}
+.adm-row .adm-row-acts button.del:hover{background:rgba(225,29,72,.12);color:#e11d48}
+.adm-row .adm-row-acts button svg{width:15px;height:15px}
+.adm-confirm{display:flex;align-items:center;gap:.6rem;font-size:.78rem;font-weight:700;color:#e11d48}
+.adm-confirm button{padding:.3rem .7rem;border-radius:8px;font-size:.75rem;font-weight:800}
+.adm-confirm .yes{background:#e11d48;color:#fff}
+.adm-confirm .no{background:var(--soft);color:var(--muted)}
+.adm-form{border:1px solid color-mix(in srgb,var(--accent) 35%,var(--border));border-radius:18px;padding:1.3rem;background:color-mix(in srgb,var(--accent) 4%,var(--card));margin-top:1rem;animation:popIn .35s var(--tr-slow)}
+.adm-form h3{font-size:1rem;font-weight:800;margin-bottom:1rem}
+.adm-form .f-row{grid-template-columns:1fr 1fr}
+.adm-form .field{margin-bottom:.85rem}
+.adm-form-actions{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:.6rem}
+.msg-card{border:1px solid var(--border);border-radius:16px;padding:1.1rem 1.3rem;background:var(--card);margin-bottom:.9rem}
+.msg-card .msg-top{display:flex;align-items:center;gap:.7rem;margin-bottom:.6rem;flex-wrap:wrap}
+.msg-card .msg-top b{font-size:.92rem}
+.msg-card .msg-top time{font-size:.72rem;color:var(--muted);margin-inline-start:auto}
+.msg-card .msg-sub{font-size:.78rem;color:var(--accent-text);font-weight:700;margin-bottom:.5rem}
+.msg-card p{font-size:.86rem;color:var(--muted);white-space:pre-line}
+.user-row{display:flex;align-items:center;gap:.9rem;padding:.8rem 1rem;border:1px solid var(--border);border-radius:14px;background:var(--card);margin-bottom:.7rem}
+.user-row .role-tag{font-size:.68rem;font-weight:800;padding:.22rem .6rem;border-radius:99px}
+.role-admin{background:rgba(225,29,72,.12);color:#e11d48}
+.role-user{background:color-mix(in srgb,var(--accent) 12%,transparent);color:var(--accent-text)}
+.adm-grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+.adm-card{border:1px solid var(--border);border-radius:18px;padding:1.3rem;background:var(--card)}
+.adm-card h3{font-size:.95rem;font-weight:800;margin-bottom:.7rem;display:flex;align-items:center;gap:.5rem}
+.adm-card h3 svg{width:17px;height:17px;color:var(--accent)}
+.adm-card p{font-size:.8rem;color:var(--muted);margin-bottom:.9rem}
+.adm-hint{font-size:.78rem;color:var(--muted);background:var(--soft);border-radius:12px;padding:.75rem .95rem;line-height:1.9;margin-bottom:1.2rem}
+@media (max-width:860px){
+  #adminPanel .sheet{flex-direction:column}
+  .adm-side{width:100%;flex-direction:row;align-items:center;border-inline-end:none;border-bottom:1px solid var(--border);padding:.7rem 1rem;gap:.8rem;overflow-x:auto}
+  .adm-side .logo{border:none;margin:0;padding:.2rem .4rem;white-space:nowrap}
+  .adm-side .logo small{display:none}
+  .adm-nav{display:flex;flex:1;gap:.3rem;overflow-x:auto;scrollbar-width:none}
+  .adm-nav button{white-space:nowrap;padding:.55rem .8rem}
+  .adm-nav button .cnt{display:none}
+  .adm-side .adm-foot{border:none;margin:0;padding:0;display:flex;flex-direction:row}
+}
+/* ============ انیمیشن‌های عمومی ============ */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s var(--tr-slow)}
+.reveal.in{opacity:1;transform:none}
+[data-stagger]>*{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s var(--tr-slow)}
+[data-stagger].in>*{opacity:1;transform:none}
+/* ============ کاهش حرکت / غیرفعال‌سازی انیمیشن ============ */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}
+}
+html.no-anim *,html.no-anim *::before,html.no-anim *::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+html.no-anim{scroll-behavior:auto}
+html.no-anim [data-stagger]>*,html.no-anim .reveal{opacity:1 !important;transform:none !important}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">پرش به محتوای اصلی</a>
+<div id="progress" aria-hidden="true"></div>
+<header id="topbar">
+  <div class="wrap">
+    <a href="#home" class="logo" aria-label="آدوان — صفحهٔ اصلی">
+      <svg class="mark" viewBox="0 0 44 44" aria-hidden="true"><defs><linearGradient id="lg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--accent)"/><stop offset="1" stop-color="var(--accent-2)"/></linearGradient></defs><rect x="2" y="2" width="40" height="40" rx="12" fill="url(#lg1)"/><path d="M12 30c4-1 6-3 6.5-6.5C19 20 21 18 25 17.5 28.5 17 30.5 15 31.5 12" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round"/><circle cx="12" cy="30" r="2.6" fill="#fff"/><circle cx="31.5" cy="12" r="2.6" fill="#fff"/><circle cx="19.5" cy="22.5" r="1.7" fill="#fff" opacity=".85"/></svg>
+      <span><span id="brandName">آدوان</span><small id="brandLatin">ADVAN</small></span>
+    </a>
+    <nav id="mainnav" aria-label="ناوبری اصلی">
+      <a href="#home" class="active">خانه</a>
+      <a href="#products">محصولات</a>
+      <a href="#about">درباره ما</a>
+      <a href="#blog">بلاگ</a>
+      <a href="#contact">تماس</a>
+    </nav>
+    <div class="actions">
+      <button class="icon-btn" id="searchBtn" aria-label="جستجو در سایت" title="جستجو (Ctrl+K)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><span class="kbd" aria-hidden="true">Ctrl+K</span></button>
+      <button class="icon-btn" id="settingsBtn" aria-label="شخصی‌سازی ظاهر سایت" title="شخصی‌سازی"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg></button>
+      <button class="icon-btn" id="themeBtn" aria-label="تغییر حالت روشن و تیره" title="حالت روشن / تیره"><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg></button>
+      <div id="authArea" style="position:relative"></div>
+      <button class="icon-btn" id="menuBtn" aria-label="باز کردن منو" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button>
+    </div>
+  </div>
+  <nav class="mnav" id="mnav" aria-label="منوی موبایل">
+    <a href="#home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg>خانه</a>
+    <a href="#products"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="5" width="14" height="14" rx="2"/><rect x="9" y="9" width="6" height="6"/></svg>محصولات</a>
+    <a href="#about"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg>درباره ما</a>
+    <a href="#blog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M9 13h6M9 17h4"/></svg>بلاگ</a>
+    <a href="#contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>تماس</a>
+  </nav>
+</header>
+<main id="main">
+<section id="home" aria-label="معرفی آدوان">
+  <div class="hero-bg" aria-hidden="true">
+    <div class="orb orb-1"></div><div class="orb orb-2"></div><div class="hero-grid-lines"></div>
+  </div>
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <span class="hero-hello" id="heroHello"></span>
+      <span class="hero-badge"><i class="dot" aria-hidden="true"></i><span id="heroBadge">نسل تازهٔ محصولات هوشمند آدوان معرفی شد</span></span>
+      <h1 id="heroTitle">آیندهٔ کسب‌وکار شما، <span class="grad-text">یک مسیر هوشمند</span> است</h1>
+      <p class="hero-lead" id="heroLead">از دستیارهای هوش مصنوعی تا زیرساخت ابری؛ آدوان ابزارهایی ساده، امن و مقیاس‌پذیر می‌سازد تا کسب‌وکار شما سریع‌تر رشد کند.</p>
+      <div class="hero-cta">
+        <a href="#products" class="btn btn-primary" id="ctaA" data-mag>مشاهدهٔ محصولات</a>
+        <button class="btn btn-ghost" id="ctaB" data-mag><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 1.9 5.7a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.7a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3Z"/><path d="M19 3v4M17 5h4"/></svg>گفتگو با دستیار هوشمند</button>
+      </div>
+      <div class="hero-trust">
+        <div class="t-avatars" aria-hidden="true"><span>م</span><span>س</span><span>ن</span></div>
+        <p class="trust-text">مورد اعتماد <b>۱٬۲۰۰+ کسب‌وکار</b><span class="trust-stars" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2Z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="m12 2 3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2Z"/></svg></span><br><span style="font-size:.78rem">میانگین رضایت ۴٫۹ از ۵</span></p>
+      </div>
+    </div>
+    <div class="scene-wrap" aria-hidden="true">
+      <div class="scene" id="scene">
+        <div class="cube">
+          <div class="face f-front"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 1.9 5.7a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.7a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3Z"/></svg><b>هوش‌بان</b></div>
+          <div class="face f-back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg><b>سحاب</b></div>
+          <div class="face f-right"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg><b>نگاه</b></div>
+          <div class="face f-left"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg><b>پیوند</b></div>
+          <div class="face f-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-3.6 8-10V5.8a1 1 0 0 0-.68-.95C17.6 4.1 14.9 3 12 3s-5.6 1.1-7.32 1.85A1 1 0 0 0 4 5.8V12c0 6.4 8 10 8 10Z"/></svg><b>سپهر</b></div>
+          <div class="face f-bottom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="5" y="5" width="14" height="14" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></svg><b>آدوان هاب</b></div>
+        </div>
+      </div>
+      <div class="cube-shadow" aria-hidden="true"></div>
+      <span class="float-chip fc-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>پشتیبانی ۲۴/۷</span>
+      <span class="float-chip fc-2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-3.6 8-10V5.8a1 1 0 0 0-.68-.95C17.6 4.1 14.9 3 12 3s-5.6 1.1-7.32 1.85A1 1 0 0 0 4 5.8V12c0 6.4 8 10 8 10Z"/></svg>امنیت سازمانی</span>
+      <span class="float-chip fc-3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>استقرار ابری</span>
+    </div>
+  </div>
+  <div class="scroll-hint" aria-hidden="true"><div class="mouse"><i></i></div><span>اسکرول کنید</span></div>
+</section>
+
+<section id="products" aria-labelledby="productsTitle">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">ویترین محصولات</span>
+      <h2 id="productsTitle">ابزارهایی برای هر مرحلهٔ <span class="grad-text">رشد</span></h2>
+      <p>نرم‌افزار، سرویس ابری و سخت‌افزار — همه در یک اکوسیستم هماهنگ. روی هر محصول کلیک کنید تا جزئیات کامل را ببینید.</p>
+    </div>
+    <div class="psearch reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="search" id="prodSearch" placeholder="جستجوی هوشمند در محصولات…" aria-label="جستجوی هوشمند در محصولات">
+    </div>
+    <div class="filters reveal" id="filters" role="group" aria-label="فیلتر دسته‌بندی محصولات"></div>
+    <div class="pgrid" id="productsGrid" data-stagger aria-live="polite"></div>
+  </div>
+</section>
+
+<section id="advisor" aria-labelledby="advisorTitle">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">دستیار هوشمند</span>
+      <h2 id="advisorTitle">در ۳۰ ثانیه بفهمید کدام محصول <span class="grad-text">برای شماست</span></h2>
+      <p>سه پرسش کوتاه پاسخ دهید؛ موتور توصیه‌گر آدوان بر اساس نیاز و بودجهٔ شما بهترین گزینه را پیشنهاد می‌دهد.</p>
+    </div>
+    <div class="card adv-card reveal" id="advCard"></div>
+  </div>
+</section>
+
+<section id="about" aria-labelledby="aboutTitle">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">دربارهٔ ما</span>
+      <h2 id="aboutTitle">ما مسیر رشد دیجیتال را <span class="grad-text">هموار می‌کنیم</span></h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-copy reveal" id="aboutParas"></div>
+      <div class="about-art reveal" aria-hidden="true">
+        <div class="aa-card aa-1">
+          <div class="aa-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 1.9 5.7a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.7a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3Z"/></svg>پاسخ‌گویی خودکار هوش مصنوعی</div>
+          <div class="aa-bar"><i data-w="86%"></i></div>
+        </div>
+        <div class="aa-card aa-2">
+          <div class="aa-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>آپ‌تایم سرویس‌های ابری</div>
+          <div class="aa-bar"><i data-w="99%"></i></div>
+        </div>
+        <span class="aa-badge">از سال ۱۳۹۷ در کنار شما</span>
+      </div>
+    </div>
+    <div class="values-grid" id="valuesRow" data-stagger></div>
+    <div class="stats-row" id="statsRow" data-stagger></div>
+  </div>
+</section>
+
+<section id="blog" aria-labelledby="blogTitle">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">بلاگ</span>
+      <h2 id="blogTitle">یادداشت‌های <span class="grad-text">تیم آدوان</span></h2>
+      <p>تجربه‌ها و نکات کاربردی دربارهٔ هوش مصنوعی، زیرساخت ابری و امنیت.</p>
+    </div>
+    <div class="blog-grid" id="blogGrid" data-stagger></div>
+  </div>
+</section>
+
+<section id="faq" aria-labelledby="faqTitle">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">سوالات متداول</span>
+      <h2 id="faqTitle">پاسخ سؤال‌های <span class="grad-text">پرتکرار</span></h2>
+      <p>اگر پاسخ سؤال‌تان را پیدا نکردید، از دستیار هوشمند بپرسید یا با ما تماس بگیرید.</p>
+    </div>
+    <div class="faq-list reveal" id="faqList"></div>
+  </div>
+</section>
+
+<section id="contact" aria-labelledby="contactTitle">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="kicker">تماس با ما</span>
+      <h2 id="contactTitle">گفتگو را <span class="grad-text">شروع کنیم</span></h2>
+      <p>فرم را پر کنید؛ کارشناسان ما حداکثر تا یک روز کاری با شما تماس می‌گیرند.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="cinfo reveal" id="contactInfo"></div>
+      <form class="card cform reveal" id="contactForm" novalidate>
+        <h3>ارسال پیام</h3>
+        <div class="f-row">
+          <div class="field"><label for="cfName">نام و نام خانوادگی</label><input id="cfName" name="name" type="text" autocomplete="name" required><span class="fe">لطفاً نام خود را وارد کنید.</span></div>
+          <div class="field"><label for="cfContact">ایمیل یا شماره تماس</label><input id="cfContact" name="contact" type="text" autocomplete="email" required><span class="fe">ایمیل یا شمارهٔ معتبر وارد کنید.</span></div>
+        </div>
+        <div class="field"><label for="cfSubject">موضوع</label><input id="cfSubject" name="subject" type="text" placeholder="مثلاً درخواست دمو از هوش‌بان"></div>
+        <div class="field"><label for="cfMsg">پیام شما</label><textarea id="cfMsg" name="msg" rows="4" required placeholder="کمی دربارهٔ نیازتان بنویسید…"></textarea><span class="fe">متن پیام را وارد کنید.</span></div>
+        <button type="submit" class="btn btn-primary" data-mag style="width:100%">ارسال پیام<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg></button>
+      </form>
+    </div>
+    <div class="cta-band reveal" style="margin-top:clamp(3rem,7vw,5rem)">
+      <h2>آمادهٔ هوشمندسازی کسب‌وکار خود هستید؟</h2>
+      <p>همین حالا ۱۴ روز رایگان هر محصول را امتحان کنید؛ بدون نیاز به کارت اعتباری.</p>
+      <a href="#contact" class="btn btn-white" data-mag>درخواست مشاورهٔ رایگان</a>
+    </div>
+  </div>
+</section>
+</main>
+<footer>
+  <div class="wrap">
+    <div class="f-cols">
+      <div class="f-col">
+        <a href="#home" class="logo" style="font-size:1.15rem;margin-bottom:1rem;display:inline-flex" aria-label="آدوان">
+          <svg class="mark" viewBox="0 0 44 44" aria-hidden="true" style="width:36px;height:36px"><rect x="2" y="2" width="40" height="40" rx="12" fill="url(#lg1)"/><path d="M12 30c4-1 6-3 6.5-6.5C19 20 21 18 25 17.5 28.5 17 30.5 15 31.5 12" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round"/><circle cx="12" cy="30" r="2.6" fill="#fff"/><circle cx="31.5" cy="12" r="2.6" fill="#fff"/></svg>
+          <span id="brandNameF">آدوان</span>
+        </a>
+        <p id="footerBlurb">آدوان؛ همراه هوشمند کسب‌وکار شما در مسیر رشد دیجیتال.</p>
+        <div class="socials">
+          <a href="#" aria-label="اینستاگرام آدوان" title="اینستاگرام"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="#" aria-label="تلگرام آدوان" title="تلگرام"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg></a>
+          <a href="#" aria-label="لینکدین آدوان" title="لینکدین"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6Z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="#" aria-label="گیت‌هاب آدوان" title="گیت‌هاب"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg></a>
+        </div>
+      </div>
+      <div class="f-col">
+        <h4>دسترسی سریع</h4>
+        <ul>
+          <li><a href="#home">خانه</a></li>
+          <li><a href="#products">محصولات</a></li>
+          <li><a href="#about">درباره ما</a></li>
+          <li><a href="#blog">بلاگ</a></li>
+          <li><a href="#contact">تماس با ما</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>محصولات</h4>
+        <ul id="footerProdLinks"></ul>
+      </div>
+      <div class="f-col">
+        <h4>عضویت در خبرنامه</h4>
+        <p>هر ماه یک ایمیل کوتاه: تازه‌های محصولات و یادداشت‌های فنی.</p>
+        <form class="newsletter" id="newsForm" novalidate>
+          <input type="email" id="newsEmail" placeholder="ایمیل شما" aria-label="ایمیل برای خبرنامه">
+          <button class="btn btn-primary btn-sm" type="submit" aria-label="عضویت">عضویت</button>
+        </form>
+      </div>
+    </div>
+    <div class="f-bottom">
+      <span id="copyright">© آدوان — تمامی حقوق محفوظ است.</span>
+      <span>ساخته‌شده با دقت، در تهران</span>
+    </div>
+  </div>
+</footer>
+
+<button id="chatFab" aria-label="باز کردن گفتگو با دستیار هوشمند" aria-expanded="false">
+  <svg class="fab-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2Z"/></svg>
+  <svg class="fab-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+  <span class="ping" aria-hidden="true"></span>
+</button>
+<div id="chatPanel" role="dialog" aria-modal="false" aria-label="گفتگو با دستیار هوشمند آدوان">
+  <div class="chat-head">
+    <span class="avatar" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 1.9 5.7a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.7a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3Z"/></svg></span>
+    <div style="flex:1"><b>دستیار آدوان</b><small><i aria-hidden="true"></i>آنلاین و آمادهٔ پاسخ</small></div>
+    <button class="sheet-close" id="chatClose" aria-label="بستن گفتگو"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  </div>
+  <div class="chat-log" id="chatLog" aria-live="polite"></div>
+  <div class="chat-chips" id="chatChips" aria-label="پیشنهادهای گفتگو"></div>
+  <form class="chat-input" id="chatForm">
+    <input type="text" id="chatInput" placeholder="سؤال خود را بنویسید…" aria-label="متن پیام به دستیار" autocomplete="off">
+    <button type="submit" aria-label="ارسال پیام"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg></button>
+  </form>
+</div>
+<button id="topBtn" aria-label="بازگشت به بالای صفحه"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg></button>
+<div id="toasts" aria-live="polite" aria-atomic="false"></div>
+
+<div class="overlay" id="searchModal" role="dialog" aria-modal="true" aria-label="جستجو در سایت">
+  <div class="sheet">
+    <div class="s-input">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="text" id="searchInput" placeholder="جستجو در محصولات، بلاگ و سوالات… (هوشمند)" aria-label="عبارت جستجو" autocomplete="off" data-autofocus>
+      <span class="kbd-hint" aria-hidden="true">ESC</span>
+    </div>
+    <div class="s-results" id="searchResults"></div>
+  </div>
+</div>
+
+<div class="overlay" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+  <div class="sheet">
+    <div class="sheet-head"><h3 id="authTitle">ورود به حساب کاربری</h3><button class="sheet-close" data-close aria-label="بستن"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+    <div class="auth-tabs" role="tablist">
+      <button id="tabLogin" class="active" role="tab" aria-selected="true">ورود</button>
+      <button id="tabRegister" role="tab" aria-selected="false">ثبت‌نام</button>
+    </div>
+    <form id="loginForm" novalidate>
+      <div class="field"><label for="liUser">نام کاربری یا ایمیل</label><input id="liUser" type="text" autocomplete="username" data-autofocus><span class="fe">نام کاربری را وارد کنید.</span></div>
+      <div class="field"><label for="liPass">رمز عبور</label><input id="liPass" type="password" autocomplete="current-password"><span class="fe">رمز عبور را وارد کنید.</span></div>
+      <button type="submit" class="btn btn-primary" style="width:100%">ورود</button>
+      <div class="auth-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg><span>حساب مدیر پیش‌فرض: نام کاربری <b>admin</b> و رمز <b>advan@1234</b> — پس از ورود، از پنل مدیریت رمز را تغییر دهید.</span></div>
+    </form>
+    <form id="registerForm" novalidate style="display:none">
+      <div class="field"><label for="rgName">نام و نام خانوادگی</label><input id="rgName" type="text" autocomplete="name"><span class="fe">نام خود را وارد کنید.</span></div>
+      <div class="field"><label for="rgUser">نام کاربری یا ایمیل</label><input id="rgUser" type="text" autocomplete="username"><span class="fe">نام کاربری باید حداقل ۳ نویسه باشد.</span></div>
+      <div class="field"><label for="rgPass">رمز عبور</label><input id="rgPass" type="password" autocomplete="new-password"><span class="fe">رمز عبور باید حداقل ۶ نویسه باشد.</span></div>
+      <div class="field"><label for="rgPass2">تکرار رمز عبور</label><input id="rgPass2" type="password" autocomplete="new-password"><span class="fe">رمزها یکسان نیستند.</span></div>
+      <button type="submit" class="btn btn-primary" style="width:100%">ایجاد حساب</button>
+      <div class="auth-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>اطلاعات حساب فقط در مرورگر شما ذخیره می‌شود و رمزها به‌صورت رمزنگاری‌شده (SHA-256) نگهداری می‌شوند.</span></div>
+    </form>
+  </div>
+</div>
+
+<div class="overlay" id="settingsModal" role="dialog" aria-modal="true" aria-labelledby="setTitle">
+  <div class="sheet">
+    <div class="sheet-head"><h3 id="setTitle">شخصی‌سازی ظاهر</h3><button class="sheet-close" data-close aria-label="بستن"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+    <div class="set-group"><label id="lblTheme">حالت نمایش</label>
+      <div class="seg" id="segTheme" role="radiogroup" aria-labelledby="lblTheme">
+        <button data-v="light" role="radio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>روشن</button>
+        <button data-v="dark" role="radio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/></svg>تیره</button>
+        <button data-v="auto" role="radio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a15.3 15.3 0 0 1 4 9 15.3 15.3 0 0 1-4 9 15.3 15.3 0 0 1-4-9 15.3 15.3 0 0 1 4-9Z"/></svg>سیستم</button>
+      </div>
+    </div>
+    <div class="set-group"><label id="lblAccent">رنگ اصلی</label>
+      <div class="swatches" id="swatches" role="radiogroup" aria-labelledby="lblAccent">
+        <button class="sw" data-v="blue" style="background:linear-gradient(135deg,#0a6ee0,#4aa3ff)" aria-label="آبی" role="radio"></button>
+        <button class="sw" data-v="violet" style="background:linear-gradient(135deg,#6d3ae8,#a78bfa)" aria-label="بنفش" role="radio"></button>
+        <button class="sw" data-v="green" style="background:linear-gradient(135deg,#0e9f6e,#34d399)" aria-label="سبز" role="radio"></button>
+        <button class="sw" data-v="orange" style="background:linear-gradient(135deg,#ea580c,#fb923c)" aria-label="نارنجی" role="radio"></button>
+        <button class="sw" data-v="pink" style="background:linear-gradient(135deg,#db2777,#f472b6)" aria-label="صورتی" role="radio"></button>
+        <button class="sw" data-v="teal" style="background:linear-gradient(135deg,#0d9488,#2dd4bf)" aria-label="فیروزه‌ای" role="radio"></button>
+      </div>
+    </div>
+    <div class="set-group"><label id="lblFs">اندازهٔ فونت</label>
+      <div class="seg" id="segFs" role="radiogroup" aria-labelledby="lblFs">
+        <button data-v="s" role="radio">کوچک</button>
+        <button data-v="m" role="radio">متوسط</button>
+        <button data-v="l" role="radio">بزرگ</button>
+      </div>
+    </div>
+    <div class="set-group"><label id="lblAnim">انیمیشن‌ها</label>
+      <div class="seg" id="segAnim" role="radiogroup" aria-labelledby="lblAnim" style="grid-template-columns:1fr 1fr">
+        <button data-v="on" role="radio">فعال</button>
+        <button data-v="off" role="radio">غیرفعال</button>
+      </div>
+      <p class="set-note">غیرفعال‌سازی انیمیشن برای کاربرانی است که حرکت کمتر را ترجیح می‌دهند یا دچار حساسیت به حرکت هستند.</p>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="productModal" role="dialog" aria-modal="true" aria-labelledby="pmTitle">
+  <div class="sheet"><div id="pmBody"></div></div>
+</div>
+<div class="overlay" id="postModal" role="dialog" aria-modal="true" aria-labelledby="poTitle">
+  <div class="sheet"><div id="poBody"></div></div>
+</div>
+<div class="overlay" id="adminPanel" role="dialog" aria-modal="true" aria-label="پنل مدیریت آدوان">
+  <div class="sheet">
+    <aside class="adm-side">
+      <span class="logo"><svg class="mark" viewBox="0 0 44 44" aria-hidden="true"><rect x="2" y="2" width="40" height="40" rx="12" fill="url(#lg1)"/><path d="M12 30c4-1 6-3 6.5-6.5C19 20 21 18 25 17.5 28.5 17 30.5 15 31.5 12" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round"/><circle cx="12" cy="30" r="2.6" fill="#fff"/><circle cx="31.5" cy="12" r="2.6" fill="#fff"/></svg><span>پنل مدیریت</span></span>
+      <nav class="adm-nav" id="admNav" aria-label="بخش‌های پنل مدیریت"></nav>
+      <div class="adm-foot">
+        <button class="btn btn-ghost btn-sm" id="admSiteBtn" style="width:100%">بازگشت به سایت</button>
+        <button class="btn btn-danger btn-sm" id="admLogoutBtn" style="width:100%">خروج از حساب</button>
+      </div>
+    </aside>
+    <main class="adm-main" id="admBody"></main>
+  </div>
+</div>
+
+<script>
+/* آدوان — اسکریپت اصلی (بخش ۱: ابزارها، داده‌ها، شخصی‌سازی) */
+const __SRC = document.documentElement.outerHTML; /* نسخهٔ خام صفحه برای ساخت فایل منتشرشده */
+
+/* ---------- ابزارهای پایه ---------- */
+const $=(s,r=document)=>r.querySelector(s);
+const $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const byId=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const faNum=n=>Number(n).toLocaleString('fa-IR');
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const clone=o=>JSON.parse(JSON.stringify(o));
+const LS={get(k,f){try{const v=JSON.parse(localStorage.getItem(k));return v===null||v===undefined?f:v}catch(e){return f}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}},del(k){localStorage.removeItem(k)}};
+const norm=s=>String(s||'').toLowerCase().replace(/ي/g,'ی').replace(/ك/g,'ک').replace(/[أإآ]/g,'ا').replace(/ة/g,'ه').replace(/[\u200c\u064B-\u065F]/g,'').replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/\s+/g,' ').trim();
+const el=h=>{const t=document.createElement('template');t.innerHTML=h.trim();return t.content.firstElementChild};
+const isReduced=()=>document.documentElement.classList.contains('no-anim')||window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const finePointer=()=>window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+/* ---------- آیکون‌ها ---------- */
+const ICONS={
+  sparkles:'<path d="m12 3 1.9 5.7a2 2 0 0 0 1.3 1.3L21 12l-5.8 1.9a2 2 0 0 0-1.3 1.3L12 21l-1.9-5.7a2 2 0 0 0-1.3-1.3L3 12l5.8-1.9a2 2 0 0 0 1.3-1.3Z"/><path d="M19 3v4M17 5h4"/>',
+  cloud:'<path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/>',
+  chart:'<line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/>',
+  plug:'<path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/>',
+  shield:'<path d="M12 22s8-3.6 8-10V5.8a1 1 0 0 0-.68-.95C17.6 4.1 14.9 3 12 3s-5.6 1.1-7.32 1.85A1 1 0 0 0 4 5.8V12c0 6.4 8 10 8 10Z"/>',
+  cpu:'<rect x="5" y="5" width="14" height="14" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/>',
+  check:'<path d="M20 6 9 17l-5-5"/>',
+  x:'<path d="M18 6 6 18M6 6l12 12"/>',
+  arrow:'<path d="M19 12H5M12 19l-7-7 7-7"/>',
+  mail:'<rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>',
+  phone:'<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/>',
+  pin:'<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>',
+  clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  file:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M9 13h6M9 17h4"/>',
+  help:'<circle cx="12" cy="12" r="9"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 2.4-3 4M12 17.5h.01"/>',
+  users:'<path d="M17 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9.5" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16.5 3.13a4 4 0 0 1 0 7.75"/>',
+  user:'<path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+  logout:'<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>',
+  settings:'<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c0 .66.39 1.26 1 1.51H21a2 2 0 1 1 0 4h-.09c-.61.25-1 .85-1 1.51Z"/>',
+  sliders:'<line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/>',
+  edit:'<path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>',
+  trash:'<path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6M10 11v6M14 11v6"/>',
+  plus:'<path d="M12 5v14M5 12h14"/>',
+  download:'<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/>',
+  upload:'<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m17 8-5-5-5 5"/><path d="M12 3v12"/>',
+  refresh:'<path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/>',
+  lock:'<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
+  zap:'<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>',
+  globe:'<circle cx="12" cy="12" r="9"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/>',
+  info:'<circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/>',
+  search:'<circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/>',
+  send:'<path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/>',
+  rocket:'<path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09Z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2Z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>',
+  eye:'<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/>',
+  home:'<path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/>',
+  compass:'<circle cx="12" cy="12" r="9"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>'
+};
+const I=(n,s=18)=>`<svg class="ic" width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[n]||ICONS.info}</svg>`;
+const TINTS=[['#0a84ff','#5e5ce6'],['#bf5af2','#ff375f'],['#ff9f0a','#ff6482'],['#30d158','#64d2ff'],['#64d2ff','#0a84ff'],['#ff453a','#ff9f0a'],['#5e5ce6','#bf5af2'],['#64d2ff','#30d158']];
+
+/* ---------- محتوای پیش‌فرض سایت (قابل ویرایش از پنل مدیریت) ---------- */
+const DEFAULT_CONTENT = /*__CONTENT_START__*/{
+  brand:{name:'آدوان',latin:'ADVAN',tagline:'مسیر شما به سوی آیندهٔ دیجیتال',blurb:'آدوان؛ همراه هوشمند کسب‌وکار شما در مسیر رشد دیجیتال.'},
+  hero:{badge:'نسل تازهٔ محصولات هوشمند آدوان معرفی شد',title:'آیندهٔ کسب‌وکار شما، <span class="grad-text">یک مسیر هوشمند</span> است',lead:'از دستیارهای هوش مصنوعی تا زیرساخت ابری؛ آدوان ابزارهایی ساده، امن و مقیاس‌پذیر می‌سازد تا کسب‌وکار شما سریع‌تر رشد کند.',ctaA:'مشاهدهٔ محصولات',ctaB:'گفتگو با دستیار هوشمند'},
+  about:{paras:['آدوان در سال ۱۳۹۷ با یک هدف ساده شروع شد: فناوری پیشرفته باید برای همهٔ کسب‌وکارها — از فروشگاه‌های کوچک تا سازمان‌های بزرگ — در دسترس و قابل فهم باشد. ما معتقدیم ابزار خوب، پیچیدگی را از مسیر شما برمی‌دارد، نه اینکه به آن اضافه کند.','امروز مجموعه‌ای از محصولات نرم‌افزاری، سرویس‌های ابری و راه‌حل‌های هوش مصنوعی ارائه می‌دهیم که روزانه هزاران کاربر به آن‌ها اعتماد می‌کنند. هر محصول با یک فلسفه طراحی شده: راه‌اندازی ساده، تجربه‌ای روان و پشتیبانی واقعی.','تیم ما از مهندسان، طراحان و متخصصان داده تشکیل شده که هر روز کنار مشتریان می‌نشینند تا مشکلات واقعی را بفهمند و برای آن‌ها راه‌حل بسازند.'],values:[{icon:'zap',title:'سادگی',text:'طراحی‌هایی که نیازی به کتابچهٔ راهنما ندارند؛ هر چیزی همان‌جایی است که انتظارش را دارید.'},{icon:'shield',title:'اعتماد',text:'امنیت و پایداری دو خط قرمز ماست. دادهٔ شما با بالاترین استانداردها محافظت می‌شود.'},{icon:'sparkles',title:'هوشمندی',text:'هوش مصنوعی را جایی به کار می‌بریم که واقعاً ارزش می‌سازد؛ نه صرفاً در شعارها.'}],stats:[{n:1200,s:'+',l:'مشتری فعال'},{n:98,s:'٪',l:'نرخ رضایت'},{n:7,s:'',l:'سال تجربه'},{n:24,s:'/۷',l:'پشتیبانی شبانه‌روزی'}]},
+  products:[
+    {id:'hooshban',name:'هوش‌بان',cat:'هوش مصنوعی',icon:'sparkles',badge:'محبوب‌ترین',tagline:'مغز متفکر تیم پشتیبانی و فروش شما',desc:'دستیار هوش مصنوعی‌ای که با دانش سازمان شما آموزش می‌بیند؛ به سؤالات مشتریان در لحظه پاسخ می‌دهد، درخواست‌ها را ثبت می‌کند و تیم فروش را در هر مرحله همراهی می‌کند.',features:['آموزش با داده‌های اختصاصی شما','پاسخ‌گویی شبانه‌روزی بدون وقفه','اتصال به سایت، واتساپ و تلگرام','گزارش تحلیلی از مکالمات و نرخ تبدیل'],price:'از ۴٬۹۰۰٬۰۰۰ تومان / ماه'},
+    {id:'sahab',name:'سحاب',cat:'ابری',icon:'cloud',badge:'جدید',tagline:'زیرساخت ابری، بدون دغدغهٔ نگه‌داری',desc:'سرورهای ابری سازمانی با راه‌اندازی چند دقیقه‌ای. منابع را هر لحظه که لازم داشتید کم یا زیاد کنید و فقط به اندازهٔ مصرف هزینه بدهید.',features:['راه‌اندازی سرور در کمتر از ۵ دقیقه','مقیاس‌پذیری خودکار منابع','بکاپ‌گیری روزانه با نگهداری ۳۰ روزه','مانیتورینگ لحظه‌ای و هشدار هوشمند'],price:'از ۲٬۴۰۰٬۰۰۰ تومان / ماه'},
+    {id:'negah',name:'نگاه',cat:'نرم‌افزار',icon:'chart',badge:'',tagline:'تصمیم‌گیری با داده، نه با حدس',desc:'سامانه تحلیل داده و داشبورد هوشمندی که تمام اطلاعات کسب‌وکار شما را یک‌جا جمع می‌کند و مهم‌ترین رویدادها را پیش از شما می‌بیند.',features:['اتصال به تمام منابع داده و فروشگاه‌سازها','داشبورد بلادرنگ قابل شخصی‌سازی','هشدار هوشمند برای روندهای غیرعادی','گزارش‌ساز خودکار دوره‌ای'],price:'از ۳٬۵۰۰٬۰۰۰ تومان / ماه'},
+    {id:'peyvand',name:'پیوند',cat:'نرم‌افزار',icon:'plug',badge:'',tagline:'همهٔ ابزارهای شما، هم‌زبان و هماهنگ',desc:'پلتفرم یکپارچه‌سازی و اتوماسیون که نرم‌افزارهای حسابداری، فروش و پشتیبانی شما را به هم وصل می‌کند و کارهای تکراری را خودکار می‌سازد.',features:['بیش از ۲۰۰ اتصال آماده','ساخت گردش‌کار بدون کدنویسی','وب‌هوک و API کامل','زمان‌بندی و اجرای خودکار'],price:'از ۱٬۹۰۰٬۰۰۰ تومان / ماه'},
+    {id:'sepehr',name:'سپهر',cat:'امنیت',icon:'shield',badge:'',tagline:'نگهبانی شبانه‌روزی از داده‌های شما',desc:'سامانه امنیت و مانیتورینگ سازمانی که رویدادهای کلیدی زیرساخت شما را پایش می‌کند و پیش از آنکه خطا به بحران تبدیل شود، خبر می‌دهد.',features:['پایش مداوم آسیب‌پذیری‌ها','لاگ مرکزی رویدادهای امنیتی','هشدار فوری پیامکی و تلفنی','گزارش انطباق برای ممیزی‌ها'],price:'از ۵٬۲۰۰٬۰۰۰ تومان / ماه'},
+    {id:'hub',name:'آدوان هاب',cat:'سخت‌افزار',icon:'cpu',badge:'پرفروش',tagline:'کنترل مرکزی فضای کار هوشمند شما',desc:'گجت هوشمندی که دستگاه‌های دفتر — از روشنایی و تهویه تا سیستم ورود — را یک‌جا مدیریت می‌کند؛ همه‌چیز از موبایل شما.',features:['اتصال هم‌زمان به بیش از ۱۰۰ دستگاه','کنترل کامل از اپلیکیشن موبایل','سازگار با پروتکل‌های رایج خانه هوشمند','نصب آسان بدون نیاز به سیم‌کشی'],price:'۱۲٬۸۰۰٬۰۰۰ تومان'}
+  ],
+  blog:[
+    {id:'b1',title:'چگونه هوش مصنوعی هزینهٔ پشتیبانی مشتری را کاهش می‌دهد؟',cat:'هوش مصنوعی',date:'۱۴۰۴/۰۸/۱۲',mins:'۵ دقیقه مطالعه',icon:'sparkles',excerpt:'بخش بزرگی از مکالمات پشتیبانی سؤال‌های تکراری است. ببینید دستیار هوشمند چطور همین بخش را به یک فرصت رشد تبدیل می‌کند.',body:['بخش عمدهٔ زمان تیم‌های پشتیبانی صرف سؤال‌های تکراری می‌شود: وضعیت سفارش، ساعت کاری، شرایط بازگشت کالا و راهنمای اولیهٔ محصول. دستیار هوشمند دقیقاً همین لایه را برمی‌دارد؛ به مشتری در لحظه و بدون انتظار پاسخ می‌دهد و فقط موارد پیچیده را به کارشناس انسانی ارجاع می‌دهد.','در بسیاری از استقرارهای واقعی، همین تغییر ساده هزینهٔ هر تماس را به‌شکل محسوسی پایین می‌آورد و — مهم‌تر از آن — زمان پاسخ‌گویی را از ساعت‌ها به چند ثانیه می‌رساند. مشتری‌ای که سریع پاسخ بگیرد، دوباره برمی‌گردد.','نکتهٔ کلیدی، آموزش دستیار با دانش اختصاصی کسب‌وکار شماست: کاتالوگ محصولات، شرایط گارانتی و تاریخچهٔ مکالمات واقعی. یک دستیار عمومی خوب نیست؛ دستیاری که زبان سازمان شما را بلد باشد، خوب است.']},
+    {id:'b2',title:'راهنمای انتخاب زیرساخت ابری برای کسب‌وکار در حال رشد',cat:'ابری',date:'۱۴۰۴/۰۷/۲۵',mins:'۷ دقیقه مطالعه',icon:'cloud',excerpt:'پنج معیاری که قبل از خرید سرور ابری باید بررسی کنید؛ از مقیاس‌پذیری تا هزینهٔ خروج داده.',body:['اولین معیار، شناخت بار کاری خودتان است: وب‌سایت پرترافیک دارید یا پایگاه‌دادهٔ حساس؟ اپ واقعی‌محور یا فایل‌محور؟ هر بار کاری، ترکیب متفاوتی از پردازنده، حافظه و دیسک می‌خواهد و انتخاب اشتباه یعنی پرداخت بیشتر برای چیزی که استفاده نمی‌کنید.','معیار دوم مقیاس‌پذیری است. کسب‌وکار در حال رشد نباید هر شش ماه مهاجرت کند؛ زیرساخت باید بتواند منابع را بدون توقف سرویس افزایش دهد. سومین معیار، SLA و پشتیبانی واقعی است: ۹۹٫۹٪ روی کاغذ با ۹۹٫۹٪ در عمل تفاوت زیادی دارد.','دو معیار آخر را هم‌یشه فراموش می‌کنند: هزینهٔ خروج داده و بکاپ. بپرسید اگر روزی خواستید سرویس را عوض کنید، داده‌تان با چه هزینه‌ای بیرون می‌آید و آخرین نسخهٔ پشتیبان شما چند دقیقه قبل از حادثه است؟']},
+    {id:'b3',title:'۱۰ عادت امنیتی که هر تیمی باید همین امروز شروع کند',cat:'امنیت',date:'۱۴۰۴/۰۶/۳۰',mins:'۴ دقیقه مطالعه',icon:'shield',excerpt:'امنیت با خرید ابزار گران شروع نمی‌شود؛ با ده عادت ساده و ارزان شروع می‌شود.',body:['۱. ورود دومرحله‌ای را برای همهٔ حساب‌های کاری اجباری کنید. ۲. مدیر هر سرویس را از مدیر کل جدا کنید. ۳. رمزها را با یک مدیر رمز نگه دارید، نه در فایل اکسل.','۴. دسترسی هر کارمند را محدود به بخش خودش کنید و موقع خروج، همان روز قطع کنید. ۵. به‌روزرسانی‌های امنیتی را از پیام‌های فوری سیستمی دنبال کنید، نه با تأخیر انسانی.','۶. لاگ رویدادها را جایی خارج از سرور اصلی نگه دارید. ۷. بکاپ را حداقل یک‌بار بازیابی آزمایشی کنید تا مطمئن شوید واقعاً کار می‌کند. ۸. یک صفحهٔ سادهٔ «اگر حساب‌مان هک شد چه کنیم» برای تیم بنویسید؛ در روز حادثه، این صفحه طلاست. ۹. لینک‌های مشکوک را با تمرین و شبیه‌سازی به تیم شناس بدهید. ۱۰. هر فصل یک‌بار لیست دسترسی‌ها را بازبینی کنید.']}
+  ],
+  faq:[
+    {q:'محصولات آدوان چگونه ارائه می‌شوند؟',a:'تمام محصولات نرم‌افزاری به‌صورت ابری (SaaS) ارائه می‌شوند؛ یعنی نیازی به نصب و نگه‌داری سرور نیست و به‌روزرسانی‌ها خودکار انجام می‌شود. تنها محصول سخت‌افزاری ما، آدوان هاب است که با پست به آدرس شما ارسال می‌شود.'},
+    {q:'آیا امکان تست رایگان وجود دارد؟',a:'بله؛ هر محصول را می‌توانید ۱۴ روز رایگان و بدون نیاز به کارت بانکی تست کنید. در پایان دورهٔ تست، بدون هیچ تعهدی می‌توانید ادامه دهید یا انصراف بدهید.'},
+    {q:'راه‌اندازی و استقرار چقدر طول می‌کشد؟',a:'محصولات ابری معمولاً در کمتر از یک ساعت فعال می‌شوند. برای پروژه‌های سازمانی با نیازهای سفارشی، تیم پیاده‌سازی ما معمولاً بین سه تا ده روز کاری کنار شماست.'},
+    {q:'پشتیبانی چگونه انجام می‌شود؟',a:'پشتیبانی از طریق همین سایت، تلفن و ایمیل در ساعات اداری (شنبه تا پنجشنبه، ۹ تا ۱۸) پاسخ‌گوست و برای مشتریان قراردادهای سازمانی، پشتیبانی شبانه‌روزی با SLA مشخص ارائه می‌شود.'},
+    {q:'آیا داده‌های ما امن است؟',a:'داده‌ها روی زیرساخت داخلی با رمزنگاری در حال انتقال و ذخیره‌سازی نگهداری می‌شوند، دسترسی کارکنان به لاگ ثبت می‌شود و بکاپ روزانه با نگهداری ۳۰ روزه گرفته می‌شود. گزارش امنیتی قرارداد برای مشتریان سازمانی در دسترس است.'},
+    {q:'امکان قرارداد سازمانی و دریافت فاکتور رسمی هست؟',a:'بله؛ برای سازمان‌ها قرارداد سالانه با تعرفهٔ اختصاصی، فاکتور رسمی و امکان صورتحساب متنی صادر می‌شود. کافی است از بخش تماس درخواست بدهید تا کارشناس فروش با شما تماس بگیرد.'}
+  ],
+  contact:{address:'تهران، خیابان ولیعصر، برج فناوری آدوان، طبقهٔ ۹',phone:'۰۲۱-۹۱۰۰۸۸۰۰',phoneLink:'+982191008800',email:'hello@advan.ir',hours:'شنبه تا پنجشنبه، ۹ تا ۱۸'}
+}/*__CONTENT_END__*/;
+
+/* ---------- وضعیت برنامه ---------- */
+let content=LS.get('advan-content',null);
+if(!content||!content.products){content=clone(DEFAULT_CONTENT);}
+const saveContent=()=>LS.set('advan-content',content);
+let prefs=Object.assign({theme:'auto',accent:'blue',fs:'m',anim:true},LS.get('advan-prefs',{}));
+const savePrefs=()=>LS.set('advan-prefs',prefs);
+
+/* ---------- سیستم توست ---------- */
+function toast(msg,type='ok'){
+  const icons={ok:'check',err:'x',info:'info'};
+  const t=el(`<div class="toast t-${type}" role="status">${I(icons[type]||'info',18)}<span>${esc(msg)}</span></div>`);
+  byId('toasts').append(t);
+  requestAnimationFrame(()=>t.classList.add('show'));
+  setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),400)},3400);
+}
+
+/* ---------- سیستم مودال ---------- */
+let lastFocus=null;
+const openOverlays=()=>$$('.overlay.open');
+function openModal(id){
+  const o=byId(id);if(!o)return;
+  lastFocus=document.activeElement;
+  o.classList.add('open');document.body.classList.add('locked');
+  const f=o.querySelector('[data-autofocus]')||o.querySelector('.sheet-close')||o.querySelector('button,input,a');
+  setTimeout(()=>{try{f&&f.focus()}catch(e){}},80);
+}
+function closeModal(id){
+  const o=id?byId(id):openOverlays().pop();if(!o)return;
+  o.classList.remove('open');
+  if(!openOverlays().length)document.body.classList.remove('locked');
+  if(lastFocus&&lastFocus.focus){try{lastFocus.focus()}catch(e){}}
+}
+document.addEventListener('click',e=>{
+  const c=e.target.closest('[data-close]');
+  if(c){const o=c.closest('.overlay');o&&closeModal(o.id)}
+  const ov=e.target.classList&&e.target.classList.contains('overlay')&&e.target;
+  if(ov&&!ov.dataset.static)closeModal(ov.id);
+});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){const top=openOverlays().pop();if(top){e.preventDefault();closeModal(top.id);return}}
+  if(e.key==='Tab'){
+    const top=openOverlays().pop();if(!top)return;
+    const items=$$('a[href],button:not([disabled]),input:not([disabled]),textarea:not([disabled]),select:not([disabled]),[tabindex]:not([tabindex="-1"])',top).filter(x=>x.offsetParent!==null||x===document.activeElement);
+    if(!items.length)return;
+    const first=items[0],last=items[items.length-1];
+    if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}
+    else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}
+  }
+});
+
+/* ---------- اعمال تم و شخصی‌سازی ---------- */
+const mqDark=window.matchMedia('(prefers-color-scheme: dark)');
+function applyTheme(){
+  const t=prefs.theme;
+  const dark=(t==='dark')||(t==='auto'&&mqDark.matches);
+  document.documentElement.dataset.theme=dark?'dark':'light';
+  document.documentElement.dataset.accent=prefs.accent||'blue';
+  document.documentElement.dataset.fs=prefs.fs||'m';
+  document.documentElement.classList.toggle('no-anim',prefs.anim===false);
+}
+mqDark.addEventListener('change',()=>{if(prefs.theme==='auto')applyTheme()});
+
+/* ---------- ذخیرهٔ __SRC بعد از رندرهای اولیه؟ نه — فقط تمیزکاری تگ html ---------- */
+function cleanedSrc(){
+  return __SRC.replace(/^<html[^>]*>/i,'<html lang="fa" dir="rtl">');
+}
+function bakeSite(){
+  const json=JSON.stringify(content).replace(/<\//g,'<\\/');
+  const re=/(\/\*__CONTENT_START__\*\/)([\s\S]*?)(\/\*__CONTENT_END__\*\/)/;
+  let out;
+  if(re.test(cleanedSrc())){out=cleanedSrc().replace(re,(m,a,b,c)=>a+' '+json+' '+c)}
+  else{toast('خطا در ساخت فایل؛ از خروجی JSON استفاده کنید.','err');return}
+  downloadBlob(new Blob(['<!DOCTYPE html>\n'+out],{type:'text/html;charset=utf-8'}),'index.html');
+  toast('نسخهٔ به‌روزشدهٔ سایت دانلود شد؛ آن را جایگزین index.html کنید.');
+}
+function downloadBlob(blob,name){
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);a.download=name;
+  document.body.append(a);a.click();
+  setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},600);
+}
+
+</script>
+
+<script>
+/* آدوان — بخش ۲: رندر بخش‌ها و میکرودی تعاملات */
+
+/* ---------- رندر محصولات ---------- */
+let prodFilter='همه',prodQuery='';
+function productCardHtml(p,idx){
+  const tint=TINTS[idx%TINTS.length];
+  return `<article class="card pcard tilt" style="--pc1:${tint[0]};--pc2:${tint[1]}" data-id="${esc(p.id)}">
+    <div class="glare" aria-hidden="true"></div>
+    ${p.badge?`<span class="pbadge">${esc(p.badge)}</span>`:''}
+    <div class="ptile">${I(p.icon||'cpu',26)}</div>
+    <h3>${esc(p.name)}</h3>
+    <p class="ptag">${esc(p.tagline||'')}</p>
+    <p class="pdesc">${esc(p.desc||'')}</p>
+    <ul class="pfeat">${(p.features||[]).slice(0,4).map(f=>`<li>${I('check',14)}<span>${esc(f)}</span></li>`).join('')}</ul>
+    <div class="pfoot"><span class="pprice">${esc(p.price||'')}</span><button class="btn btn-soft btn-sm" data-prod-open="${esc(p.id)}">جزئیات ${I('arrow',15)}</button></div>
+  </article>`;
+}
+function renderProducts(){
+  const grid=byId('productsGrid');if(!grid)return;
+  const q=norm(prodQuery);
+  let list=content.products.filter(p=>prodFilter==='همه'||p.cat===prodFilter);
+  if(q)list=list.filter(p=>norm([p.name,p.tagline,p.desc,(p.features||[]).join(' ')].join(' ')).includes(q));
+  grid.innerHTML=list.length?list.map((p,i)=>productCardHtml(p,i)).join(''):
+    `<div class="empty-state">${I('search',44)}<b>موردی یافت نشد</b>عبارت دیگری جستجو کنید یا فیلتر را بردارید.</div>`;
+  attachTilt(grid);
+}
+function renderFilters(){
+  const wrap=byId('filters');if(!wrap)return;
+  const cats=['همه',...new Set(content.products.map(p=>p.cat).filter(Boolean))];
+  wrap.innerHTML=cats.map(c=>`<button class="chip ${c===prodFilter?'active':''}" data-cat="${esc(c)}">${esc(c)}</button>`).join('');
+}
+function openProduct(id){
+  const p=content.products.find(x=>x.id===id);if(!p)return;
+  const idx=content.products.indexOf(p)%TINTS.length,tint=TINTS[(idx+TINTS.length)%TINTS.length];
+  byId('pmBody').innerHTML=`
+    <div class="sheet-head"><h3 id="pmTitle">${esc(p.name)}</h3><button class="sheet-close" data-close aria-label="بستن">${I('x')}</button></div>
+    <div class="pm-head"><div class="ptile" style="--pc1:${tint[0]};--pc2:${tint[1]}">${I(p.icon||'cpu',29)}</div><div><h3>${esc(p.name)}</h3><p class="ptag">${esc(p.tagline||'')}</p></div></div>
+    <p class="pm-desc">${esc(p.desc||'')}</p>
+    <ul class="pm-feats">${(p.features||[]).map(f=>`<li>${I('check',15)}<span>${esc(f)}</span></li>`).join('')}</ul>
+    <div class="pm-foot"><span class="pm-price">${esc(p.price||'')}</span><button class="btn btn-primary" data-demo="${esc(p.id)}">درخواست دمو ${I('rocket',17)}</button></div>`;
+  openModal('productModal');
+}
+
+/* ---------- رندر درباره/بلاگ/سوالات/تماس/فوتر ---------- */
+function renderAbout(){
+  const a=content.about||{};
+  byId('aboutParas').innerHTML=(a.paras||[]).map(t=>`<p>${esc(t)}</p>`).join('');
+  byId('valuesRow').innerHTML=(a.values||[]).map((v,i)=>{const t=TINTS[i%TINTS.length];return `<div class="card vcard"><div class="ptile" style="--pc1:${t[0]};--pc2:${t[1]}">${I(v.icon||'zap',24)}</div><h3>${esc(v.title||'')}</h3><p>${esc(v.text||'')}</p></div>`}).join('');
+  byId('statsRow').innerHTML=(a.stats||[]).map(s=>`<div class="stat"><b><span class="cnt" data-count="${Number(s.n)||0}">۰</span>${esc(s.s||'')}</b><span>${esc(s.l||'')}</span></div>`).join('');
+}
+function renderBlog(){
+  byId('blogGrid').innerHTML=(content.blog||[]).map((b,i)=>{const t=TINTS[(i+2)%TINTS.length];return `<article class="card bcard" data-post="${esc(b.id)}" style="--bc1:${t[0]};--bc2:${t[1]}" tabindex="0" role="button" aria-label="مطالعهٔ مقاله: ${esc(b.title)}">
+    <div class="bmedia"><span class="bcat">${esc(b.cat||'')}</span>${I(b.icon||'file',44)}</div>
+    <div class="bbody"><h3>${esc(b.title)}</h3><p>${esc(b.excerpt||'')}</p>
+    <div class="bmeta"><span>${I('clock',14)}${esc(b.mins||'')}</span><span>${I('globe',14)}${esc(b.date||'')}</span></div></div></article>`}).join('');
+}
+function openPost(id){
+  const b=(content.blog||[]).find(x=>x.id===id);if(!b)return;
+  byId('poBody').innerHTML=`
+    <div class="sheet-head"><h3 id="poTitle">${esc(b.title)}</h3><button class="sheet-close" data-close aria-label="بستن">${I('x')}</button></div>
+    <div class="post-meta"><span>${I('file',14)}${esc(b.cat||'')}</span><span>${I('clock',14)}${esc(b.mins||'')}</span><span>${I('globe',14)}${esc(b.date||'')}</span></div>
+    <div class="post-body">${(b.body||[]).map(p=>`<p>${esc(p)}</p>`).join('')}</div>`;
+  openModal('postModal');
+}
+function renderFaq(){
+  byId('faqList').innerHTML=(content.faq||[]).map((f,i)=>`<div class="acc" id="faq-${i}">
+    <h3 style="margin:0"><button class="acc-btn" aria-expanded="false" aria-controls="faq-p-${i}"><span>${esc(f.q)}</span><span class="chev">${I('compass',16)}</span></button></h3>
+    <div class="acc-panel" id="faq-p-${i}" role="region"><div><p>${esc(f.a)}</p></div></div></div>`).join('');
+  $$('#faqList .acc-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const acc=btn.closest('.acc');const open=acc.classList.toggle('open');
+      btn.setAttribute('aria-expanded',open?'true':'false');
+    });
+  });
+}
+function renderContact(){
+  const c=content.contact||{};
+  byId('contactInfo').innerHTML=`
+    <div class="card cinfo-card" data-copy="${esc(c.phone||'')}" tabindex="0" role="button" aria-label="کپی شماره تلفن">
+      <div class="ptile" style="--pc1:#0a84ff;--pc2:#5e5ce6">${I('phone',21)}</div><div><b>تلفن پاسخ‌گویی</b><span class="fa-dir">${esc(c.phone||'')}</span></div></div>
+    <div class="card cinfo-card" data-copy="${esc(c.email||'')}" tabindex="0" role="button" aria-label="کپی ایمیل">
+      <div class="ptile" style="--pc1:#bf5af2;--pc2:#ff375f">${I('mail',21)}</div><div><b>ایمیل</b><span>${esc(c.email||'')}</span></div></div>
+    <div class="card cinfo-card" data-copy="${esc(c.address||'')}" tabindex="0" role="button" aria-label="کپی آدرس">
+      <div class="ptile" style="--pc1:#30d158;--pc2:#64d2ff">${I('pin',21)}</div><div><b>آدرس دفتر مرکزی</b><span class="fa-dir">${esc(c.address||'')}</span></div></div>
+    <div class="card cinfo-card">
+      <div class="ptile" style="--pc1:#ff9f0a;--pc2:#ff6482">${I('clock',21)}</div><div><b>ساعات کاری</b><span class="fa-dir">${esc(c.hours||'')}</span></div></div>`;
+}
+function renderFooter(){
+  byId('footerProdLinks').innerHTML=content.products.slice(0,5).map(p=>`<li><button data-prod-open="${esc(p.id)}">${esc(p.name)}</button></li>`).join('');
+  byId('brandNameF').textContent=content.brand.name;
+  byId('footerBlurb').textContent=content.brand.blurb||'';
+  try{const y=new Intl.DateTimeFormat('fa-IR',{year:'numeric'}).format(new Date());byId('copyright').textContent=`© ${y} ${content.brand.name} — تمامی حقوق محفوظ است.`}catch(e){}
+}
+function renderBrand(){
+  const b=content.brand||{};
+  byId('brandName').textContent=b.name||'';
+  byId('brandLatin').textContent=b.latin||'';
+  byId('heroBadge').textContent=b.tagline?content.hero.badge||'':(content.hero.badge||'');
+  byId('heroTitle').innerHTML=content.hero.title||'';
+  byId('heroLead').textContent=content.hero.lead||'';
+  byId('ctaA').childNodes[0].textContent=content.hero.ctaA||'مشاهدهٔ محصولات';
+  document.title=`${b.name||'آدوان'} | ${b.tagline||''}`;
+}
+function renderAll(){
+  renderBrand();renderFilters();renderProducts();renderAbout();renderBlog();renderFaq();renderContact();renderFooter();initStagger();
+}
+
+/* ---------- میکرودی تعاملات ---------- */
+function initStagger(){
+  $$('[data-stagger]').forEach(g=>{
+    [...g.children].forEach((c,i)=>c.style.transitionDelay=Math.min(i*70,420)+'ms');
+  });
+}
+const revealIO=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');
+    $$('.aa-bar i',e.target).forEach(b=>b.style.width=b.dataset.w||'80%');
+    revealIO.unobserve(e.target)}});
+},{threshold:.14,rootMargin:'0px 0px -6% 0px'});
+function observeReveals(){
+  $$('.reveal,[data-stagger]').forEach(x=>revealIO.observe(x));
+}
+function initCounters(){
+  const io=new IntersectionObserver(es=>{
+    es.forEach(e=>{
+      if(!e.isIntersecting)return;io.unobserve(e.target);
+      const n=Number(e.target.dataset.count)||0,t0=performance.now(),dur=isReduced()?1:1300;
+      const step=t=>{const p=Math.min((t-t0)/dur,1),v=Math.round(n*(1-Math.pow(1-p,3)));
+        e.target.textContent=faNum(v);if(p<1)requestAnimationFrame(step)};
+      requestAnimationFrame(step);
+    });
+  },{threshold:.5});
+  $$('.cnt').forEach(x=>io.observe(x));
+}
+function attachTilt(root){
+  if(!finePointer()||isReduced())return;
+  $$('.tilt',root||document).forEach(card=>{
+    if(card.dataset.tilted)return;card.dataset.tilted='1';
+    card.addEventListener('pointermove',e=>{
+      const r=card.getBoundingClientRect();
+      const px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;
+      card.style.transform=`rotateY(${px*7}deg) rotateX(${-py*7}deg) translateY(-3px)`;
+      card.style.setProperty('--gx',((px+.5)*100)+'%');
+      card.style.setProperty('--gy',((py+.5)*100)+'%');
+    });
+    card.addEventListener('pointerleave',()=>{card.style.transform=''});
+  });
+}
+document.addEventListener('pointerdown',e=>{
+  const b=e.target.closest('.btn,.chip,.icon-btn,.sw,.adv-opt');if(!b||isReduced())return;
+  const r=b.getBoundingClientRect(),d=Math.max(r.width,r.height);
+  const s=document.createElement('span');s.className='ripple';
+  s.style.width=s.style.height=d+'px';
+  s.style.left=(e.clientX-r.left-d/2)+'px';s.style.top=(e.clientY-r.top-d/2)+'px';
+  if(getComputedStyle(b).overflow!=='visible')b.appendChild(s);
+  s.addEventListener('animationend',()=>s.remove());
+});
+function initMagnetic(){
+  if(!finePointer()||isReduced())return;
+  $$('[data-mag]').forEach(b=>{
+    b.addEventListener('pointermove',e=>{
+      const r=b.getBoundingClientRect();
+      const dx=(e.clientX-r.left-r.width/2)/r.width,dy=(e.clientY-r.top-r.height/2)/r.height;
+      b.style.transform=`translate(${dx*7}px,${dy*7}px)`;
+    });
+    b.addEventListener('pointerleave',()=>{b.style.transform=''});
+  });
+}
+/* پارالاکس صحنهٔ سه‌بعدی */
+function initParallax(){
+  if(!finePointer()||isReduced())return;
+  const hero=byId('home'),scene=byId('scene');if(!hero||!scene)return;
+  hero.addEventListener('pointermove',e=>{
+    const r=hero.getBoundingClientRect();
+    const px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;
+    scene.style.transform=`rotateY(${px*8}deg) rotateX(${-py*8}deg)`;
+    $$('.orb',hero).forEach((o,i)=>{o.style.translate=`${px*(i?-26:22)}px ${py*(i?18:-16)}px`});
+  });
+  hero.addEventListener('pointerleave',()=>{scene.style.transform='';$$('.orb',hero).forEach(o=>o.style.translate='')});
+}
+/* هدر، ناوبری و اسکرول */
+function initScroll(){
+  const hdr=byId('topbar'),prog=byId('progress'),topBtn=byId('topBtn');
+  const onScroll=()=>{
+    const y=scrollY,h=document.documentElement.scrollHeight-innerHeight;
+    hdr.classList.toggle('scrolled',y>10);
+    prog.style.width=(h>0?(y/h)*100:0)+'%';
+    topBtn.classList.toggle('show',y>800);
+  };
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+  topBtn.addEventListener('click',()=>scrollTo({top:0,behavior:isReduced()?'auto':'smooth'}));
+  const secs=$$('main section[id]');
+  const io=new IntersectionObserver(es=>{
+    es.forEach(e=>{if(e.isIntersecting){
+      $$('nav#mainnav a,#mnav a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id));
+    }});
+  },{rootMargin:'-45% 0px -50% 0px'});
+  secs.forEach(s=>io.observe(s));
+}
+function initMenu(){
+  const hdr=byId('topbar'),btn=byId('menuBtn'),mnav=byId('mnav');
+  const close=()=>{hdr.classList.remove('open');btn.setAttribute('aria-expanded','false')};
+  btn.addEventListener('click',()=>{
+    const open=!hdr.classList.contains('open');
+    hdr.classList.toggle('open',open);btn.setAttribute('aria-expanded',String(open));
+  });
+  $$('a',mnav).forEach(a=>a.addEventListener('click',close));
+  document.addEventListener('click',e=>{if(!e.target.closest('#topbar')&&!e.target.closest('#mnav'))close()});
+}
+/* تم toggle سریع (روشن↔تیره، سیستم را نادیده می‌گیرد) */
+function initThemeBtn(){
+  byId('themeBtn').addEventListener('click',()=>{
+    const cur=document.documentElement.dataset.theme;
+    prefs.theme=cur==='dark'?'light':'dark';savePrefs();applyTheme();syncSettingsUI();
+    toast(prefs.theme==='dark'?'حالت تیره فعال شد':'حالت روشن فعال شد','info');
+  });
+}
+/* فرم تماس و خبرنامه */
+function initForms(){
+  byId('contactForm').addEventListener('submit',e=>{
+    e.preventDefault();
+    const f=e.target;let ok=true;
+    const need=[['cfName',v=>v.trim().length>=2],['cfContact',v=>/.+@.+\..+/.test(v)||v.replace(/\D/g,'').length>=8],['cfMsg',v=>v.trim().length>=3]];
+    need.forEach(([id,fn])=>{const inp=byId(id),w=inp.closest('.field');const good=fn(inp.value);w.classList.toggle('err',!good);inp.setAttribute('aria-invalid',String(!good));if(!good)ok=false});
+    if(!ok){toast('لطفاً موارد خواسته‌شده را کامل کنید.','err');return}
+    const msgs=LS.get('advan-messages',[]);
+    msgs.unshift({id:uid(),name:byId('cfName').value.trim(),contact:byId('cfContact').value.trim(),subject:byId('cfSubject').value.trim()||'بدون موضوع',msg:byId('cfMsg').value.trim(),date:new Date().toISOString(),read:false});
+    LS.set('advan-messages',msgs);
+    f.reset();
+    toast('پیام شما ثبت شد؛ به‌زودی با شما تماس می‌گیریم.');
+  });
+  byId('newsForm').addEventListener('submit',e=>{
+    e.preventDefault();
+    const em=byId('newsEmail').value.trim();
+    if(!/.+@.+\..+/.test(em)){toast('ایمیل معتبر وارد کنید.','err');return}
+    const nl=LS.get('advan-newsletter',[]);
+    if(!nl.includes(em))nl.push(em);
+    LS.set('advan-newsletter',nl);
+    byId('newsEmail').value='';
+    toast('عضویت شما در خبرنامه ثبت شد.');
+  });
+}
+function initCopyCards(){
+  document.addEventListener('click',e=>{
+    const c=e.target.closest('[data-copy]');if(!c)return;
+    const v=c.dataset.copy;if(!v)return;
+    const done=()=>toast('«'+v.slice(0,26)+'» کپی شد.');
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(v).then(done).catch(()=>{})}
+    else{const ta=document.createElement('textarea');ta.value=v;document.body.append(ta);ta.select();try{document.execCommand('copy');done()}catch(x){}ta.remove()}
+  });
+}
+/* دکمه‌های بازکردن محصول/پست (رویدادِ واگذارشده) */
+document.addEventListener('click',e=>{
+  const po=e.target.closest('[data-prod-open]');if(po){openProduct(po.dataset.prodOpen);return}
+  const bp=e.target.closest('[data-post]');if(bp){openPost(bp.dataset.post);return}
+  const dm=e.target.closest('[data-demo]');
+  if(dm){const p=content.products.find(x=>x.id===dm.dataset.demo);closeModal('productModal');
+    setTimeout(()=>{byId('cfSubject').value=p?('درخواست دمو از '+p.name):'';byId('contactForm').scrollIntoView({behavior:isReduced()?'auto':'smooth',block:'center'});setTimeout(()=>byId('cfName').focus(),600)},200);return}
+});
+byId('productsGrid').addEventListener('keydown',e=>{});
+byId('blogGrid').addEventListener('keydown',e=>{
+  if((e.key==='Enter'||e.key===' ')&&e.target.classList.contains('bcard')){e.preventDefault();openPost(e.target.dataset.post)}
+});
+byId('prodSearch').addEventListener('input',e=>{prodQuery=e.target.value;renderProducts();initStagger()});
+byId('filters').addEventListener('click',e=>{
+  const c=e.target.closest('[data-cat]');if(!c)return;
+  prodFilter=c.dataset.cat;renderFilters();renderProducts();initStagger();
+});
+
+</script>
+
+<script>
+/* آدوان — بخش ۳: احراز هویت و پنل مدیریت */
+
+/* ---------- هش SHA-256 (با Web Crypto + جایگزین جاوااسکریپتی) ---------- */
+function jsSha256(ascii){
+  const K=[0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2];
+  const H=[0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19];
+  const bytes=[];for(let i=0;i<ascii.length;i++){const c=ascii.charCodeAt(i);if(c<128)bytes.push(c);else if(c<2048){bytes.push(192|c>>6,128|c&63)}else{bytes.push(224|c>>12,128|c>>6&63,128|c&63)}}
+  const bitLen=bytes.length*8;
+  bytes.push(128);
+  while(bytes.length%64!==56)bytes.push(0);
+  const hi=Math.floor(bitLen/4294967296),lo=bitLen>>>0;
+  [hi,lo].forEach(x=>bytes.push(x>>>24&255,x>>>16&255,x>>>8&255,x&255));
+  const w=new Array(64);
+  const rotr=(x,n)=>(x>>>n)|(x<<(32-n));
+  for(let off=0;off<bytes.length;off+=64){
+    for(let i=0;i<16;i++)w[i]=(bytes[off+i*4]<<24)|(bytes[off+i*4+1]<<16)|(bytes[off+i*4+2]<<8)|bytes[off+i*4+3];
+    for(let i=16;i<64;i++){const s0=rotr(w[i-15],7)^rotr(w[i-15],18)^(w[i-15]>>>3),s1=rotr(w[i-2],17)^rotr(w[i-2],19)^(w[i-2]>>>10);w[i]=(w[i-16]+s0+w[i-7]+s1)|0}
+    let[a,b,c,d,e,f,g,h]=H;
+    for(let i=0;i<64;i++){
+      const S1=rotr(e,6)^rotr(e,11)^rotr(e,25),ch=(e&f)^(~e&g),t1=(h+S1+ch+K[i]+w[i])|0;
+      const S0=rotr(a,2)^rotr(a,13)^rotr(a,22),maj=(a&b)^(a&c)^(b&c),t2=(S0+maj)|0;
+      h=g;g=f;f=e;e=(d+t1)|0;d=c;c=b;b=a;a=(t1+t2)|0;
+    }
+    [a,b,c,d,e,f,g,h].forEach((x,i)=>{H[i]=(H[i]+x)|0});
+  }
+  return H.map(x=>('00000000'+(x>>>0).toString(16)).slice(-8)).join('');
+}
+async function hashPw(pw,salt){
+  try{
+    if(window.crypto&&crypto.subtle){
+      const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(salt+':'+pw));
+      return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join('');
+    }
+  }catch(e){}
+  return jsSha256(salt+':'+pw);
+}
+const randHex=n=>Array.from({length:n},()=>'0123456789abcdef'[Math.floor(Math.random()*16)]).join('');
+
+/* ---------- کاربران و نشست ---------- */
+const getUsers=()=>LS.get('advan-users',[]);
+const setUsers=u=>LS.set('advan-users',u);
+const getSession=()=>LS.get('advan-session',null);
+const setSession=s=>s?LS.set('advan-session',s):LS.del('advan-session');
+function currentUser(){
+  const s=getSession();if(!s)return null;
+  const u=getUsers().find(x=>x.u===s.u);return u||null;
+}
+async function seedAdmin(){
+  if(!getUsers().length){
+    const salt=randHex(8);
+    setUsers([{id:uid(),name:'مدیر آدوان',u:'admin',role:'admin',salt,hash:await hashPw('advan@1234',salt),joined:new Date().toISOString()}]);
+  }
+}
+let pendingAdmin=false;
+function updateAuthUI(){
+  const area=byId('authArea'),u=currentUser();
+  if(!u){
+    area.innerHTML=`<button class="btn btn-primary btn-sm" id="loginBtnTop">ورود | ثبت‌نام</button>`;
+    byId('loginBtnTop').addEventListener('click',()=>openAuth(false));
+  }else{
+    const initial=(u.name||u.u||'ک').trim()[0]||'ک';
+    area.innerHTML=`<button class="user-chip" id="userChip" aria-haspopup="true" aria-expanded="false"><span class="avatar" aria-hidden="true">${esc(initial)}</span><span>${esc(u.name||u.u)}</span></button>
+      <div class="user-menu" id="userMenu" role="menu">
+        <div class="um-head">سلام، ${esc(u.name||u.u)} 👋</div>
+        ${u.role==='admin'?`<a href="#admin" id="umAdmin" role="menuitem">${I('sliders',16)}پنل مدیریت</a>`:''}
+        <button id="umSettings" role="menuitem">${I('settings',16)}شخصی‌سازی ظاهر</button>
+        <button id="umLogout" role="menuitem">${I('logout',16)}خروج از حساب</button>
+      </div>`;
+    byId('userChip').addEventListener('click',e=>{e.stopPropagation();const m=byId('userMenu');m.classList.toggle('open');byId('userChip').setAttribute('aria-expanded',m.classList.contains('open')?'true':'false')});
+    byId('umLogout').addEventListener('click',()=>{setSession(null);updateAuthUI();renderHeroHello();toast('از حساب خود خارج شدید.','info')});
+    byId('umSettings').addEventListener('click',()=>{byId('userMenu').classList.remove('open');openSettings()});
+    const adm=byId('umAdmin');if(adm)adm.addEventListener('click',e=>{e.preventDefault();byId('userMenu').classList.remove('open');openAdmin()});
+  }
+  renderHeroHello();
+  document.addEventListener('click',()=>{const m=byId('userMenu');if(m)m.classList.remove('open')},{once:true});
+}
+function renderHeroHello(){
+  const u=currentUser(),h=byId('heroHello');
+  if(u){h.innerHTML=`${I('user',18)}<span>سلام ${esc(u.name||u.u)} عزیز، خوش آمدید!</span>`;h.classList.add('on')}
+  else{h.classList.remove('on');h.innerHTML=''}
+}
+function openAuth(asAdmin){
+  pendingAdmin=!!asAdmin;
+  byId('loginForm').style.display='';byId('registerForm').style.display='none';
+  byId('tabLogin').classList.add('active');byId('tabLogin').setAttribute('aria-selected','true');
+  byId('tabRegister').classList.remove('active');byId('tabRegister').setAttribute('aria-selected','false');
+  byId('authTitle').textContent=asAdmin?'ورود مدیر':'ورود به حساب کاربری';
+  openModal('authModal');
+}
+function setTab(login){
+  byId('loginForm').style.display=login?'':'none';
+  byId('registerForm').style.display=login?'none':'';
+  byId('tabLogin').classList.toggle('active',login);byId('tabLogin').setAttribute('aria-selected',String(login));
+  byId('tabRegister').classList.toggle('active',!login);byId('tabRegister').setAttribute('aria-selected',String(!login));
+  byId('authTitle').textContent=login?'ورود به حساب کاربری':'ایجاد حساب جدید';
+}
+function fieldCheck(id,fn){
+  const inp=byId(id),w=inp.closest('.field');const ok=fn(inp.value);
+  w.classList.toggle('err',!ok);inp.setAttribute('aria-invalid',String(!ok));return ok;
+}
+function initAuthForms(){
+  byId('tabLogin').addEventListener('click',()=>setTab(true));
+  byId('tabRegister').addEventListener('click',()=>setTab(false));
+  byId('loginForm').addEventListener('submit',async e=>{
+    e.preventDefault();
+    const u=byId('liUser').value.trim(),p=byId('liPass').value;
+    let ok=fieldCheck('liUser',v=>v.length>0)&&fieldCheck('liPass',v=>v.length>0);
+    if(!ok)return;
+    const user=getUsers().find(x=>x.u.toLowerCase()===u.toLowerCase());
+    if(!user||(await hashPw(p,user.salt))!==user.hash){toast('نام کاربری یا رمز عبور اشتباه است.','err');return}
+    setSession({u:user.u,role:user.role,name:user.name,at:Date.now()});
+    updateAuthUI();closeModal('authModal');byId('liPass').value='';
+    toast('خوش آمدید، '+(user.name||user.u)+'!');
+    if(pendingAdmin&&user.role==='admin'){pendingAdmin=false;openAdmin()}
+    if(location.hash==='#admin'&&user.role==='admin')openAdmin();
+  });
+  byId('registerForm').addEventListener('submit',async e=>{
+    e.preventDefault();
+    const name=byId('rgName').value.trim(),u=byId('rgUser').value.trim(),p=byId('rgPass').value,p2=byId('rgPass2').value;
+    let ok=fieldCheck('rgName',v=>v.length>=2)&&fieldCheck('rgUser',v=>v.length>=3)&&fieldCheck('rgPass',v=>v.length>=6)&&fieldCheck('rgPass2',v=>v===p&&v.length>0);
+    if(!ok)return;
+    if(getUsers().some(x=>x.u.toLowerCase()===u.toLowerCase())){toast('این نام کاربری قبلاً ثبت شده است.','err');return}
+    const salt=randHex(8);
+    const users=getUsers();
+    users.push({id:uid(),name,u,role:'user',salt,hash:await hashPw(p,salt),joined:new Date().toISOString()});
+    setUsers(users);
+    setSession({u,role:'user',name,at:Date.now()});
+    updateAuthUI();closeModal('authModal');
+    toast('حساب شما ساخته شد؛ خوش آمدید، '+name+'!');
+  });
+}
+
+/* ---------- پنل مدیریت ---------- */
+let admTab='content';
+const ADM_TABS=[
+  ['content','محتوای سایت','sliders'],['products','محصولات','cpu'],['blog','بلاگ','file'],['faq','سوالات متداول','help'],
+  ['messages','پیام‌ها','mail'],['users','کاربران','users'],['settings','تنظیمات','settings']
+];
+function openAdmin(){
+  const u=currentUser();
+  if(!u||u.role!=='admin'){openAuth(true);return}
+  renderAdminNav();renderAdminTab();openModal('adminPanel');
+}
+function renderAdminNav(){
+  const msgs=LS.get('advan-messages',[]).filter(m=>!m.read).length;
+  byId('admNav').innerHTML=ADM_TABS.map(([id,label,icon])=>{
+    const cnt=(id==='messages'&&msgs)?`<span class="cnt">${faNum(msgs)}</span>`:'';
+    return `<button data-tab="${id}" class="${id===admTab?'active':''}">${I(icon,17)}${label}${cnt}</button>`;
+  }).join('');
+}
+function renderAdminTab(){
+  const body=byId('admBody');
+  const fn={content:admContent,products:admProducts,blog:admBlog,faq:admFaq,messages:admMessages,users:admUsers,settings:admSettings}[admTab];
+  body.innerHTML='';fn(body);
+  renderAdminNav();
+}
+byId('admNav').addEventListener('click',e=>{
+  const b=e.target.closest('[data-tab]');if(!b)return;
+  admTab=b.dataset.tab;renderAdminTab();
+});
+byId('admSiteBtn').addEventListener('click',()=>closeModal('adminPanel'));
+byId('admLogoutBtn').addEventListener('click',()=>{setSession(null);updateAuthUI();closeModal('adminPanel');toast('از حساب خود خارج شدید.','info')});
+
+/* فرم‌ساز کمکی */
+function fld(label,val,key,type='text',ph=''){
+  if(type==='textarea')return `<div class="field"><label>${esc(label)}</label><textarea rows="4" data-k="${esc(key)}" placeholder="${esc(ph)}">${esc(val||'')}</textarea></div>`;
+  return `<div class="field"><label>${esc(label)}</label><input type="${type}" data-k="${esc(key)}" value="${esc(val||'')}" placeholder="${esc(ph)}"></div>`;
+}
+function listFld(label,arr,key,rows=4){
+  return `<div class="field"><label>${esc(label)} <small style="color:var(--muted);font-weight:600">(هر خط یک مورد)</small></label><textarea rows="${rows}" data-list="${esc(key)}">${esc((arr||[]).join('\n'))}</textarea></div>`;
+}
+function collectForm(root,base){
+  const obj=clone(base);
+  $$('[data-k]',root).forEach(inp=>{setPath(obj,inp.dataset.k,inp.value)});
+  $$('[data-list]',root).forEach(ta=>{setPath(obj,ta.dataset.list,ta.value.split('\n').map(x=>x.trim()).filter(Boolean))});
+  return obj;
+}
+function setPath(obj,path,val){
+  const parts=path.split('.');let cur=obj;
+  for(let i=0;i<parts.length-1;i++){if(cur[parts[i]]===undefined||cur[parts[i]]===null||typeof cur[parts[i]]!=='object')cur[parts[i]]=isNaN(+parts[i+1])?{}:[];cur=cur[parts[i]]}
+  cur[parts[parts.length-1]]=val;
+}
+function persistAndRefresh(msg){
+  saveContent();renderAll();
+  toast(msg||'تغییرات ذخیره شد و در سایت اعمال شد.');
+}
+
+/* تب محتوا */
+function admContent(body){
+  const c=content,b=c.brand||{},h=c.hero||{},ct=c.contact||{},a=c.about||{};
+  body.innerHTML=`<h2>محتوای سایت</h2><p class="adm-sub">متن‌های اصلی صفحهٔ اصلی را ویرایش کنید.</p>
+  <div class="adm-card" style="margin-bottom:1.2rem"><h3>${I('info',17)}برند و هیرو</h3>
+    ${fld('نام برند',b.name,'brand.name')}${fld('نام لاتین',b.latin,'brand.latin')}
+    ${fld('شعار (تگ‌لاین)',b.tagline,'brand.tagline')}
+    ${fld('متن باج هیرو',h.badge,'hero.badge')}
+    ${fld('عنوان هیرو (می‌تواند شامل <span> باشد)',h.title,'hero.title')}
+    ${fld('توضیح هیرو',h.lead,'hero.lead','textarea')}
+    <div class="f-row">${fld('دکمهٔ اصلی',h.ctaA,'hero.ctaA')}${fld('دکمهٔ دوم',h.ctaB,'hero.ctaB')}</div>
+  </div>
+  <div class="adm-card" style="margin-bottom:1.2rem"><h3>${I('user',17)}دربارهٔ ما</h3>
+    ${listFld('پاراگراف‌های دربارهٔ ما',a.paras,'about.paras',5)}
+  </div>
+  <div class="adm-card"><h3>${I('phone',17)}اطلاعات تماس</h3>
+    <div class="f-row">${fld('تلفن',ct.phone,'contact.phone')}${fld('لینک تلفن (مثلاً +9821…)',ct.phoneLink,'contact.phoneLink')}</div>
+    ${fld('ایمیل',ct.email,'contact.email')}${fld('آدرس',ct.address,'contact.address')}
+    ${fld('ساعات کاری',ct.hours,'contact.hours')}${fld('متن فوتر',b.blurb,'brand.blurb')}
+  </div>
+  <div class="adm-form-actions"><button class="btn btn-primary" id="saveContentBtn">ذخیرهٔ تغییرات</button></div>`;
+  byId('saveContentBtn').addEventListener('click',()=>{content=collectForm(body,content);persistAndRefresh()});
+}
+
+/* تب محصولات */
+let editingProd=null;
+function admProducts(body){
+  body.innerHTML=`<h2>محصولات</h2><p class="adm-sub">${faNum(content.products.length)} محصول در ویترین — افزودن، ویرایش و حذف.</p>
+  <button class="btn btn-primary btn-sm" id="addProdBtn" style="margin-bottom:1.2rem">${I('plus',16)}افزودن محصول</button>
+  <div class="adm-list" id="prodList"></div><div id="prodFormWrap"></div>`;
+  const draw=()=>{
+    byId('prodList').innerHTML=content.products.map((p,i)=>`<div class="adm-row">
+      <span class="adm-row-ic">${I(p.icon||'cpu',18)}</span>
+      <div class="adm-row-body"><b>${esc(p.name)}</b><small>${esc(p.cat||'')} — ${esc(p.price||'')}</small></div>
+      <div class="adm-row-acts">
+        <button data-edit="${i}" aria-label="ویرایش" title="ویرایش">${I('edit',15)}</button>
+        <button class="del" data-del="${i}" aria-label="حذف" title="حذف">${I('trash',15)}</button>
+      </div></div>`).join('')||'<p class="adm-sub">محصولی وجود ندارد.</p>';
+  };
+  const form=(p,idx)=>{
+    byId('prodFormWrap').innerHTML=`<div class="adm-form"><h3>${idx===undefined?'محصول جدید':'ویرایش «'+esc(p.name)+'»'}</h3>
+      <div class="f-row">${fld('نام محصول',p.name,'p.name')}${fld('دسته‌بندی',p.cat,'p.cat')}</div>
+      <div class="f-row">${fld('آیکون (sparkles, cloud, chart, plug, shield, cpu)',p.icon,'p.icon')}${fld('برچسب (اختیاری)',p.badge,'p.badge')}</div>
+      ${fld('تگ‌لاین',p.tagline,'p.tagline')}
+      ${fld('توضیحات',p.desc,'p.desc','textarea')}
+      ${listFld('ویژگی‌ها',p.features,'p.features',4)}
+      ${fld('قیمت (متن آزاد)',p.price,'p.price')}
+      <div class="adm-form-actions"><button class="btn btn-primary btn-sm" id="saveProdBtn">ذخیره</button><button class="btn btn-ghost btn-sm" id="cancelProdBtn">انصراف</button></div></div>`;
+    byId('saveProdBtn').addEventListener('click',()=>{
+      const obj=collectForm(byId('prodFormWrap'),p||{});
+      if(!obj.name||!obj.name.trim()){toast('نام محصول الزامی است.','err');return}
+      obj.id=obj.id||uid();
+      if(idx===undefined)content.products.push(obj);else content.products[idx]=obj;
+      persistAndRefresh('محصول ذخیره شد.');editingProd=null;
+      admTab='products';renderAdminTab();
+    });
+    byId('cancelProdBtn').addEventListener('click',()=>{byId('prodFormWrap').innerHTML='';editingProd=null});
+  };
+  draw();
+  byId('addProdBtn').addEventListener('click',()=>form({id:'',name:'',cat:'نرم‌افزار',icon:'cpu',badge:'',tagline:'',desc:'',features:[],price:''}));
+  byId('prodList').addEventListener('click',e=>{
+    const ed=e.target.closest('[data-edit]'),dl=e.target.closest('[data-del]');
+    if(ed){editingProd=+ed.dataset.edit;form(content.products[editingProd],editingProd)}
+    if(dl){
+      const i=+dl.dataset.del,row=dl.closest('.adm-row');
+      const acts=row.querySelector('.adm-row-acts');
+      acts.innerHTML=`<span class="adm-confirm">حذف شود؟<button class="yes">بله</button><button class="no">خیر</button></span>`;
+      acts.querySelector('.yes').addEventListener('click',()=>{content.products.splice(i,1);persistAndRefresh('محصول حذف شد.');admTab='products';renderAdminTab()});
+      acts.querySelector('.no').addEventListener('click',()=>{admTab='products';renderAdminTab()});
+    }
+  });
+  if(editingProd!==null&&content.products[editingProd])form(content.products[editingProd],editingProd);
+}
+
+/* تب بلاگ */
+function admBlog(body){
+  body.innerHTML=`<h2>بلاگ</h2><p class="adm-sub">مدیریت مقاله‌های بلاگ.</p>
+  <button class="btn btn-primary btn-sm" id="addPostBtn" style="margin-bottom:1.2rem">${I('plus',16)}مقالهٔ جدید</button>
+  <div class="adm-list" id="blogList"></div><div id="blogFormWrap"></div>`;
+  const draw=()=>{
+    byId('blogList').innerHTML=(content.blog||[]).map((b,i)=>`<div class="adm-row">
+      <span class="adm-row-ic">${I(b.icon||'file',18)}</span>
+      <div class="adm-row-body"><b>${esc(b.title)}</b><small>${esc(b.cat||'')} — ${esc(b.date||'')}</small></div>
+      <div class="adm-row-acts"><button data-edit="${i}" aria-label="ویرایش">${I('edit',15)}</button><button class="del" data-del="${i}" aria-label="حذف">${I('trash',15)}</button></div></div>`).join('');
+  };
+  const form=(b,idx)=>{
+    byId('blogFormWrap').innerHTML=`<div class="adm-form"><h3>${idx===undefined?'مقالهٔ جدید':'ویرایش مقاله'}</h3>
+      ${fld('عنوان',b.title,'b.title')}
+      <div class="f-row">${fld('دسته',b.cat,'b.cat')}${fld('آیکون (sparkles, cloud, shield, file)',b.icon,'b.icon')}</div>
+      <div class="f-row">${fld('تاریخ',b.date,'b.date')}${fld('زمان مطالعه',b.mins,'b.mins')}</div>
+      ${fld('خلاصه',b.excerpt,'b.excerpt','textarea',2)}
+      ${listFld('متن مقاله (هر خط یک پاراگراف)',b.body,'b.body',7)}
+      <div class="adm-form-actions"><button class="btn btn-primary btn-sm" id="savePostBtn">ذخیره</button><button class="btn btn-ghost btn-sm" id="cancelPostBtn">انصراف</button></div></div>`;
+    byId('savePostBtn').addEventListener('click',()=>{
+      const obj=collectForm(byId('blogFormWrap'),clone(b)||{});
+      if(!obj.title||!obj.title.trim()){toast('عنوان الزامی است.','err');return}
+      obj.id=obj.id||uid();obj.body=obj.body||[];
+      if(idx===undefined)content.blog.unshift(obj);else content.blog[idx]=obj;
+      persistAndRefresh('مقاله ذخیره شد.');admTab='blog';renderAdminTab();
+    });
+    byId('cancelPostBtn').addEventListener('click',()=>{byId('blogFormWrap').innerHTML=''});
+  };
+  draw();
+  byId('addPostBtn').addEventListener('click',()=>form({id:'',title:'',cat:'',icon:'file',date:'',mins:'',excerpt:'',body:[]}));
+  byId('blogList').addEventListener('click',e=>{
+    const ed=e.target.closest('[data-edit]'),dl=e.target.closest('[data-del]');
+    if(ed)form(content.blog[+ed.dataset.edit],+ed.dataset.edit);
+    if(dl){
+      const i=+dl.dataset.del,acts=dl.closest('.adm-row-acts');
+      acts.innerHTML=`<span class="adm-confirm">حذف شود؟<button class="yes">بله</button><button class="no">خیر</button></span>`;
+      acts.querySelector('.yes').addEventListener('click',()=>{content.blog.splice(i,1);persistAndRefresh('مقاله حذف شد.');admTab='blog';renderAdminTab()});
+      acts.querySelector('.no').addEventListener('click',()=>{admTab='blog';renderAdminTab()});
+    }
+  });
+}
+
+/* تب سوالات متداول */
+function admFaq(body){
+  const draw=()=>{
+    body.innerHTML=`<h2>سوالات متداول</h2><p class="adm-sub">سؤال و پاسخ‌های بخش FAQ.</p>
+    <button class="btn btn-primary btn-sm" id="addFaqBtn" style="margin-bottom:1.2rem">${I('plus',16)}سؤال جدید</button>
+    <div id="faqFormWrap"></div><div class="adm-list" id="faqAdminList"></div>`;
+    byId('faqAdminList').innerHTML=(content.faq||[]).map((f,i)=>`<div class="adm-row">
+      <span class="adm-row-ic">${I('help',18)}</span>
+      <div class="adm-row-body"><b>${esc(f.q)}</b><small>${esc((f.a||'').slice(0,70))}…</small></div>
+      <div class="adm-row-acts"><button data-edit="${i}" aria-label="ویرایش">${I('edit',15)}</button><button class="del" data-del="${i}" aria-label="حذف">${I('trash',15)}</button></div></div>`).join('');
+    byId('addFaqBtn').addEventListener('click',()=>form(null));
+    byId('faqAdminList').addEventListener('click',e=>{
+      const ed=e.target.closest('[data-edit]'),dl=e.target.closest('[data-del]');
+      if(ed)form(content.faq[+ed.dataset.edit],+ed.dataset.edit);
+      if(dl){
+        const i=+dl.dataset.del,acts=dl.closest('.adm-row-acts');
+        acts.innerHTML=`<span class="adm-confirm">حذف شود؟<button class="yes">بله</button><button class="no">خیر</button></span>`;
+        acts.querySelector('.yes').addEventListener('click',()=>{content.faq.splice(i,1);persistAndRefresh('سؤال حذف شد.');renderAdminTab()});
+        acts.querySelector('.no').addEventListener('click',()=>renderAdminTab());
+      }
+    });
+  };
+  const form=(f,idx)=>{
+    f=f||{q:'',a:''};
+    byId('faqFormWrap').innerHTML=`<div class="adm-form"><h3>${idx===undefined?'سؤال جدید':'ویرایش سؤال'}</h3>
+      ${fld('پرسش',f.q,'f.q')}
+      ${fld('پاسخ',f.a,'f.a','textarea')}
+      <div class="adm-form-actions"><button class="btn btn-primary btn-sm" id="saveFaqBtn">ذخیره</button><button class="btn btn-ghost btn-sm" id="cancelFaqBtn">انصراف</button></div></div>`;
+    byId('saveFaqBtn').addEventListener('click',()=>{
+      const obj=collectForm(byId('faqFormWrap'),clone(f));
+      if(!obj.q||!obj.q.trim()){toast('متن پرسش الزامی است.','err');return}
+      if(idx===undefined)content.faq.push(obj);else content.faq[idx]=obj;
+      persistAndRefresh('سؤال ذخیره شد.');renderAdminTab();
+    });
+    byId('cancelFaqBtn').addEventListener('click',()=>{byId('faqFormWrap').innerHTML=''});
+  };
+  draw();
+}
+
+/* تب پیام‌ها */
+function admMessages(body){
+  const msgs=LS.get('advan-messages',[]);
+  body.innerHTML=`<h2>پیام‌های دریافتی</h2><p class="adm-sub">${msgs.length?faNum(msgs.length)+' پیام — پیام‌های فرم تماس در همین مرورگر ذخیره شده‌اند.':''}</p>
+  ${msgs.length?'<div id="msgsWrap"></div>':'<p class="adm-sub">هنوز پیامی دریافت نشده است.</p>'}
+  ${msgs.length?'<button class="btn btn-ghost btn-sm" id="clearMsgsBtn">'+I('trash',15)+'پاک کردن همه</button>':''}`;
+  if(msgs.length){
+    byId('msgsWrap').innerHTML=msgs.map((m,i)=>`<div class="msg-card ${m.read?'':'unread'}" style="${m.read?'':'border-color:color-mix(in srgb,var(--accent) 45%,var(--border))'}">
+      <div class="msg-top"><b>${esc(m.name)}</b><span class="role-tag role-user">${esc(m.contact)}</span><time>${esc(new Date(m.date).toLocaleDateString('fa-IR'))}</time></div>
+      ${m.subject&&m.subject!=='بدون موضوع'?`<div class="msg-sub">موضوع: ${esc(m.subject)}</div>`:''}
+      <p>${esc(m.msg)}</p>
+      <div class="adm-form-actions" style="margin-top:.8rem">
+        ${m.read?'':`<button class="btn btn-soft btn-sm" data-read="${i}">${I('eye',15)}خوانده شد</button>`}
+        <button class="btn btn-ghost btn-sm" data-mail="${i}">${I('mail',15)}پاسخ با ایمیل</button>
+        <button class="btn btn-ghost btn-sm" data-delmsg="${i}">${I('trash',15)}حذف</button>
+      </div></div>`).join('');
+    byId('msgsWrap').addEventListener('click',e=>{
+      const r=e.target.closest('[data-read]'),ml=e.target.closest('[data-mail]'),dl=e.target.closest('[data-delmsg]');
+      if(r){const ms=LS.get('advan-messages',[]);ms[+r.dataset.read].read=true;LS.set('advan-messages',ms);renderAdminTab()}
+      if(ml){const m=LS.get('advan-messages',[])[+ml.dataset.mail];location.href='mailto:'+encodeURIComponent(m.contact)+'?subject='+encodeURIComponent('پاسخ به پیام شما در سایت '+content.brand.name)}
+      if(dl){const ms=LS.get('advan-messages',[]);ms.splice(+dl.dataset.delmsg,1);LS.set('advan-messages',ms);toast('پیام حذف شد.','info');renderAdminTab()}
+    });
+    byId('clearMsgsBtn').addEventListener('click',()=>{
+      LS.del('advan-messages');toast('همهٔ پیام‌ها پاک شدند.','info');renderAdminTab();
+    });
+  }
+}
+
+/* تب کاربران */
+function admUsers(body){
+  const users=getUsers(),me=currentUser();
+  body.innerHTML=`<h2>کاربران</h2><p class="adm-sub">حساب‌های ثبت‌شده در این مرورگر (${faNum(users.length)} حساب).</p><div id="usersWrap"></div>`;
+  byId('usersWrap').innerHTML=users.map((u,i)=>`<div class="user-row">
+    <span class="avatar" aria-hidden="true">${esc((u.name||u.u||'ک').trim()[0]||'ک')}</span>
+    <div class="adm-row-body"><b>${esc(u.name||u.u)}</b><small>@${esc(u.u)} — ${esc(new Date(u.joined).toLocaleDateString('fa-IR'))}</small></div>
+    <span class="role-tag ${u.role==='admin'?'role-admin':'role-user'}">${u.role==='admin'?'مدیر':'کاربر'}</span>
+    ${u.u!==me.u?`<div class="adm-row-acts">
+      <button data-promote="${i}" title="${u.role==='admin'?'سلب دسترسی مدیر':'ارتقا به مدیر'}" aria-label="تغییر نقش">${I(u.role==='admin'?'user':'shield',15)}</button>
+      <button class="del" data-deluser="${i}" title="حذف" aria-label="حذف کاربر">${I('trash',15)}</button></div>`:''}
+  </div>`).join('');
+  byId('usersWrap').addEventListener('click',e=>{
+    const pr=e.target.closest('[data-promote]'),dl=e.target.closest('[data-deluser]');
+    if(pr){const us=getUsers(),i=+pr.dataset.promote;us[i].role=us[i].role==='admin'?'user':'admin';setUsers(us);toast('نقش کاربر تغییر کرد.');renderAdminTab()}
+    if(dl){const us=getUsers(),i=+dl.dataset.deluser;us.splice(i,1);setUsers(us);toast('کاربر حذف شد.','info');renderAdminTab();updateAuthUI()}
+  });
+}
+
+/* تب تنظیمات */
+function admSettings(body){
+  body.innerHTML=`<h2>تنظیمات</h2><p class="adm-sub">امنیت حساب، پشتیبان‌گیری محتوا و انتشار نسخهٔ به‌روز.</p>
+  <div class="adm-grid2">
+    <div class="adm-card"><h3>${I('lock',17)}تغییر رمز مدیر</h3>
+      ${fld('رمز فعلی','','pw.current','password')}${fld('رمز جدید (حداقل ۶ نویسه)','','pw.next','password')}${fld('تکرار رمز جدید','','pw.next2','password')}
+      <button class="btn btn-primary btn-sm" id="changePwBtn">تغییر رمز</button></div>
+    <div class="adm-card"><h3>${I('download',17)}پشتیبان محتوا</h3>
+      <p>خروجی JSON کل محتوای سایت را ذخیره کنید یا نسخهٔ پشتیبان قبلی را بازگردانید.</p>
+      <div class="adm-form-actions"><button class="btn btn-soft btn-sm" id="expJsonBtn">${I('download',15)}خروجی JSON</button><button class="btn btn-ghost btn-sm" id="impJsonBtn">${I('upload',15)}ورود JSON</button></div>
+      <textarea id="impJsonArea" rows="3" style="margin-top:.8rem;width:100%;border:1px solid var(--border-2);border-radius:12px;padding:.7rem;background:var(--bg);font-size:.75rem" placeholder='متن JSON را اینجا بچسبانید…'></textarea></div>
+    <div class="adm-card"><h3>${I('globe',17)}انتشار نسخهٔ به‌روز</h3>
+      <p>فایل کامل سایت را با محتوای فعلی دریافت کنید و به‌جای <b>index.html</b> قبلی در گیت‌هاب/کلادفلر قرار دهید تا همهٔ بازدیدکنندگان محتوای جدید را ببینند.</p>
+      <button class="btn btn-primary btn-sm" id="bakeBtn">${I('download',15)}دانلود index.html به‌روز</button></div>
+    <div class="adm-card"><h3>${I('refresh',17)}بازنشانی محتوا</h3>
+      <p>بازگرداندن همهٔ محتوا به مقادیر پیش‌فرض اولیه.</p>
+      <button class="btn btn-danger btn-sm" id="resetBtn">${I('refresh',15)}بازنشانی به پیش‌فرض</button></div>
+  </div>
+  <div class="adm-hint" style="margin-top:1.2rem">نکته: این سایت کاملاً ایستا است؛ محتوای ویرایش‌شده در مرورگر شما (localStorage) و پیام‌ها/کاربران در همان مرورگر ذخیره می‌شوند. برای انتشار محتوای جدید برای همه، از دکمهٔ «دانلود index.html به‌روز» استفاده کنید و فایل را روی هاست جایگزین کنید.</div>`;
+  byId('changePwBtn').addEventListener('click',async()=>{
+    const cur=body.querySelector('[data-k="pw.current"]').value,next=body.querySelector('[data-k="pw.next"]').value,next2=body.querySelector('[data-k="pw.next2"]').value;
+    const me=currentUser();
+    if((await hashPw(cur,me.salt))!==me.hash){toast('رمز فعلی اشتباه است.','err');return}
+    if(next.length<6){toast('رمز جدید باید حداقل ۶ نویسه باشد.','err');return}
+    if(next!==next2){toast('تکرار رمز مطابقت ندارد.','err');return}
+    const us=getUsers(),idx=us.findIndex(u=>u.u===me.u);
+    us[idx].hash=await hashPw(next,us[idx].salt);setUsers(us);
+    body.querySelector('[data-k="pw.current"]').value=body.querySelector('[data-k="pw.next"]').value=body.querySelector('[data-k="pw.next2"]').value='';
+    toast('رمز عبور با موفقیت تغییر کرد.');
+  });
+  byId('expJsonBtn').addEventListener('click',()=>{
+    downloadBlob(new Blob([JSON.stringify(content,null,2)],{type:'application/json;charset=utf-8'}),'advan-content.json');
+    toast('فایل JSON محتوا دانلود شد.');
+  });
+  byId('impJsonBtn').addEventListener('click',()=>{
+    try{
+      const obj=JSON.parse(byId('impJsonArea').value);
+      if(!obj.products||!obj.brand)throw 0;
+      content=obj;persistAndRefresh('محتوا از JSON بازگردانده شد.');
+    }catch(e){toast('JSON نامعتبر است.','err')}
+  });
+  byId('bakeBtn').addEventListener('click',bakeSite);
+  byId('resetBtn').addEventListener('click',()=>{
+    const btn=byId('resetBtn');
+    if(btn.dataset.arm){content=clone(DEFAULT_CONTENT);saveContent();renderAll();toast('محتوا به حالت پیش‌فرض بازگشت.');btn.dataset.arm='';btn.textContent='بازنشانی به پیش‌فرض';renderAdminTab()}
+    else{btn.dataset.arm='1';btn.textContent='مطمئن هستید؟ دوباره کلیک کنید';setTimeout(()=>{if(btn.dataset.arm){btn.dataset.arm='';btn.textContent='بازنشانی به پیش‌فرض'}},4000)}
+  });
+}
+
+</script>
+
+<script>
+/* آدوان — بخش ۴: شخصی‌سازی UI، جستجوی هوشمند، توصیه‌گر و چت‌بات */
+
+/* ---------- مودال شخصی‌سازی ---------- */
+function openSettings(){syncSettingsUI();openModal('settingsModal')}
+function syncSettingsUI(){
+  $$('#segTheme button').forEach(b=>{const on=b.dataset.v===prefs.theme;b.classList.toggle('active',on);b.setAttribute('aria-checked',String(on))});
+  $$('#swatches .sw').forEach(b=>{const on=b.dataset.v===prefs.accent;b.classList.toggle('active',on);b.setAttribute('aria-checked',String(on))});
+  $$('#segFs button').forEach(b=>{const on=b.dataset.v===prefs.fs;b.classList.toggle('active',on);b.setAttribute('aria-checked',String(on))});
+  $$('#segAnim button').forEach(b=>{const on=(b.dataset.v==='on')===(prefs.anim!==false);b.classList.toggle('active',on);b.setAttribute('aria-checked',String(on))});
+}
+function segBind(id,key,cast){
+  byId(id).addEventListener('click',e=>{
+    const b=e.target.closest('button[data-v]');if(!b)return;
+    prefs[key]=cast?cast(b.dataset.v):b.dataset.v;savePrefs();applyTheme();syncSettingsUI();
+    if(key==='anim')initMagnetic();
+  });
+}
+segBind('segTheme','theme');segBind('swatches','accent');segBind('segFs','fs');
+segBind('segAnim','anim',v=>v==='on');
+
+/* ---------- جستجوی هوشمند ---------- */
+let searchItems=[];
+function buildSearchIndex(){
+  searchItems=[
+    {type:'صفحه',title:'خانه',text:'معرفی آدوان و محصولات',icon:'home',run:()=>{location.hash='#home'}},
+    {type:'صفحه',title:'محصولات',text:'ویترین محصولات',icon:'cpu',run:()=>{location.hash='#products'}},
+    {type:'صفحه',title:'توصیه‌گر هوشمند',text:'کدام محصول برای من مناسب است؟',icon:'sparkles',run:()=>{location.hash='#advisor'}},
+    {type:'صفحه',title:'درباره ما',text:'داستان تیم آدوان',icon:'users',run:()=>{location.hash='#about'}},
+    {type:'صفحه',title:'تماس با ما',text:'فرم تماس و اطلاعات ارتباطی',icon:'mail',run:()=>{location.hash='#contact'}},
+    ...content.products.map(p=>({type:'محصول',title:p.name,text:[p.tagline,p.desc].filter(Boolean).join(' — '),icon:p.icon||'cpu',run:()=>openProduct(p.id)})),
+    ...(content.blog||[]).map(b=>({type:'بلاگ',title:b.title,text:b.excerpt||'',icon:b.icon||'file',run:()=>openPost(b.id)})),
+    ...(content.faq||[]).map((f,i)=>({type:'سوال',title:f.q,text:(f.a||'').slice(0,110)+'…',icon:'help',run:()=>{location.hash='#faq';setTimeout(()=>{const acc=byId('faq-'+i);if(acc&&!acc.classList.contains('open'))acc.querySelector('.acc-btn').click()},450)}}))
+  ];
+}
+function scoreItem(item,q){
+  const t=norm(item.title),x=norm(item.text);
+  if(t.startsWith(q))return 120;
+  if(t.includes(q))return 90;
+  const words=q.split(' ').filter(Boolean);
+  let s=0;words.forEach(w=>{if(t.includes(w))s+=26;else if(x.includes(w))s+=9});
+  return s;
+}
+function markTitle(title,q){
+  const raw=title,nq=q.replace(/[\u200c]/g,'');
+  const idx=raw.toLowerCase().indexOf(nq);
+  if(idx>=0&&nq)return esc(raw.slice(0,idx))+'<mark>'+esc(raw.slice(idx,idx+nq.length))+'</mark>'+esc(raw.slice(idx+nq.length));
+  return esc(raw);
+}
+function renderSearch(q){
+  const box=byId('searchResults');
+  if(!q){box.innerHTML=`<div class="s-group"><b>دسترسی سریع</b>${searchItems.slice(0,5).map(it=>sItemHtml(it,'')).join('')}</div>`;return}
+  const hits=searchItems.map(it=>({it,s:scoreItem(it,q)})).filter(x=>x.s>0).sort((a,b)=>b.s-a.s).slice(0,12);
+  if(!hits.length){box.innerHTML=`<div class="s-empty">${I('search',26)}<div style="margin-top:.5rem">نتیجه‌ای برای «${esc(q)}» پیدا نشد.<br>از دستیار هوشمند بپرسید!</div></div>`;return}
+  const groups={};
+  hits.forEach(h=>{(groups[h.it.type]=groups[h.it.type]||[]).push(h)});
+  box.innerHTML=Object.entries(groups).map(([type,items])=>`<div class="s-group"><b>${esc(type)}</b>${items.map(h=>sItemHtml(h.it,q)).join('')}</div>`).join('');
+}
+function sItemHtml(it,q){
+  return `<button class="s-item" data-srun="${esc(it.title)}|${esc(it.type)}">${`<span class="s-ic">${I(it.icon||'info',17)}</span>`}<span style="min-width:0"><span>${markTitle(it.title,q)}</span><small>${esc(it.text||'')}</small></span></button>`;
+}
+function initSearch(){
+  byId('searchBtn').addEventListener('click',()=>{openSearchModal()});
+  document.addEventListener('keydown',e=>{
+    if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();openSearchModal()}
+  });
+  byId('searchInput').addEventListener('input',e=>{
+    renderSearch(norm(e.target.value).trim());
+  });
+  byId('searchInput').addEventListener('keydown',e=>{
+    const items=$$('.s-item',byId('searchResults'));
+    if(!items.length)return;
+    let cur=items.findIndex(i=>i.classList.contains('active'));
+    if(e.key==='ArrowDown'||e.key==='ArrowUp'){
+      e.preventDefault();
+      cur=e.key==='ArrowDown'?(cur+1)%items.length:(cur-1+items.length)%items.length;
+      items.forEach((x,i)=>x.classList.toggle('active',i===cur));
+      items[cur].scrollIntoView({block:'nearest'});
+    }else if(e.key==='Enter'){
+      e.preventDefault();(items[Math.max(cur,0)]||items[0]).click();
+    }
+  });
+  byId('searchResults').addEventListener('click',e=>{
+    const b=e.target.closest('.s-item');if(!b)return;
+    const[key,type]=b.dataset.srun.split('|');
+    const it=searchItems.find(x=>x.title===key&&x.type===type);
+    closeModal('searchModal');
+    if(it)setTimeout(()=>it.run(),180);
+  });
+}
+function openSearchModal(){
+  buildSearchIndex();byId('searchInput').value='';renderSearch('');openModal('searchModal');
+}
+
+/* ---------- توصیه‌گر هوشمند ---------- */
+const QUIZ=[
+  {q:'حوزهٔ فعالیت شما کدام است؟',opts:[['shop','فروشگاه آنلاین'],['srv','شرکت خدمات'],['startup','استارتاپ فناوری'],['factory','تولید و صنعت']]},
+  {q:'مهم‌ترین نیاز شما چیست؟',opts:[['support','پشتیبانی و فروش هوشمند'],['infra','زیرساخت پایدار و ابری'],['insight','شناخت عمیق‌تر مشتری و داده‌ها'],['security','امنیت اطلاعات']]},
+  {q:'بودجهٔ ماهانهٔ شما در چه محدوده‌ای است؟',opts:[['b1','تا ۳ میلیون تومان'],['b2','۳ تا ۶ میلیون تومان'],['b3','بیش از ۶ میلیون تومان']]}
+];
+const SCORE={
+  hooshban:{support:6,shop:3,srv:2,startup:2,b1:1,b2:2,b3:2},
+  sahab:{infra:6,startup:3,factory:2,b1:1,b2:1,b3:3},
+  negah:{insight:6,shop:3,factory:2,b2:2,b3:2},
+  peyvand:{support:2,infra:2,startup:4,srv:2,b1:2,b2:2},
+  sepehr:{security:6,srv:3,factory:2,b3:3,b2:1},
+  hub:{factory:4,srv:2,shop:2,b1:2,b2:1}
+};
+let advStep=0,advAns=[];
+function renderAdvisor(){
+  const wrap=byId('advCard');if(!wrap)return;
+  if(advStep===0){
+    wrap.innerHTML=`
+      <div class="adv-steps" aria-hidden="true">${QUIZ.map((_,i)=>`<span class="adv-dot ${i===0?'on':''}"></span>${i<QUIZ.length-1?'<span class="adv-line"></span>':''}`).join('')}</div>
+      <p class="adv-q">${esc(QUIZ[0].q)}</p>
+      <div class="adv-opts">${QUIZ[0].opts.map(([v,l])=>`<button class="adv-opt" data-ans="${v}" data-i="0">${I('compass',17)}${esc(l)}</button>`).join('')}</div>
+      <div class="adv-nav"><span></span><button class="btn btn-ghost btn-sm" id="advRestart0">${I('refresh',15)}شروع از ابتدا</button></div>`;
+    $$('[data-ans]',wrap).forEach(b=>b.addEventListener('click',()=>advPick(0,b.dataset.ans,b)));
+    byId('advRestart0').addEventListener('click',()=>{advStep=0;advAns=[];renderAdvisor()});
+  }else if(advStep<QUIZ.length){
+    wrap.innerHTML=`
+      <div class="adv-steps" aria-hidden="true">${QUIZ.map((_,i)=>`<span class="adv-dot ${i<advStep?'done':i===advStep?'on':''}"></span>${i<QUIZ.length-1?`<span class="adv-line ${i<advStep?'done':''}"></span>`:''}`).join('')}</div>
+      <p class="adv-q">${esc(QUIZ[advStep].q)}</p>
+      <div class="adv-opts">${QUIZ[advStep].opts.map(([v,l])=>`<button class="adv-opt" data-ans="${v}">${I('compass',17)}${esc(l)}</button>`).join('')}</div>
+      <div class="adv-nav"><button class="btn btn-ghost btn-sm" id="advBack">${I('arrow',15)}قبلی</button><button class="btn btn-ghost btn-sm" id="advRestart">${I('refresh',15)}از ابتدا</button></div>`;
+    $$('[data-ans]',wrap).forEach(b=>b.addEventListener('click',()=>advPick(advStep,b.dataset.ans,b)));
+    byId('advBack').addEventListener('click',()=>{advStep--;advAns.pop();renderAdvisor()});
+    byId('advRestart').addEventListener('click',()=>{advStep=0;advAns=[];renderAdvisor()});
+  }else{
+    const scores={};
+    advAns.forEach(a=>{Object.entries(SCORE).forEach(([pid,w])=>{scores[pid]=(scores[pid]||0)+(w[a]||0)})});
+    const bestId=Object.entries(scores).sort((a,b)=>b[1]-a[1])[0][0];
+    const p=content.products.find(x=>x.id===bestId)||content.products[0];
+    const tint=TINTS[content.products.indexOf(p)%TINTS.length];
+    const areaName=QUIZ[0].opts.find(o=>o[0]===advAns[0])?.[1]||'';
+    const needName=QUIZ[1].opts.find(o=>o[0]===advAns[1])?.[1]||'';
+    wrap.innerHTML=`<div class="adv-result">
+      <div class="ptile" style="--pc1:${tint[0]};--pc2:${tint[1]}">${I(p.icon||'cpu',32)}</div>
+      <h3>پیشنهاد ما برای شما: ${esc(p.name)}</h3>
+      <p class="ptag">${esc(p.tagline||'')}</p>
+      <p class="adv-reason">با توجه به اینکه فعالیت شما در حوزهٔ <b>${esc(areaName)}</b> است و تمرکزتان روی <b>${esc(needName)}</b> قرار دارد، <b>${esc(p.name)}</b> بهترین تطابق با نیاز شماست؛ زیرا ${esc((p.desc||'').slice(0,120))}…</p>
+      <div class="adv-actions">
+        <button class="btn btn-primary" data-prod-open="${esc(p.id)}">مشاهدهٔ جزئیات ${I('arrow',16)}</button>
+        <button class="btn btn-ghost" id="advAgain">${I('refresh',16)}دوباره</button>
+        <button class="btn btn-soft" id="advTalk">${I('send',16)}مشاورهٔ دقیق‌تر</button>
+      </div></div>`;
+    byId('advAgain').addEventListener('click',()=>{advStep=0;advAns=[];renderAdvisor()});
+    byId('advTalk').addEventListener('click',()=>{byId('contact').scrollIntoView({behavior:isReduced()?'auto':'smooth'});setTimeout(()=>byId('cfSubject').focus({preventScroll:true}),700)});
+  }
+}
+function advPick(step,ans,btn){
+  $$('.adv-opt',byId('advCard')).forEach(x=>x.classList.remove('sel'));
+  if(btn)btn.classList.add('sel');
+  advAns[step]=ans;
+  setTimeout(()=>{advStep++;renderAdvisor()},isReduced()?50:260);
+}
+
+/* ---------- چت‌بات فروش ---------- */
+let chatOpened=false;
+const botMsg=(html,actions=[])=>({who:'bot',html,actions});
+function addMsg(m){
+  const log=byId('chatLog');
+  const d=el(`<div class="msg ${m.who}">${m.html}${m.actions&&m.actions.length?`<div class="m-actions">${m.actions.map((a,i)=>`<button data-act="${i}">${esc(a.label)}${I('arrow',12)}</button>`).join('')}</div>`:''}</div>`);
+  log.append(d);
+  if(m.actions&&m.actions.length){
+    d.addEventListener('click',e=>{
+      const b=e.target.closest('[data-act]');if(!b)return;
+      const a=m.actions[+b.dataset.act];a&&a.run&&a.run();
+    });
+  }
+  log.scrollTop=log.scrollHeight;
+}
+function botSay(text,actions=[]){
+  addMsg(botMsg(esc(text).replace(/\n/g,'<br>'),actions));
+}
+function showTyping(){
+  const log=byId('chatLog');
+  const t=el(`<div class="typing" aria-label="دستیار در حال نوشتن است"><i></i><i></i><i></i></div>`);
+  log.append(t);log.scrollTop=log.scrollHeight;
+  return t;
+}
+function replyTo(text){
+  const q=norm(text);
+  const u=currentUser();
+  const productsBtns=()=>content.products.slice(0,4).map(p=>({label:p.name,run:()=>openProduct(p.id)}));
+  /* دستور پیشنهاد */
+  if(/پیشنهاد|مناسب|مشاوره|انتخاب|کدام/.test(q)){
+    botSay('برای اینکه دقیق‌ترین پیشنهاد را بدهم، چند سؤال کوتاه از شما دارم؛ توصیه‌گر هوشمند را برایتان باز می‌کنم.',[{label:'شروع توصیه‌گر',run:()=>{location.hash='#advisor';setTimeout(renderAdvisor,300)}}]);
+    return;
+  }
+  /* تطبیق مستقیم نام محصول */
+  const p=content.products.find(x=>q.includes(norm(x.name)));
+  if(p){
+    botSay(`${p.name} — ${p.tagline}\n${p.desc}\n💰 قیمت: ${p.price}`.replace('💰 ',''),[{label:'مشاهدهٔ جزئیات',run:()=>openProduct(p.id)},{label:'محصولات دیگر',run:()=>{location.hash='#products'}}]);
+    return;
+  }
+  const INTENTS=[
+    {re:/سلام|درود|وقت بخیر|hi|hello/,r:()=>{botSay(`سلام${u?' '+u.name:''}! من دستیار فروش آدوان هستم. 😊\nمی‌توانم دربارهٔ محصولات، قیمت‌ها و پیشنهاد مناسب‌ترین گزینه کمکتان کنم.`.replace(' 😊',''),[{label:'معرفی محصولات',run:()=>{location.hash='#products'}},{label:'پیشنهاد بده',run:()=>{location.hash='#advisor'}}])}},
+    {re:/قیمت|هزینه|تعرفه|چند تومان|چقدر/,r:()=>{botSay('قیمت پایهٔ محصولات ما:\n'+content.products.map(p=>`• ${p.name}: ${p.price}`).join('\n')+'\nبرای تعرفهٔ دقیق‌تر و تخفیف‌های سازمانی، فرم تماس را پر کنید.',[{label:'تماس با کارشناس',run:()=>{location.hash='#contact'}},...productsBtns()])}},
+    {re:/تست|دمو|رایگان|trial/,r:()=>botSay('بله! همهٔ محصولات را می‌توانید ۱۴ روز رایگان و بدون نیاز به کارت بانکی تست کنید. برای فعال‌سازی دمو، فرم تماس را با موضوع «درخواست دمو» پر کنید.',[{label:'درخواست دمو',run:()=>{location.hash='#contact';setTimeout(()=>byId('cfSubject').focus(),700)}}])},
+    {re:/تماس|شماره|آدرس|ایمیل|ساعت کاری|پشتیبانی|تلفن/,r:()=>{botSay(`راه‌های ارتباط با ما:\n• تلفن: ${content.contact.phone} (${content.contact.hours})\n• ایمیل: ${content.contact.email}\n• آدرس: ${content.contact.address}`,[{label:'فرم تماس',run:()=>{location.hash='#contact'}}])}},
+    {re:/امنیت|امن|داده|حریم خصوصی/,r:()=>botSay('امنیت داده‌ها برای ما خط قرمز است: رمزنگاری در انتقال و ذخیره‌سازی، بکاپ روزانه ۳۰ روزه و ثبت لاگ دسترسی‌ها. جزئیات کامل در پاسخ سؤال‌های متداول آمده است.',[{label:'سوالات متداول',run:()=>{location.hash='#faq'}}])},
+    {re:/فاکتور|قرارداد|سازمانی/,r:()=>botSay('برای سازمان‌ها قرارداد سالانه با تعرفهٔ اختصاصی، فاکتور رسمی و پشتیبانی شبانه‌روزی با SLA ارائه می‌شود. کارشناس فروش پس از ثبت درخواست با شما تماس می‌گیرد.',[{label:'ثبت درخواست',run:()=>{location.hash='#contact'}}])},
+    {re:/ممنون|تشکر|مرسی|خسته نباشید/,r:()=>botSay('خواهش می‌کنم! اگر سؤال دیگری داشتید در خدمت هستم. 🌟'.replace(' 🌟',''))},
+    {re:/خداحافظ|بای|فعلا/,r:()=>botSay('روز خوش! هر وقت نیاز به راهنمایی داشتید، اینجا هستم.')},
+    {re:/بلاگ|مقاله|اخبار/,r:()=>botSay('در بلاگ ما یادداشت‌هایی دربارهٔ هوش مصنوعی، زیرساخت ابری و امنیت منتشر می‌کنیم.',[{label:'مشاهدهٔ بلاگ',run:()=>{location.hash='#blog'}}])},
+    {re:/faq|سوالات متداول|سوال پرتکرار/,r:()=>botSay('پاسخ سؤال‌های پرتکرار دربارهٔ ارائه، تست رایگان، استقرار و امنیت را در بخش سوالات متداول جمع کرده‌ایم.',[{label:'رفتن به سوالات',run:()=>{location.hash='#faq'}}])}
+  ];
+  for(const it of INTENTS){
+    if(it.re.test(q)){it.r();return}
+  }
+  /* جستجو در سوالات متداول */
+  const faqHit=(content.faq||[]).map((f,i)=>({f,s:scoreItem({title:f.q,text:f.a},q)})).sort((a,b)=>b.s-a.s)[0];
+  if(faqHit&&faqHit.s>=30){
+    botSay(faqHit.f.a,[{label:'سوالات بیشتر',run:()=>{location.hash='#faq'}}]);
+    return;
+  }
+  /* جستجو در محصولات */
+  const hits=content.products.map(p=>({p,s:scoreItem({title:p.name,text:[p.tagline,p.desc,(p.features||[]).join(' ')].join(' ')},q)})).sort((a,b)=>b.s-a.s).filter(x=>x.s>0).slice(0,3);
+  if(hits.length){
+    botSay('بر اساس توضیحات شما، این محصولات ممکن است به کارتان بیایند:',hits.map(h=>({label:h.p.name,run:()=>openProduct(h.p.id)})));
+    return;
+  }
+  botSay('دقیق‌تر متوجه سؤال شما نشدم. می‌توانید دربارهٔ این موضوعات بپرسید:\n• محصولات و قیمت‌ها\n• پیشنهاد مناسب‌ترین محصول\n• تست رایگان و دمو\n• پشتیبانی و تماس با ما',[
+    {label:'معرفی محصولات',run:()=>{location.hash='#products'}},
+    {label:'پیشنهاد بده',run:()=>{location.hash='#advisor'}},
+    {label:'تماس با ما',run:()=>{location.hash='#contact'}}
+  ]);
+}
+function initChat(){
+  const fab=byId('chatFab'),panel=byId('chatPanel');
+  const openChat=()=>{
+    panel.classList.add('open');fab.classList.add('on');
+    fab.setAttribute('aria-expanded','true');byId('chatInput').focus();
+    if(!chatOpened){chatOpened=true;
+      const u=currentUser();
+      const t=showTyping();
+      setTimeout(()=>{t.remove();
+        botSay(`سلام${u?' '+u.name:''}! من دستیار هوشمند آدوان هستم و سؤال‌های شما دربارهٔ محصولات، قیمت‌ها و شرایط همکاری را پاسخ می‌دهم. چطور می‌توانم کمک کنم؟`,[{label:'کدام محصول برای من؟',run:()=>{location.hash='#advisor'}},{label:'قیمت‌ها',run:()=>replyTo('قیمت ها')}]);
+        renderChips();
+      },isReduced()?50:900);
+    }
+  };
+  const closeChat=()=>{panel.classList.remove('open');fab.classList.remove('on');fab.setAttribute('aria-expanded','false')};
+  fab.addEventListener('click',()=>panel.classList.contains('open')?closeChat():openChat());
+  byId('chatClose').addEventListener('click',closeChat);
+  byId('chatForm').addEventListener('submit',e=>{
+    e.preventDefault();
+    const inp=byId('chatInput'),v=inp.value.trim();if(!v)return;
+    addMsg({who:'user',html:esc(v)});
+    inp.value='';
+    const t=showTyping();
+    setTimeout(()=>{t.remove();replyTo(v)},Math.min(500+v.length*18,1500));
+  });
+  function renderChips(){
+    byId('chatChips').innerHTML=[['محصولات را نشان بده','محصولات'],['قیمت‌ها؟','قیمت ها'],['کدام محصول برای من؟','پیشنهاد'],['تست رایگان','دمو رایگان'],['تماس با شما','تماس و پشتیبانی']].map(([l,q])=>`<button type="button" data-q="${esc(q)}">${esc(l)}</button>`).join('');
+    $$('#chatChips button').forEach(b=>b.addEventListener('click',()=>{
+      addMsg({who:'user',html:esc(b.textContent)});
+      const t=showTyping();
+      setTimeout(()=>{t.remove();replyTo(b.dataset.q)},700);
+    }));
+  }
+  renderChips();
+}
+
+/* ---------- اتصال نهایی ---------- */
+function init(){
+  applyTheme();
+  seedAdmin();
+  renderAll();
+  observeReveals();
+  initCounters();
+  initScroll();
+  initMenu();
+  initThemeBtn();
+  initParallax();
+  initMagnetic();
+  initForms();
+  initCopyCards();
+  initAuthForms();
+  initSearch();
+  renderAdvisor();
+  initChat();
+  updateAuthUI();
+  syncSettingsUI();
+  byId('settingsBtn').addEventListener('click',openSettings);
+  byId('ctaB').addEventListener('click',()=>byId('chatFab').click());
+  window.addEventListener('hashchange',()=>{
+    if(location.hash==='#admin'||location.hash==='#login'){
+      const u=currentUser();
+      if(u&&u.role==='admin')openAdmin();else openAuth(true);
+      history.replaceState(null,'',location.pathname+location.search);
+    }
+  });
+  if(location.hash==='#admin'||location.hash==='#login'){
+    const u=currentUser();
+    if(u&&u.role==='admin')openAdmin();else openAuth(true);
+    history.replaceState(null,'',location.pathname+location.search);
+  }
+}
+document.addEventListener('DOMContentLoaded',init);
+
+</script>
+
+</body>
+</html>
