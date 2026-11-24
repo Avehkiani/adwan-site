@@ -102,7 +102,7 @@ main{display:block}
 /* ============ نوار پیشرفت + هدر ============ */
 #progress{position:fixed;top:0;right:0;height:3px;width:100%;background:var(--grad);z-index:60;border-radius:0 0 0 4px;transform:scaleX(0);transform-origin:right;transition:transform .18s linear;will-change:transform}
 header#topbar{position:fixed;inset-inline:0;top:0;height:var(--hdr);z-index:50;display:flex;align-items:center;transition:box-shadow var(--tr),background var(--tr);background:transparent}
-header#topbar.scrolled{background:var(--glass);-webkit-backdrop-filter:blur(18px) saturate(1.6);backdrop-filter:blur(18px) saturate(1.6);box-shadow:0 1px 0 var(--border),0 8px 28px -18px rgba(0,0,0,.35)}
+header#topbar.scrolled{background:color-mix(in srgb,var(--bg) 85%,transparent);box-shadow:0 1px 0 var(--border),0 8px 28px -18px rgba(0,0,0,.35)}
 header#topbar .wrap{display:flex;align-items:center;gap:1.1rem;width:min(var(--wrap),100% - 2rem)}
 .logo{display:inline-flex;align-items:center;gap:.65rem;font-weight:800;font-size:1.25rem}
 .logo .mark{width:40px;height:40px;flex:none;filter:drop-shadow(0 4px 10px var(--glow));transition:transform var(--tr)}
@@ -181,13 +181,13 @@ section{padding-block:clamp(4rem,9vw,7rem);position:relative}
 /* ============ هیرو ============ */
 #home{min-height:100vh;min-height:100svh;display:flex;align-items:center;padding-block:calc(var(--hdr) + 2.5rem) 3rem;overflow:hidden}
 .hero-bg{position:absolute;inset:0;pointer-events:none;z-index:0}
-.orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.8;will-change:transform}
+.orb{position:absolute;border-radius:50%;filter:blur(70px);opacity:.8;will-change:transform}
 .orb-1{width:min(46vw,540px);aspect-ratio:1;background:var(--glow);top:-14%;inset-inline-start:-8%;animation:orbFloat 11s ease-in-out infinite alternate}
 .orb-2{width:min(34vw,400px);aspect-ratio:1;background:color-mix(in srgb,var(--accent-2) 16%,transparent);bottom:-16%;inset-inline-end:-6%;animation:orbFloat 13s ease-in-out infinite alternate-reverse}
 @keyframes orbFloat{from{transform:translate(0,0) scale(1)}to{transform:translate(3vw,4vh) scale(1.12)}}
 .hero-grid-lines{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse 75% 65% at 50% 40%,#000 25%,transparent 72%);-webkit-mask-image:radial-gradient(ellipse 75% 65% at 50% 40%,#000 25%,transparent 72%);opacity:.5}
 .hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1.08fr .92fr;gap:2.5rem;align-items:center;width:min(var(--wrap),100% - 2.5rem);margin-inline:auto}
-.hero-badge{display:inline-flex;align-items:center;gap:.55rem;font-size:.83rem;font-weight:700;color:var(--text);background:var(--glass);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid var(--border);border-radius:99px;padding:.42rem 1.1rem;margin-bottom:1.3rem;box-shadow:var(--shadow-sm)}
+.hero-badge{display:inline-flex;align-items:center;gap:.55rem;font-size:.83rem;font-weight:700;color:var(--text);background:color-mix(in srgb,var(--card) 92%,transparent);border:1px solid var(--border);border-radius:99px;padding:.42rem 1.1rem;margin-bottom:1.3rem;box-shadow:var(--shadow-sm)}
 .hero-badge .dot{width:8px;height:8px;border-radius:50%;background:#30d158;box-shadow:0 0 0 0 rgba(48,209,88,.5);animation:pulseDot 2.8s infinite}
 @keyframes pulseDot{0%{box-shadow:0 0 0 0 rgba(48,209,88,.38)}70%{box-shadow:0 0 0 8px rgba(48,209,88,0)}100%{box-shadow:0 0 0 0 rgba(48,209,88,0)}}
 #heroTitle{font-size:clamp(2.1rem,5.6vw,3.9rem);font-weight:900;line-height:1.55;margin-bottom:1.1rem;letter-spacing:-.01em}
@@ -212,7 +212,7 @@ section{padding-block:clamp(4rem,9vw,7rem);position:relative}
 .scene{perspective:1150px;width:min(330px,66vw);aspect-ratio:1;will-change:transform;transition:transform .3s cubic-bezier(.3,.8,.4,1)}
 .cube{position:relative;width:100%;height:100%;transform-style:preserve-3d;animation:cubeSpin 26s linear infinite}
 @keyframes cubeSpin{from{transform:rotateX(-18deg) rotateY(0deg)}to{transform:rotateX(-18deg) rotateY(-360deg)}}
-.face{position:absolute;inset:0;display:grid;place-items:center;align-content:center;gap:.7rem;border-radius:26px;background:color-mix(in srgb,var(--card) 78%,transparent);border:1px solid var(--border-2);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px);box-shadow:inset 0 0 46px color-mix(in srgb,var(--accent) 9%,transparent),0 0 30px color-mix(in srgb,var(--accent) 7%,transparent)}
+.face{position:absolute;inset:0;display:grid;place-items:center;align-content:center;gap:.7rem;border-radius:26px;background:color-mix(in srgb,var(--card) 88%,transparent);border:1px solid var(--border-2);backface-visibility:hidden;-webkit-backface-visibility:hidden;box-shadow:inset 0 0 46px color-mix(in srgb,var(--accent) 9%,transparent),0 0 30px color-mix(in srgb,var(--accent) 7%,transparent)}
 .face svg{width:clamp(40px,9vw,58px);height:clamp(40px,9vw,58px);color:var(--accent)}
 .face b{font-size:clamp(.82rem,1.8vw,1.02rem);font-weight:800;color:var(--text);opacity:.9}
 .f-front{transform:translateZ(var(--hz))}
@@ -225,7 +225,7 @@ html:not([data-theme]) .scene{--hz:165px}
 .scene{--hz:min(165px,33vw)}
 .cube-shadow{position:absolute;bottom:-9%;width:58%;height:26px;background:radial-gradient(ellipse,var(--scrim) 0%,transparent 70%);filter:blur(8px);opacity:.45;animation:shadowPulse 5s ease-in-out infinite}
 @keyframes shadowPulse{0%,100%{transform:scaleX(1);opacity:.45}50%{transform:scaleX(.82);opacity:.3}}
-.float-chip{position:absolute;display:inline-flex;align-items:center;gap:.55rem;padding:.6rem 1.05rem;border-radius:16px;background:var(--glass);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--border);box-shadow:var(--shadow);font-size:.8rem;font-weight:800;z-index:2;animation:floaty 5.5s ease-in-out infinite}
+.float-chip{position:absolute;display:inline-flex;align-items:center;gap:.55rem;padding:.6rem 1.05rem;border-radius:16px;background:color-mix(in srgb,var(--card) 94%,transparent);border:1px solid var(--border);box-shadow:var(--shadow);font-size:.8rem;font-weight:800;z-index:2;animation:floaty 5.5s ease-in-out infinite}
 .float-chip svg{width:17px;height:17px;color:var(--accent)}
 .fc-1{top:6%;inset-inline-start:-4%;animation-delay:.2s}
 .fc-2{bottom:16%;inset-inline-start:-7%;animation-delay:1.4s;animation-duration:6.5s}
@@ -309,7 +309,7 @@ html:not([data-theme]) .scene{--hz:165px}
 .about-copy p{color:var(--muted);margin-bottom:1rem;font-size:.98rem}
 .about-copy p:first-of-type{font-size:1.06rem;color:var(--text);font-weight:500}
 .about-art{position:relative;display:grid;place-items:center;min-height:300px}
-.about-art .aa-card{position:absolute;width:min(78%,340px);border-radius:22px;padding:1.4rem 1.6rem;background:var(--glass);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid var(--border);box-shadow:var(--shadow)}
+.about-art .aa-card{position:absolute;width:min(78%,340px);border-radius:22px;padding:1.4rem 1.6rem;background:color-mix(in srgb,var(--card) 94%,transparent);border:1px solid var(--border);box-shadow:var(--shadow)}
 .aa-1{transform:translateY(-34px) rotate(3deg);z-index:1}
 .aa-2{transform:translateY(30px) rotate(-2.5deg);z-index:2}
 .aa-card .aa-row{display:flex;align-items:center;gap:.7rem;font-size:.88rem;font-weight:700;margin-bottom:.7rem}
@@ -341,7 +341,7 @@ html:not([data-theme]) .scene{--hz:165px}
 .bmedia{height:150px;position:relative;display:grid;place-items:center;background:linear-gradient(135deg,color-mix(in srgb,var(--bc1,#0a84ff) 88%,#000),var(--bc2,#5e5ce6))}
 .bmedia svg{width:44px;height:44px;color:#fff;opacity:.95;filter:drop-shadow(0 6px 14px rgba(0,0,0,.25))}
 .bmedia::after{content:"";position:absolute;inset:0;background:radial-gradient(120px circle at 80% 15%,rgba(255,255,255,.28),transparent 60%)}
-.bcat{position:absolute;top:.9rem;inset-inline-start:.9rem;background:rgba(0,0,0,.35);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);color:#fff;font-size:.7rem;font-weight:800;padding:.3rem .75rem;border-radius:99px}
+.bcat{position:absolute;top:.9rem;inset-inline-start:.9rem;background:rgba(0,0,0,.55);color:#fff;font-size:.7rem;font-weight:800;padding:.3rem .75rem;border-radius:99px}
 .bbody{padding:1.3rem 1.5rem 1.5rem}
 .bbody h3{font-size:1.06rem;font-weight:800;line-height:1.7;margin-bottom:.5rem;transition:color var(--tr)}
 .bcard:hover .bbody h3{color:var(--accent-text)}
@@ -415,7 +415,7 @@ footer{background:var(--bg-2);border-top:1px solid var(--border);padding:3.5rem 
 </style>
 <style>
 /* ============ مودال‌ها و اورلی‌ها ============ */
-.overlay{position:fixed;inset:0;background:var(--scrim);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);z-index:80;display:grid;place-items:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .4s}
+.overlay{position:fixed;inset:0;background:var(--scrim);z-index:80;display:grid;place-items:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .4s}
 .overlay.open{opacity:1;pointer-events:auto}
 .overlay .sheet{width:min(560px,100%);max-height:88vh;overflow:auto;background:var(--card);border:1px solid var(--border);border-radius:24px;box-shadow:var(--shadow);padding:1.7rem;transform:translateY(24px) scale(.95);transition:transform .55s var(--ease-spring);scrollbar-width:thin}
 .overlay.open .sheet{transform:none}
@@ -630,13 +630,6 @@ body::before{content:"";position:fixed;inset:-20%;z-index:-1;pointer-events:none
 .adv-opt{transition:transform .5s var(--ease-spring),box-shadow .5s var(--ease-soft),background .35s,border-color .35s}
 /* ============ بهینه‌سازی رندر در دستگاه‌های لمسی ============ */
 @media (pointer:coarse){
-  .face{-webkit-backdrop-filter:none;backdrop-filter:none;background:color-mix(in srgb,var(--card) 90%,transparent)}
-  .float-chip{-webkit-backdrop-filter:none;backdrop-filter:none;background:color-mix(in srgb,var(--card) 94%,transparent)}
-  .hero-badge{-webkit-backdrop-filter:none;backdrop-filter:none;background:color-mix(in srgb,var(--card) 94%,transparent)}
-  header#topbar.scrolled{-webkit-backdrop-filter:none;backdrop-filter:none;background:color-mix(in srgb,var(--bg) 88%,transparent)}
-  .overlay{-webkit-backdrop-filter:none;backdrop-filter:none}
-  .about-art .aa-card{-webkit-backdrop-filter:none;backdrop-filter:none;background:color-mix(in srgb,var(--card) 92%,transparent)}
-  .bcat{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(0,0,0,.55)}
   .orb{filter:blur(55px)}
   .orb-1,.orb-2{animation:orbFloat 14s ease-in-out infinite alternate}
   .hero-grid-lines{animation:none;opacity:.38}
@@ -683,7 +676,7 @@ html.lite .hero-badge .dot,html.lite #chatFab .ping,html.lite .chat-head small i
   <div class="wrap">
     <a href="#home" class="logo" aria-label="آدوان — صفحهٔ اصلی">
       <svg class="mark" viewBox="0 0 44 44" aria-hidden="true"><defs><linearGradient id="lg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--accent)"/><stop offset="1" stop-color="var(--accent-2)"/></linearGradient></defs><rect x="2" y="2" width="40" height="40" rx="12" fill="url(#lg1)"/><path d="M12 30c4-1 6-3 6.5-6.5C19 20 21 18 25 17.5 28.5 17 30.5 15 31.5 12" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round"/><circle cx="12" cy="30" r="2.6" fill="#fff"/><circle cx="31.5" cy="12" r="2.6" fill="#fff"/><circle cx="19.5" cy="22.5" r="1.7" fill="#fff" opacity=".85"/></svg>
-      <span><span id="brandName">آدوان</span><small id="brandLatin">ADVAN</small></span>
+      <span><span id="brandName">آدوان</span><small id="brandLatin">ADWAN.IR</small></span>
     </a>
     <nav id="mainnav" aria-label="ناوبری اصلی">
       <a href="#home" class="active">خانه</a>
@@ -856,7 +849,7 @@ html.lite .hero-badge .dot,html.lite #chatFab .ping,html.lite .chat-head small i
       <div class="f-col">
         <a href="#home" class="logo" style="font-size:1.15rem;margin-bottom:1rem;display:inline-flex" aria-label="آدوان">
           <svg class="mark" viewBox="0 0 44 44" aria-hidden="true" style="width:36px;height:36px"><rect x="2" y="2" width="40" height="40" rx="12" fill="url(#lg1)"/><path d="M12 30c4-1 6-3 6.5-6.5C19 20 21 18 25 17.5 28.5 17 30.5 15 31.5 12" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round"/><circle cx="12" cy="30" r="2.6" fill="#fff"/><circle cx="31.5" cy="12" r="2.6" fill="#fff"/></svg>
-          <span id="brandNameF">آدوان</span>
+          <span><span id="brandNameF">آدوان</span><small>ADWAN.IR</small></span>
         </a>
         <p id="footerBlurb">آدوان؛ همراه هوشمند کسب‌وکار شما در مسیر رشد دیجیتال.</p>
         <div class="socials">
@@ -1071,7 +1064,7 @@ const TINTS=[['#0a84ff','#5e5ce6'],['#bf5af2','#ff375f'],['#ff9f0a','#ff6482'],[
 
 /* ---------- محتوای پیش‌فرض سایت (قابل ویرایش از پنل مدیریت) ---------- */
 const DEFAULT_CONTENT = /*__CONTENT_START__*/{
-  brand:{name:'آدوان',latin:'ADVAN',tagline:'مسیر شما به سوی آیندهٔ دیجیتال',blurb:'آدوان؛ همراه هوشمند کسب‌وکار شما در مسیر رشد دیجیتال.'},
+  brand:{name:'آدوان',latin:'ADWAN.IR',tagline:'مسیر شما به سوی آیندهٔ دیجیتال',blurb:'آدوان؛ همراه هوشمند کسب‌وکار شما در مسیر رشد دیجیتال.'},
   hero:{badge:'نسل تازهٔ محصولات هوشمند آدوان معرفی شد',title:'آیندهٔ کسب‌وکار شما، <span class="grad-text">یک مسیر هوشمند</span> است',lead:'از دستیارهای هوش مصنوعی تا زیرساخت ابری؛ آدوان ابزارهایی ساده، امن و مقیاس‌پذیر می‌سازد تا کسب‌وکار شما سریع‌تر رشد کند.',ctaA:'مشاهدهٔ محصولات',ctaB:'گفتگو با دستیار هوشمند'},
   about:{paras:['آدوان در سال ۱۳۹۷ با یک هدف ساده شروع شد: فناوری پیشرفته باید برای همهٔ کسب‌وکارها — از فروشگاه‌های کوچک تا سازمان‌های بزرگ — در دسترس و قابل فهم باشد. ما معتقدیم ابزار خوب، پیچیدگی را از مسیر شما برمی‌دارد، نه اینکه به آن اضافه کند.','امروز مجموعه‌ای از محصولات نرم‌افزاری، سرویس‌های ابری و راه‌حل‌های هوش مصنوعی ارائه می‌دهیم که روزانه هزاران کاربر به آن‌ها اعتماد می‌کنند. هر محصول با یک فلسفه طراحی شده: راه‌اندازی ساده، تجربه‌ای روان و پشتیبانی واقعی.','تیم ما از مهندسان، طراحان و متخصصان داده تشکیل شده که هر روز کنار مشتریان می‌نشینند تا مشکلات واقعی را بفهمند و برای آن‌ها راه‌حل بسازند.'],values:[{icon:'zap',title:'سادگی',text:'طراحی‌هایی که نیازی به کتابچهٔ راهنما ندارند؛ هر چیزی همان‌جایی است که انتظارش را دارید.'},{icon:'shield',title:'اعتماد',text:'امنیت و پایداری دو خط قرمز ماست. دادهٔ شما با بالاترین استانداردها محافظت می‌شود.'},{icon:'sparkles',title:'هوشمندی',text:'هوش مصنوعی را جایی به کار می‌بریم که واقعاً ارزش می‌سازد؛ نه صرفاً در شعارها.'}],stats:[{n:1200,s:'+',l:'مشتری فعال'},{n:98,s:'٪',l:'نرخ رضایت'},{n:7,s:'',l:'سال تجربه'},{n:24,s:'/۷',l:'پشتیبانی شبانه‌روزی'}]},
   products:[
