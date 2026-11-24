@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-theme="auto">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44'%3E%3Crect x='2' y='2' width='40' height='40' rx='12' fill='%230a6ee0'/%3E%3Cpath d='M12 30c4-1 6-3 6.5-6.5C19 20 21 18 25 17.5 28.5 17 30.5 15 31.5 12' stroke='%23fff' stroke-width='2.6' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='12' cy='30' r='2.6' fill='%23fff'/%3E%3Ccircle cx='31.5' cy='12' r='2.6' fill='%23fff'/%3E%3C/svg%3E">
+<title>پنل مدیریت — آدوان</title>
+<style>
+:root{--bg:#f7f8fa;--card:#ffffff;--text:#1c1e26;--muted:#6a7080;--border:#e5e7ee;--accent:#4f6ef7;--accent-2:#8b5cf6;--ok:#30d158;--err:#ff453a;--warn:#ffb340;--shadow:0 10px 34px -12px rgba(28,30,38,.18)}
+[data-theme=dark]{--bg:#0e1016;--card:#161923;--text:#eef0f6;--muted:#9aa0b0;--border:#262a36;--shadow:0 10px 34px -12px rgba(0,0,0,.5)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Vazirmatn","Segoe UI",Tahoma,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:clamp(1rem,4vw,2.5rem)}
+.wrap{width:min(1080px,100%)}
+header{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.6rem;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:.7rem;font-weight:800;font-size:1.2rem}
+.brand svg{width:38px;height:38px}
+.brand small{display:block;font-size:.62rem;font-weight:600;color:var(--muted);letter-spacing:.14em;line-height:1}
+.hdr-btns{display:flex;gap:.6rem}
+.btn{border:1px solid var(--border);background:var(--card);color:var(--text);border-radius:12px;padding:.55rem 1.05rem;font:inherit;font-weight:700;font-size:.9rem;cursor:pointer;transition:filter .2s,transform .2s}
+.btn:hover{filter:brightness(.96);transform:translateY(-1px)}
+.btn.primary{background:linear-gradient(120deg,var(--accent),var(--accent-2));border:none;color:#fff}
+.gate{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:2.4rem 2rem;text-align:center;box-shadow:var(--shadow);max-width:560px;margin:8vh auto}
+.gate h1{font-size:1.25rem;margin-bottom:.8rem}
+.gate p{color:var(--muted);font-size:.95rem;line-height:1.9;margin-bottom:1.4rem}
+.gate code{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:.15rem .45rem;font-size:.8rem;direction:ltr;display:inline-block}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.9rem;margin-bottom:1.3rem}
+.stat{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.1rem 1.2rem;box-shadow:var(--shadow)}
+.stat b{display:block;font-size:1.7rem;line-height:1.2}
+.stat span{color:var(--muted);font-size:.83rem;font-weight:600}
+.bar{display:flex;gap:.7rem;margin-bottom:1rem;flex-wrap:wrap}
+.bar input{flex:1;min-width:200px;border:1px solid var(--border);background:var(--card);color:var(--text);border-radius:12px;padding:.6rem 1rem;font:inherit;font-size:.92rem}
+.tbl-wrap{background:var(--card);border:1px solid var(--border);border-radius:18px;overflow-x:auto;box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;font-size:.9rem;min-width:640px}
+th,td{padding:.85rem 1rem;text-align:right;border-bottom:1px solid var(--border);white-space:nowrap}
+th{color:var(--muted);font-size:.78rem;font-weight:700;background:var(--bg)}
+tr:last-child td{border-bottom:none}
+td .who b{display:block}
+td .who small{color:var(--muted);font-size:.78rem}
+select{border:1px solid var(--border);background:var(--bg);color:var(--text);border-radius:10px;padding:.4rem .7rem;font:inherit;font-size:.82rem;font-weight:700;cursor:pointer}
+select:disabled{opacity:.45;cursor:not-allowed}
+.tag{display:inline-block;padding:.25rem .7rem;border-radius:99px;font-size:.74rem;font-weight:800}
+.tag.admin{background:rgba(79,110,247,.14);color:var(--accent)}
+.tag.user{background:rgba(48,209,88,.13);color:var(--ok)}
+.tag .fa{opacity:.85}
+#toast{position:fixed;bottom:1.4rem;inset-inline-start:50%;transform:translateX(50%);background:var(--text);color:var(--bg);padding:.7rem 1.3rem;border-radius:12px;font-weight:700;font-size:.88rem;opacity:0;pointer-events:none;transition:opacity .3s;z-index:99}
+#toast.on{opacity:1}
+.muted{color:var(--muted);font-size:.82rem}
+.err-text{color:var(--err)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">
+      <svg viewBox="0 0 44 44" aria-hidden="true"><defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4f6ef7"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient></defs><rect x="2" y="2" width="40" height="40" rx="12" fill="url(#g1)"/><path d="M12 30c4-1 6-3 6.5-6.5C19 20 21 18 25 17.5 28.5 17 30.5 15 31.5 12" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round"/><circle cx="12" cy="30" r="2.6" fill="#fff"/><circle cx="31.5" cy="12" r="2.6" fill="#fff"/></svg>
+      <span>پنل مدیریت آدوان<small>ADWAN.IR</small></span>
+    </div>
+    <div class="hdr-btns">
+      <button class="btn" id="refreshBtn">بروزرسانی</button>
+      <a class="btn" href="/">بازگشت به سایت</a>
+      <button class="btn" id="themeBtn" aria-label="تغییر تم">◐</button>
+      <button class="btn primary" id="logoutBtn">خروج</button>
+    </div>
+  </header>
+  <main id="main">
+    <div class="gate"><h1>در حال بررسی دسترسی…</h1><p>لطفاً چند لحظه صبر کنید.</p></div>
+  </main>
+</div>
+<div id="toast" role="status"></div>
+<script src="/supabase.js"></script>
+<script>
+const SB_URL='https://lshfhxzppmoulmxdrrap.supabase.co';
+const SB_KEY='sb_publishable_0e-SgUGGck9gbOPHz54MAg_lwvzVtoC';
+const sb=(window.supabase&&window.supabase.createClient)?window.supabase.createClient(SB_URL,SB_KEY,{auth:{storageKey:'adwan-auth',persistSession:true}}):null;
+const $=s=>document.querySelector(s);
+const fa=n=>String(n).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fdate=iso=>{try{return iso?new Date(iso).toLocaleDateString('fa-IR')+' — '+new Date(iso).toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'}):'—'}catch(e){return '—'}};
+let ME=null,ROWS=[];
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('on'),3200)}
+function gate(title,body,btn){$('#main').innerHTML=`<div class="gate"><h1>${esc(title)}</h1><p>${body}</p>${btn?`<a class="btn primary" href="/">${esc(btn)}</a>`:''}</div>`}
+function themeInit(){const t=localStorage.getItem('adwan-admin-theme');if(t)document.documentElement.dataset.theme=t;
+  $('#themeBtn').addEventListener('click',()=>{const cur=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=cur;localStorage.setItem('adwan-admin-theme',cur)});}
+async function start(){
+  themeInit();
+  $('#logoutBtn').addEventListener('click',async()=>{if(sb){try{await sb.auth.signOut()}catch(e){}}location.reload()});
+  $('#refreshBtn').addEventListener('click',()=>loadUsers());
+  if(!sb){gate('اتصال برقرار نشد','کتابخانه supabase.js از خود سایت بارگیری نشد — صفحه را با Ctrl+Shift+R باز کنید.','رفتن به سایت');return}
+  const {data:{session}}=await sb.auth.getSession();
+  if(!session){gate('وارد نشده‌اید','برای دسترسی به پنل مدیریت، ابتدا از صفحهٔ اصلی سایت با حساب مدیر وارد شوید.<br>بعد از ورود، این صفحه را دوباره باز کنید.','رفتن به سایت');return}
+  let prof,perr;
+  try{const r=await sb.from('profiles').select('role,full_name,email').eq('id',session.user.id).maybeSingle();prof=r.data;perr=r.error}catch(e){perr=e}
+  if(perr||prof===null){
+    gate('پنل هنوز فعال نیست',`جدول کاربران در دیتابیس پیدا نشد. فایل <code>supabase_setup.sql</code> را در Supabase (SQL Editor → New query → Run) اجرا کنید و بعد این صفحه را بروزرسانی کنید.` ,null);
+    return;
+  }
+  if(prof&&prof.role!=='admin'){gate('دسترسی ندارید','این حساب نقش «مدیر» ندارد. با حساب مدیر وارد شوید یا از طریق یک مدیر ارتقا پیدا کنید.','رفتن به سایت');return}
+  ME={id:session.user.id,email:prof&&prof.email||session.user.email,name:prof&&prof.full_name||''};
+  loadUsers();
+}
+async function loadUsers(){
+  $('#main').innerHTML='<div class="gate"><h1>در حال دریافت کاربران…</h1></div>';
+  let rows,e;
+  try{const r=await sb.from('profiles').select('*').order('created_at',{ascending:false});rows=r.data;e=r.error}catch(x){e=x}
+  if(e||!rows){gate('دریافت ناموفق','خطا در خواندن جدول profiles:<br><code>'+esc(String((e&&e.message)||e))+'</code>');return}
+  ROWS=rows;
+  const week=Date.now()-7*864e5,day=Date.now()-864e5;
+  const stats=[
+    ['کل کاربران',fa(rows.length)],
+    ['مدیران',fa(rows.filter(r=>r.role==='admin').length)],
+    ['ثبت‌نام هفتهٔ اخیر',fa(rows.filter(r=>r.created_at&&new Date(r.created_at).getTime()>week).length)],
+    ['ورود ۲۴ ساعت اخیر',fa(rows.filter(r=>r.last_sign_in_at&&new Date(r.last_sign_in_at).getTime()>day).length)]
+  ];
+  $('#main').innerHTML=`
+    <div class="stats">${stats.map(([l,v])=>`<div class="stat"><b>${v}</b><span>${l}</span></div>`).join('')}</div>
+    <div class="bar"><input id="q" type="search" placeholder="جستجو بر اساس نام یا ایمیل…" aria-label="جستجو"><span class="muted">${fa(rows.length)} حساب</span></div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>#</th><th>کاربر</th><th>نقش</th><th>عضویت</th><th>آخرین ورود</th></tr></thead>
+      <tbody id="tbody"></tbody>
+    </table></div>`;
+  renderRows();
+  $('#q').addEventListener('input',renderRows);
+}
+function renderRows(){
+  const q=($('#q').value||'').trim().toLowerCase();
+  const rows=ROWS.filter(r=>!q||(r.email||'').toLowerCase().includes(q)||(r.full_name||'').toLowerCase().includes(q));
+  $('#tbody').innerHTML=rows.length?rows.map((r,i)=>`<tr>
+    <td>${fa(i+1)}</td>
+    <td><div class="who"><b>${esc(r.full_name||'—')}</b><small>${esc(r.email||'')}</small></div></td>
+    <td><span class="tag ${r.role==='admin'?'admin':'user'}">${r.role==='admin'?'مدیر':'کاربر'}</span>&nbsp;
+      <select data-id="${esc(r.id)}" data-role="${esc(r.role||'user')}" ${r.id===ME.id?'disabled title="نقش خودتان را نمی‌توانید تغییر دهید"':''} aria-label="تغییر نقش">
+        <option value="user" ${r.role!=='admin'?'selected':''}>کاربر</option>
+        <option value="admin" ${r.role==='admin'?'selected':''}>مدیر</option>
+      </select></td>
+    <td>${fdate(r.created_at)}</td>
+    <td>${fdate(r.last_sign_in_at)}</td>
+  </tr>`).join(''):`<tr><td colspan="5" class="muted">موردی یافت نشد.</td></tr>`;
+  $$('#tbody select[data-id]').forEach(sel=>sel.addEventListener('change',async()=>{
+    const id=sel.dataset.id,next=sel.value;
+    const {error}=await sb.from('profiles').update({role:next}).eq('id',id);
+    if(error){toast('تغییر نقش ناموفق بود: '+error.message);sel.value=sel.dataset.role;return}
+    toast('نقش کاربر بروزرسانی شد.');loadUsers();
+  }));
+}
+start();
+</script>
+</body>
+</html>
