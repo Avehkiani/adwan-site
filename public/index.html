@@ -503,6 +503,13 @@ footer{background:var(--bg-2);border-top:1px solid var(--border);padding:3.5rem 
 .auth-tabs button.active{background:var(--card);color:var(--text);box-shadow:var(--shadow-sm)}
 .auth-note{font-size:.78rem;color:var(--muted);background:var(--soft);border-radius:12px;padding:.7rem .9rem;margin-top:.9rem;display:flex;gap:.5rem;align-items:flex-start}
 .auth-note svg{width:15px;height:15px;flex:none;margin-top:.15rem;color:var(--accent)}
+.check-email{text-align:center;padding:.6rem .2rem}
+.check-email .ce-icon{width:58px;height:58px;margin:0 auto .9rem;border-radius:16px;display:flex;align-items:center;justify-content:center;background:rgba(79,110,247,.12);color:var(--accent)}
+.check-email h4{font-size:1.05rem;margin-bottom:.55rem}
+.check-email p{font-size:.86rem;color:var(--muted);line-height:2;margin-bottom:1rem}
+.check-email p b{color:var(--text);direction:ltr;display:inline-block}
+.check-email small{font-size:.76rem;opacity:.85}
+.check-email .btn{width:100%;margin-top:.55rem}
 /* شخصی‌سازی */
 .set-group{margin-bottom:1.5rem}
 .set-group>label{display:block;font-size:.85rem;font-weight:800;margin-bottom:.65rem}
@@ -1562,6 +1569,7 @@ function renderHeroHello(){
 }
 function openAuth(asAdmin){
   pendingAdmin=!!asAdmin;
+  const cp=byId('checkEmailPanel');if(cp)cp.style.display='none';
   byId('loginForm').style.display='';byId('registerForm').style.display='none';
   byId('tabLogin').classList.add('active');byId('tabLogin').setAttribute('aria-selected','true');
   byId('tabRegister').classList.remove('active');byId('tabRegister').setAttribute('aria-selected','false');
@@ -1569,12 +1577,49 @@ function openAuth(asAdmin){
   openModal('authModal');
 }
 function setTab(login){
+  const cp=byId('checkEmailPanel');if(cp)cp.style.display='none';
   byId('loginForm').style.display=login?'':'none';
   byId('registerForm').style.display=login?'none':'';
   byId('tabLogin').classList.toggle('active',login);byId('tabLogin').setAttribute('aria-selected',String(login));
   byId('tabRegister').classList.toggle('active',!login);byId('tabRegister').setAttribute('aria-selected',String(!login));
   byId('authTitle').textContent=login?'ورود به حساب کاربری':'ایجاد حساب جدید';
 }
+let pendingCheckEmail='';
+function showCheckEmail(email){
+  pendingCheckEmail=email;
+  byId('loginForm').style.display='none';byId('registerForm').style.display='none';
+  let p=byId('checkEmailPanel');
+  if(!p){
+    p=document.createElement('div');p.id='checkEmailPanel';p.className='check-email';
+    p.innerHTML=`<div class="ce-icon" aria-hidden="true">${I('mail',26)}</div>
+      <h4>ایمیل تأیید ارسال شد</h4>
+      <p>به نشانی <b id="ceMail"></b> ایمیل حاوی لینک تأیید فرستادیم.<br>روی لینک داخل ایمیل بزنید؛ با بازگشت به سایت، خودکار وارد حساب می‌شوید.<br><small>ایمیل نیامده؟ پوشهٔ اسپم را هم ببینید.</small></p>
+      <button type="button" id="ceResend" class="btn btn-primary">ارسال مجدد ایمیل تأیید</button>
+      <button type="button" id="ceBack" class="btn btn-ghost">بازگشت به ورود</button>`;
+    byId('authModal').querySelector('.sheet').appendChild(p);
+    byId('ceResend').addEventListener('click',doResendConfirm);
+    byId('ceBack').addEventListener('click',hideCheckEmail);
+  }
+  byId('ceMail').textContent=email;
+  p.style.display='';
+  byId('authTitle').textContent='بررسی ایمیل';
+}
+function hideCheckEmail(){
+  const p=byId('checkEmailPanel');if(p)p.style.display='none';
+  pendingCheckEmail='';
+  setTab(true);
+  byId('authTitle').textContent='ورود به حساب کاربری';
+}
+async function doResendConfirm(){
+  const btn=byId('ceResend');if(btn.disabled||!sb||!pendingCheckEmail)return;
+  btn.disabled=true;btn.textContent='در حال ارسال…';
+  const {error}=await sb.auth.resend({type:'signup',email:pendingCheckEmail});
+  if(error){btn.disabled=false;btn.textContent='ارسال مجدد ایمیل تأیید';toast('ارسال مجدد ناموفق بود: '+error.message,'err');return}
+  toast('ایمیل تأیید دوباره ارسال شد؛ صندوق و پوشهٔ اسپم را بررسی کنید.','info');
+  let s=60;const orig='ارسال مجدد ایمیل تأیید';
+  const iv=setInterval(()=>{s--;btn.textContent='ارسال مجدد تا '+faNum(s)+' ثانیهٔ دیگر';if(s<=0){clearInterval(iv);btn.disabled=false;btn.textContent=orig}},1000);
+}
+window.__adwanShowCheckEmail=showCheckEmail;
 function fieldCheck(id,fn){
   const inp=byId(id),w=inp.closest('.field');const ok=fn(inp.value);
   w.classList.toggle('err',!ok);inp.setAttribute('aria-invalid',String(!ok));return ok;
@@ -1591,7 +1636,8 @@ function initAuthForms(){
     const {data,error}=await sb.auth.signInWithPassword({email:toEmail(u),password:p});
     if(error){
       const m=error.message||'';
-      toast(m.includes('Invalid login credentials')?'ایمیل یا رمز عبور اشتباه است.':m.includes('Email not confirmed')?'ابتدا ایمیل تأیید خود را تأیید کنید.':'ورود ناموفق بود: '+m,'err');
+      if(m.includes('Email not confirmed')){showCheckEmail(toEmail(u));return}
+      toast(m.includes('Invalid login credentials')?'ایمیل یا رمز عبور اشتباه است.':'ورود ناموفق بود: '+m,'err');
       return;
     }
     applySessionUser(data.session);
@@ -1611,7 +1657,7 @@ function initAuthForms(){
     const ok=fieldCheck('rgName',v=>v.length>=2)&&fieldCheck('rgUser',v=>v.length>=3)&&fieldCheck('rgPass',v=>v.length>=6)&&fieldCheck('rgPass2',v=>v===p&&v.length>0);
     if(!ok)return;
     if(!sb){toast('سرویس ثبت‌نام در دسترس نیست؛ اتصال اینترنت را بررسی کنید.','err');return}
-    const {data,error}=await sb.auth.signUp({email:toEmail(u),password:p,options:{data:{full_name:name}}});
+    const {data,error}=await sb.auth.signUp({email:toEmail(u),password:p,options:{data:{full_name:name},emailRedirectTo:location.origin+'/'}});
     if(error){
       const m=error.message||'';
       toast(m.includes('already registered')?'این ایمیل قبلاً ثبت شده است.':m.includes('Password should be')?'رمز عبور باید حداقل ۶ نویسه باشد.':'ثبت‌نام ناموفق بود: '+m,'err');
@@ -1622,8 +1668,7 @@ function initAuthForms(){
       updateAuthUI();closeModal('authModal');
       toast('حساب شما ساخته شد؛ خوش آمدید، '+name+'!');
     }else{
-      closeModal('authModal');
-      toast('حساب ساخته شد؛ ایمیل تأیید برای شما ارسال شد و پس از تأیید می‌توانید وارد شوید.','info');
+      showCheckEmail(data.user&&data.user.email||toEmail(u));
     }
   });
 }
