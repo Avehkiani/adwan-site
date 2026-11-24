@@ -100,7 +100,7 @@ ul,ol{list-style:none}
 .wrap{width:min(var(--wrap),100% - 2.5rem);margin-inline:auto}
 main{display:block}
 /* ============ نوار پیشرفت + هدر ============ */
-#progress{position:fixed;top:0;right:0;height:3px;width:0;background:var(--grad);z-index:60;border-radius:0 0 0 4px;transition:width .12s linear}
+#progress{position:fixed;top:0;right:0;height:3px;width:100%;background:var(--grad);z-index:60;border-radius:0 0 0 4px;transform:scaleX(0);transform-origin:right;transition:transform .18s linear;will-change:transform}
 header#topbar{position:fixed;inset-inline:0;top:0;height:var(--hdr);z-index:50;display:flex;align-items:center;transition:box-shadow var(--tr),background var(--tr);background:transparent}
 header#topbar.scrolled{background:var(--glass);-webkit-backdrop-filter:blur(18px) saturate(1.6);backdrop-filter:blur(18px) saturate(1.6);box-shadow:0 1px 0 var(--border),0 8px 28px -18px rgba(0,0,0,.35)}
 header#topbar .wrap{display:flex;align-items:center;gap:1.1rem;width:min(var(--wrap),100% - 2rem)}
@@ -610,7 +610,7 @@ footer{background:var(--bg-2);border-top:1px solid var(--border);padding:3.5rem 
 @keyframes orbBreath{0%,100%{opacity:.5}50%{opacity:.92}}
 .hero-grid-lines{animation:gridBreath 12s ease-in-out infinite}
 @keyframes gridBreath{0%,100%{opacity:.32}50%{opacity:.62}}
-body::before{content:"";position:fixed;inset:-20%;z-index:-1;pointer-events:none;background:radial-gradient(42% 34% at 18% 22%,color-mix(in srgb,var(--accent) 7%,transparent),transparent 70%),radial-gradient(36% 30% at 82% 78%,color-mix(in srgb,var(--accent-2) 6%,transparent),transparent 70%);filter:blur(60px);animation:auroraDrift 22s ease-in-out infinite alternate}
+body::before{content:"";position:fixed;inset:-20%;z-index:-1;pointer-events:none;background:radial-gradient(42% 34% at 18% 22%,color-mix(in srgb,var(--accent) 7%,transparent),transparent 70%),radial-gradient(36% 30% at 82% 78%,color-mix(in srgb,var(--accent-2) 6%,transparent),transparent 70%);animation:auroraDrift 22s ease-in-out infinite alternate}
 @keyframes auroraDrift{from{transform:translate3d(0,-2%,0) scale(1)}to{transform:translate3d(3%,3%,0) scale(1.08)}}
 .hero-badge,.hero-hello,#heroTitle,.hero-lead,.hero-cta,.hero-trust,.scene-wrap{animation:heroIn .95s var(--ease-soft) backwards}
 .hero-badge{animation-delay:.02s}
@@ -628,6 +628,23 @@ body::before{content:"";position:fixed;inset:-20%;z-index:-1;pointer-events:none
 .vcard::after,.bcard::after,.cinfo-card::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(115deg,transparent 40%,color-mix(in srgb,var(--accent) 9%,transparent) 50%,transparent 60%);transform:translateX(-135%);transition:transform 1.15s var(--ease-soft);pointer-events:none}
 .vcard:hover::after,.bcard:hover::after,.cinfo-card:hover::after{transform:translateX(135%)}
 .adv-opt{transition:transform .5s var(--ease-spring),box-shadow .5s var(--ease-soft),background .35s,border-color .35s}
+/* ============ بهینه‌سازی رندر در دستگاه‌های لمسی ============ */
+@media (pointer:coarse){
+  .face{-webkit-backdrop-filter:none;backdrop-filter:none;background:color-mix(in srgb,var(--card) 90%,transparent)}
+  .float-chip{-webkit-backdrop-filter:none;backdrop-filter:none;background:color-mix(in srgb,var(--card) 94%,transparent)}
+  .hero-badge{-webkit-backdrop-filter:none;backdrop-filter:none;background:color-mix(in srgb,var(--card) 94%,transparent)}
+  header#topbar.scrolled{-webkit-backdrop-filter:none;backdrop-filter:none;background:color-mix(in srgb,var(--bg) 88%,transparent)}
+  .overlay{-webkit-backdrop-filter:none;backdrop-filter:none}
+  .about-art .aa-card{-webkit-backdrop-filter:none;backdrop-filter:none;background:color-mix(in srgb,var(--card) 92%,transparent)}
+  .bcat{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(0,0,0,.55)}
+  .orb{filter:blur(55px)}
+  .orb-1,.orb-2{animation:orbFloat 14s ease-in-out infinite alternate}
+  .hero-grid-lines{animation:none;opacity:.38}
+  .reveal{filter:none;transition:opacity .8s var(--ease-soft),transform .8s var(--ease-soft)}
+  [data-stagger]>*{filter:none;transition:opacity .75s var(--ease-soft),transform .75s var(--ease-soft)}
+  .hero-badge,.hero-hello,#heroTitle,.hero-lead,.hero-cta,.hero-trust,.scene-wrap{animation-name:heroInSoft}
+}
+@keyframes heroInSoft{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
 /* ============ کاهش حرکت / غیرفعال‌سازی انیمیشن ============ */
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important}
@@ -635,7 +652,27 @@ body::before{content:"";position:fixed;inset:-20%;z-index:-1;pointer-events:none
 html.no-anim *,html.no-anim *::before,html.no-anim *::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
 html.no-anim{scroll-behavior:auto}
 html.no-anim [data-stagger]>*,html.no-anim .reveal{opacity:1 !important;transform:none !important;filter:none !important}
+/* حالت سبک خودکار: اگر دستگاه لمسی ضعیف باشد، انیمیشن‌های پیوسته خاموش می‌شوند */
+html.lite .float-chip{animation:none}
+html.lite .orb-1,html.lite .orb-2{animation:none}
+html.lite .hero-grid-lines{display:none}
+html.lite body::before{animation:none}
+html.lite .cube{animation-duration:90s}
+html.lite .cube-shadow{animation:none}
+html.lite .hero-badge .dot,html.lite #chatFab .ping,html.lite .chat-head small i{animation:none}
 </style>
+<script>
+/* سنجش FPS در ۲ ثانیهٔ اول؛ اگر دستگاه لمسی ناتوان بود، حالت سبک فعال می‌شود */
+(function(){
+  if(document.documentElement.classList.contains('no-anim'))return;
+  if(!matchMedia('(pointer:coarse)').matches)return;
+  var n=0,t0=performance.now();
+  (function loop(){n++;
+    if(performance.now()-t0<2000)requestAnimationFrame(loop);
+    else if(n/2<30)document.documentElement.classList.add('lite');
+  })();
+})();
+</script>
 </head>
 <body>
 <a class="skip" href="#main">پرش به محتوای اصلی</a>
@@ -1329,7 +1366,7 @@ function initScroll(){
   const onScroll=()=>{
     const y=scrollY,h=document.documentElement.scrollHeight-innerHeight;
     hdr.classList.toggle('scrolled',y>10);
-    prog.style.width=(h>0?(y/h)*100:0)+'%';
+    prog.style.transform='scaleX('+(h>0?y/h:0)+')';
     topBtn.classList.toggle('show',y>800);
   };
   addEventListener('scroll',onScroll,{passive:true});onScroll();
