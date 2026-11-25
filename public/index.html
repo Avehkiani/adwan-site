@@ -1657,7 +1657,7 @@ function initAuthForms(){
     const ok=fieldCheck('rgName',v=>v.length>=2)&&fieldCheck('rgUser',v=>/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()))&&fieldCheck('rgPass',v=>v.length>=6)&&fieldCheck('rgPass2',v=>v===p&&v.length>0);
     if(!ok)return;
     if(!sb){toast('سرویس ثبت‌نام در دسترس نیست؛ اتصال اینترنت را بررسی کنید.','err');return}
-    const {data,error}=await sb.auth.signUp({email:toEmail(u),password:p,options:{data:{full_name:name},emailRedirectTo:location.origin+'/'}});
+    const {data,error}=await sb.auth.signUp({email:toEmail(u),password:p,options:{data:{full_name:name,app:'adwan-site'},emailRedirectTo:location.origin+'/'}});
     if(error){
       const m=error.message||'';
       toast(m.includes('already registered')?'این ایمیل قبلاً ثبت شده است.':m.includes('Password should be')?'رمز عبور باید حداقل ۶ نویسه باشد.':'ثبت‌نام ناموفق بود: '+m,'err');
