@@ -1585,24 +1585,36 @@ function setTab(login){
   byId('authTitle').textContent=login?'ورود به حساب کاربری':'ایجاد حساب جدید';
 }
 let pendingCheckEmail='';
-function showCheckEmail(email){
-  pendingCheckEmail=email;
+/* پنل تأیید ایمیل — sent=true یعنی همین حالا ایمیل فرستاده شده؛ sent=false یعنی حساب تأییدنشده است و کاربر باید خودش درخواست بدهد
+   ایمیلِ در انتظار در مرورگر یادآوری می‌شود تا اگر کاربر از لینکِ باطلشده برگشت، همان حساب آمادهٔ ارسال مجدد باشد */
+function showCheckEmail(email,sent){
+  pendingCheckEmail=email;LS.set('advan-pending-email',email);
   byId('loginForm').style.display='none';byId('registerForm').style.display='none';
   let p=byId('checkEmailPanel');
   if(!p){
     p=document.createElement('div');p.id='checkEmailPanel';p.className='check-email';
     p.innerHTML=`<div class="ce-icon" aria-hidden="true">${I('mail',26)}</div>
-      <h4>ایمیل تأیید ارسال شد</h4>
-      <p>به نشانی <b id="ceMail"></b> ایمیل حاوی لینک تأیید فرستادیم.<br>روی لینک داخل ایمیل بزنید؛ با بازگشت به سایت، خودکار وارد حساب می‌شوید.<br><small>ایمیل نیامده؟ پوشهٔ اسپم را هم ببینید.</small></p>
-      <button type="button" id="ceResend" class="btn btn-primary">ارسال مجدد ایمیل تأیید</button>
+      <h4 id="ceTitle"></h4>
+      <p id="ceText"></p>
+      <div class="field"><input id="ceCode" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="کد شش‌رقمی داخل ایمیل" aria-label="کد تأیید ایمیل"></div>
+      <button type="button" id="ceVerify" class="btn btn-primary">تأیید با کد</button>
+      <button type="button" id="ceResend" class="btn btn-ghost"></button>
       <button type="button" id="ceBack" class="btn btn-ghost">بازگشت به ورود</button>`;
     byId('authModal').querySelector('.sheet').appendChild(p);
+    byId('ceVerify').addEventListener('click',doVerifyCode);
+    byId('ceCode').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();doVerifyCode()}});
     byId('ceResend').addEventListener('click',doResendConfirm);
     byId('ceBack').addEventListener('click',hideCheckEmail);
   }
-  byId('ceMail').textContent=email;
+  byId('ceTitle').textContent=sent?'ایمیل تأیید ارسال شد':'ایمیل این حساب هنوز تأیید نشده است';
+  byId('ceText').innerHTML=(sent
+    ?`به نشانی <b>${esc(email)}</b> ایمیل حاوی لینک و کد تأیید فرستادیم. روی دکمهٔ داخل ایمیل بزنید، یا کد شش‌رقمی همان ایمیل را در کادر زیر وارد کنید.`
+    :`حساب <b>${esc(email)}</b> وجود دارد ولی ایمیلش هنوز تأیید نشده است. دکمهٔ «دریافت ایمیل تأیید» را بزنید تا لینک و کد تأیید برایتان بیاید.`)
+    +`<br><small>هر ایمیل تازه، لینک ایمیل‌های قبلی را بی‌اثر می‌کند؛ همیشه آخرین ایمیل را به کار ببرید.</small>`;
+  // اگر شمارش معکوس ارسال مجدد در جریان است، برچسب دکمه را نگیر
+  if(!byId('ceResend').disabled)byId('ceResend').textContent=sent?'ارسال مجدد ایمیل تأیید':'دریافت ایمیل تأیید';
   p.style.display='';
-  byId('authTitle').textContent='بررسی ایمیل';
+  byId('authTitle').textContent='تأیید ایمیل';
 }
 function hideCheckEmail(){
   const p=byId('checkEmailPanel');if(p)p.style.display='none';
@@ -1613,11 +1625,30 @@ function hideCheckEmail(){
 async function doResendConfirm(){
   const btn=byId('ceResend');if(btn.disabled||!sb||!pendingCheckEmail)return;
   btn.disabled=true;btn.textContent='در حال ارسال…';
-  const {error}=await sb.auth.resend({type:'signup',email:pendingCheckEmail});
-  if(error){btn.disabled=false;btn.textContent='ارسال مجدد ایمیل تأیید';toast('ارسال مجدد ناموفق بود: '+error.message,'err');return}
-  toast('ایمیل تأیید دوباره ارسال شد؛ صندوق و پوشهٔ اسپم را بررسی کنید.','info');
-  let s=60;const orig='ارسال مجدد ایمیل تأیید';
-  const iv=setInterval(()=>{s--;btn.textContent='ارسال مجدد تا '+faNum(s)+' ثانیهٔ دیگر';if(s<=0){clearInterval(iv);btn.disabled=false;btn.textContent=orig}},1000);
+  const {error}=await sb.auth.resend({type:'signup',email:pendingCheckEmail,emailRedirectTo:location.origin+'/'});
+  if(error){btn.disabled=false;btn.textContent='ارسال مجدد ایمیل تأیید';toast('ارسال ناموفق بود: '+error.message,'err');return}
+  showCheckEmail(pendingCheckEmail,true);
+  toast('ایمیل تأیید ارسال شد؛ آخرین ایمیل دریافت‌شده را باز کنید (صندوق و پوشهٔ اسپم).','info');
+  let s=60;
+  const iv=setInterval(()=>{s--;btn.textContent='ارسال مجدد تا '+faNum(s)+' ثانیهٔ دیگر';if(s<=0){clearInterval(iv);btn.disabled=false;btn.textContent='ارسال مجدد ایمیل تأیید'}},1000);
+}
+/* تأیید با کد شش‌رقمی — مسیر پشتیبان برای وقتی که لینک باطل، مصرف یا منقضی شده است */
+async function doVerifyCode(){
+  const btn=byId('ceVerify');if(btn.disabled||!sb||!pendingCheckEmail)return;
+  const code=norm(byId('ceCode').value); // ارقام فارسی/عربی هم پذیرفته می‌شود
+  if(!/^\d{6}$/.test(code)){toast('کد شش‌رقمی داخل ایمیل را وارد کنید.','err');return}
+  btn.disabled=true;btn.textContent='در حال بررسی…';
+  let done=false;const watch=setTimeout(()=>{if(done)return;done=true;btn.disabled=false;btn.textContent='تأیید با کد';toast('پاسخی از سرور نیامد؛ اتصال اینترنت را بررسی و دوباره تلاش کنید.','err')},15000);
+  const {data,error}=await sb.auth.verifyOtp({email:pendingCheckEmail,token:code,type:'signup'});
+  if(done)return;done=true;clearTimeout(watch);
+  if(error){btn.disabled=false;btn.textContent='تأیید با کد';toast(error.code==='otp_expired'?'این کد دیگر معتبر نیست؛ آخرین ایمیل را باز کنید یا ایمیل تازه بگیرید.':'کد تأیید نشد: '+error.message,'err');return}
+  LS.del('advan-pending-email');
+  applySessionUser(data.session);
+  await sbRefreshProfile();
+  const user=AUTH.user;user.role=(AUTH.profile&&AUTH.profile.role==='admin')?'admin':'user';
+  updateAuthUI();closeModal('authModal');byId('ceCode').value='';
+  toast('ایمیل شما تأیید شد؛ خوش آمدید، '+(user.name||'')+'!');
+  if(location.hash==='#admin'&&user.role==='admin')openAdmin();
 }
 window.__adwanShowCheckEmail=showCheckEmail;
 function fieldCheck(id,fn){
@@ -1636,10 +1667,11 @@ function initAuthForms(){
     const {data,error}=await sb.auth.signInWithPassword({email:toEmail(u),password:p});
     if(error){
       const m=error.message||'';
-      if(m.includes('Email not confirmed')){showCheckEmail(toEmail(u));return}
+      if(m.includes('Email not confirmed')){showCheckEmail(toEmail(u),false);return}
       toast(m.includes('Invalid login credentials')?'ایمیل یا رمز عبور اشتباه است.':'ورود ناموفق بود: '+m,'err');
       return;
     }
+    LS.del('advan-pending-email');
     applySessionUser(data.session);
     await sbRefreshProfile();
     const user=AUTH.user;
@@ -1668,10 +1700,21 @@ function initAuthForms(){
       updateAuthUI();closeModal('authModal');
       toast('حساب شما ساخته شد؛ خوش آمدید، '+name+'!');
     }else{
-      showCheckEmail(data.user&&data.user.email||toEmail(u));
+      showCheckEmail(data.user&&data.user.email||toEmail(u),true);
     }
   });
 }
+
+/* اگر کاربر با خطا (مثلاً لینک باطل‌شده) از تأیید ایمیل برگشت: نشانی را پاک کند، فارسی توضیح بدهد و همان حساب را آمادهٔ دریافت ایمیل تازه کند */
+(function(){
+  if(!location.hash||location.hash.indexOf('error=')<0)return;
+  const q=new URLSearchParams(location.hash.slice(1)),expired=q.get('error_code')==='otp_expired';
+  history.replaceState(null,'',location.pathname+location.search);
+  const mail=LS.get('advan-pending-email','');
+  openAuth(false);
+  if(mail)showCheckEmail(mail,false);
+  toast(expired?'لینک تأیید باطل شده است (هر ایمیل تازه، لینک قبلی را بی‌اثر می‌کند). ایمیل تازه بگیرید و لینک یا کد همان را به کار ببرید.':'تأیید ایمیل ناموفق بود؛ دوباره تلاش کنید.','err');
+})();
 
 /* ---------- پنل مدیریت ---------- */
 let admTab='content';
