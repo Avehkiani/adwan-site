@@ -389,6 +389,10 @@ html:not([data-theme]) .scene{--hz:165px}
 .field.err input,.field.err textarea{border-color:#e11d48;box-shadow:0 0 0 4px rgba(225,29,72,.12)}
 .field .fe{display:none;color:#e11d48;font-size:.76rem;font-weight:700;margin-top:.35rem}
 .field.err .fe{display:block}
+.pw-meter{display:flex;gap:.35rem;align-items:center;margin-top:.45rem}
+.pw-meter i{height:4px;flex:1;border-radius:3px;background:var(--border-2);transition:background .2s}
+.pw-meter i.on-1{background:#f59e0b}.pw-meter i.on-2{background:#0ea5e9}.pw-meter i.on-3{background:#16a34a}
+.pw-meter b{font-size:.72rem;color:var(--muted);font-weight:700;min-width:5em;text-align:left}
 .f-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 @media (max-width:920px){
   .contact-grid{grid-template-columns:1fr}
@@ -938,15 +942,18 @@ html.lite .hero-badge .dot,html.lite #chatFab .ping,html.lite .chat-head small i
     <form id="loginForm" novalidate>
       <div class="field"><label for="liUser">ایمیل یا نام کاربری</label><input id="liUser" type="text" autocomplete="username" data-autofocus dir="ltr" style="text-align:left" placeholder="you@example.com"><span class="fe">ایمیل یا نام کاربری را وارد کنید.</span></div>
       <div class="field"><label for="liPass">رمز عبور</label><input id="liPass" type="password" autocomplete="current-password"><span class="fe">رمز عبور را وارد کنید.</span></div>
+      <div id="cfTsLogin" style="margin-bottom:1rem"></div>
       <button type="submit" class="btn btn-primary" style="width:100%">ورود</button>
       <div class="auth-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg><span>برای ورود، همان ایمیلی را بنویسید که هنگام ثبت‌نام استفاده کردید. حساب ندارید؟ از تب «ثبت‌نام» بسازید — لینک تأیید به ایمیل شما ارسال می‌شود.</span></div>
     </form>
     <form id="registerForm" novalidate style="display:none">
       <div class="field"><label for="rgName">نام و نام خانوادگی</label><input id="rgName" type="text" autocomplete="name"><span class="fe">نام خود را وارد کنید.</span></div>
       <div class="field"><label for="rgUser">ایمیل</label><input id="rgUser" type="email" autocomplete="email" dir="ltr" style="text-align:left" placeholder="you@example.com"><span class="fe">یک ایمیل معتبر وارد کنید؛ لینک تأیید به همین آدرس ارسال می‌شود.</span></div>
-      <div class="field"><label for="rgPass">رمز عبور</label><input id="rgPass" type="password" autocomplete="new-password"><span class="fe">رمز عبور باید حداقل ۶ نویسه باشد.</span></div>
+      <div class="field"><label for="rgPass">رمز عبور</label><input id="rgPass" type="password" autocomplete="new-password"><span class="fe">رمز عبور باید حداقل ۸ نویسه و ترکیبی از حرف و رقم باشد.</span><div class="pw-meter" id="pwMeter" aria-hidden="true"><i></i><i></i><i></i><b id="pwLabel"></b></div></div>
       <div class="field"><label for="rgPass2">تکرار رمز عبور</label><input id="rgPass2" type="password" autocomplete="new-password"><span class="fe">رمزها یکسان نیستند.</span></div>
+      <div id="cfTsRegister" style="margin-bottom:1rem"></div>
       <button type="submit" class="btn btn-primary" style="width:100%">ایجاد حساب</button>
+      <div class="auth-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>یک حساب برای همهٔ دنیای ادوان کافیه؛ همین ثبت‌نام در بقیهٔ محصولات هم کار میکنه.</span></div>
       <div class="auth-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>اطلاعات حساب فقط در مرورگر شما ذخیره می‌شود و رمزها به‌صورت رمزنگاری‌شده (SHA-256) نگهداری می‌شوند.</span></div>
     </form>
   </div>
@@ -1502,6 +1509,7 @@ function currentUser(){return AUTH.user}
 /* ---------- اتصال Supabase — یک حساب برای همهٔ اپ‌ها ---------- */
 const SB_URL='https://lshfhxzppmoulmxdrrap.supabase.co';
 const SB_KEY='sb_publishable_0e-SgUGGck9gbOPHz54MAg_lwvzVtoC';
+const TURNSTILE_SITEKEY='';
 const sb=(window.supabase&&window.supabase.createClient)?window.supabase.createClient(SB_URL,SB_KEY,{auth:{storageKey:'adwan-auth',persistSession:true}}):null;
 const toEmail=v=>/@/.test(v)?v.trim():v.trim().toLowerCase().replace(/\s+/g,'')+'@adwan.ir';
 const AUTH={user:null,profile:null};
@@ -1574,6 +1582,7 @@ function openAuth(asAdmin){
   byId('tabLogin').classList.add('active');byId('tabLogin').setAttribute('aria-selected','true');
   byId('tabRegister').classList.remove('active');byId('tabRegister').setAttribute('aria-selected','false');
   byId('authTitle').textContent=asAdmin?'ورود مدیر':'ورود به حساب کاربری';
+  initTurnstile();
   openModal('authModal');
 }
 function setTab(login){
@@ -1626,7 +1635,7 @@ async function doResendConfirm(){
   const btn=byId('ceResend');if(btn.disabled||!sb||!pendingCheckEmail)return;
   btn.disabled=true;btn.textContent='در حال ارسال…';
   const {error}=await sb.auth.resend({type:'signup',email:pendingCheckEmail,emailRedirectTo:location.origin+'/'});
-  if(error){btn.disabled=false;btn.textContent='ارسال مجدد ایمیل تأیید';toast('ارسال ناموفق بود: '+error.message,'err');return}
+  if(error){btn.disabled=false;btn.textContent='ارسال مجدد ایمیل تأیید';toast(rateLimitMsg(error.message||'')||('ارسال ناموفق بود: '+(error.message||'')),'err');return}
   showCheckEmail(pendingCheckEmail,true);
   toast('ایمیل تأیید ارسال شد؛ آخرین ایمیل دریافت‌شده را باز کنید (صندوق و پوشهٔ اسپم).','info');
   let s=60;
@@ -1651,6 +1660,27 @@ async function doVerifyCode(){
   if(location.hash==='#admin'&&user.role==='admin')openAdmin();
 }
 window.__adwanShowCheckEmail=showCheckEmail;
+function isStrongPw(v){return v.length>=8&&/\p{L}/u.test(v)&&/\p{N}/u.test(v)}
+function pwLevel(v){if(!v)return 0;let s=0;if(v.length>=8)s++;if(/\p{L}/u.test(v)&&/\p{N}/u.test(v))s++;if(v.length>=12||(/[\p{P}\p{S}]/u.test(v)&&v.length>=8))s++;return s}
+function updatePwMeter(){
+  const m=byId('pwMeter');if(!m)return;
+  const v=byId('rgPass').value,l=pwLevel(v),lbl=byId('pwLabel');
+  m.querySelectorAll('i').forEach((el,idx)=>{el.className=idx<l?('on-'+l):''});
+  lbl.textContent=v?(l===0?'خیلی ضعیف':l===1?'ضعیف':l===2?'خوب':'عالی'):'';
+}
+const cfWids={login:null,register:null};
+function initTurnstile(){
+  if(!TURNSTILE_SITEKEY||cfWids.login!==null)return;
+  const s=document.createElement('script');s.src='https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+  s.onload=()=>{try{cfWids.login=window.turnstile.render('#cfTsLogin',{sitekey:TURNSTILE_SITEKEY});cfWids.register=window.turnstile.render('#cfTsRegister',{sitekey:TURNSTILE_SITEKEY})}catch(e){}};
+  document.head.appendChild(s);
+}
+function getCaptchaToken(id){
+  if(!TURNSTILE_SITEKEY)return undefined;
+  try{return (window.turnstile&&cfWids[id]!=null)?(window.turnstile.getResponse(cfWids[id])||undefined):undefined}catch(e){return undefined}
+}
+function resetCaptcha(id){try{if(TURNSTILE_SITEKEY&&window.turnstile&&cfWids[id]!=null)window.turnstile.reset(cfWids[id])}catch(e){}}
+function rateLimitMsg(m){return (m.includes('over_email_send_rate_limit')||m.includes('rate limit'))?'سقف ارسال ایمیل فعلاً پر شده؛ چند دقیقهٔ دیگر دوباره امتحان کنید.':null}
 function fieldCheck(id,fn){
   const inp=byId(id),w=inp.closest('.field');const ok=fn(inp.value);
   w.classList.toggle('err',!ok);inp.setAttribute('aria-invalid',String(!ok));return ok;
@@ -1658,17 +1688,19 @@ function fieldCheck(id,fn){
 function initAuthForms(){
   byId('tabLogin').addEventListener('click',()=>setTab(true));
   byId('tabRegister').addEventListener('click',()=>setTab(false));
+  byId('rgPass').addEventListener('input',updatePwMeter);
   byId('loginForm').addEventListener('submit',async e=>{
     e.preventDefault();
     const u=byId('liUser').value.trim(),p=byId('liPass').value;
     const ok=fieldCheck('liUser',v=>v.length>0)&&fieldCheck('liPass',v=>v.length>0);
     if(!ok)return;
     if(!sb){toast('سرویس ورود در دسترس نیست؛ اتصال اینترنت را بررسی کنید.','err');return}
-    const {data,error}=await sb.auth.signInWithPassword({email:toEmail(u),password:p});
+    const {data,error}=await sb.auth.signInWithPassword({email:toEmail(u),password:p,options:{captchaToken:getCaptchaToken('login')}});
+    resetCaptcha('login');
     if(error){
       const m=error.message||'';
       if(m.includes('Email not confirmed')){showCheckEmail(toEmail(u),false);return}
-      toast(m.includes('Invalid login credentials')?'ایمیل یا رمز عبور اشتباه است.':'ورود ناموفق بود: '+m,'err');
+      toast(rateLimitMsg(m)||(m.includes('Invalid login credentials')?'ایمیل یا رمز عبور اشتباه است.':'ورود ناموفق بود: '+m),'err');
       return;
     }
     LS.del('advan-pending-email');
@@ -1686,13 +1718,14 @@ function initAuthForms(){
   byId('registerForm').addEventListener('submit',async e=>{
     e.preventDefault();
     const name=byId('rgName').value.trim(),u=byId('rgUser').value.trim(),p=byId('rgPass').value,p2=byId('rgPass2').value;
-    const ok=fieldCheck('rgName',v=>v.length>=2)&&fieldCheck('rgUser',v=>/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()))&&fieldCheck('rgPass',v=>v.length>=6)&&fieldCheck('rgPass2',v=>v===p&&v.length>0);
+    const ok=fieldCheck('rgName',v=>v.length>=2)&&fieldCheck('rgUser',v=>/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()))&&fieldCheck('rgPass',isStrongPw)&&fieldCheck('rgPass2',v=>v===p&&v.length>0);
     if(!ok)return;
     if(!sb){toast('سرویس ثبت‌نام در دسترس نیست؛ اتصال اینترنت را بررسی کنید.','err');return}
-    const {data,error}=await sb.auth.signUp({email:toEmail(u),password:p,options:{data:{full_name:name,app:'adwan-site'},emailRedirectTo:location.origin+'/'}});
+    const {data,error}=await sb.auth.signUp({email:toEmail(u),password:p,options:{data:{full_name:name,app:'adwan-site'},emailRedirectTo:location.origin+'/',captchaToken:getCaptchaToken('register')}});
+    resetCaptcha('register');
     if(error){
       const m=error.message||'';
-      toast(m.includes('already registered')?'این ایمیل قبلاً ثبت شده است.':m.includes('Password should be')?'رمز عبور باید حداقل ۶ نویسه باشد.':'ثبت‌نام ناموفق بود: '+m,'err');
+      toast(rateLimitMsg(m)||(m.includes('already registered')?'این ایمیل قبلاً ثبت شده است.':m.includes('Password should be')?'رمز عبور باید حداقل ۸ نویسه و ترکیبی از حرف و رقم باشد.':'ثبت‌نام ناموفق بود: '+m),'err');
       return;
     }
     if(data.session){
