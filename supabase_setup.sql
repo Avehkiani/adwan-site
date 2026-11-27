@@ -125,6 +125,21 @@ create table if not exists public.messages (
   created_at  timestamptz not null default now()
 );
 
+-- اگر جدول messages قبلاً با شمای قدیمی ساخته شده باشد (فقط content/is_read)،
+-- ستون‌های غایب این‌جا افزایشی و بی‌خطر اضافه می‌شوند تا ایندکس‌ها و تابع contact کار کنند.
+alter table public.messages add column if not exists name    text;
+alter table public.messages add column if not exists contact text;
+alter table public.messages add column if not exists subject text;
+alter table public.messages add column if not exists message text;
+
+-- اگر نسخهٔ قدیمی جدول، ستون content را با قید NOT NULL داشته باشد، درج‌های تازه (که content را نمی‌فرستند) شکست می‌خورند؛ قید را برمی‌داریم.
+do $$ begin
+  if exists (select 1 from information_schema.columns
+             where table_schema = 'public' and table_name = 'messages' and column_name = 'content') then
+    alter table public.messages alter column content drop not null;
+  end if;
+end $$;
+
 create index if not exists messages_created_at_idx on public.messages (created_at desc);
 create index if not exists messages_contact_idx on public.messages (contact, created_at desc);
 
