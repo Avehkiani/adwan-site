@@ -7,6 +7,24 @@
 <meta name="theme-color" content="#f7f7f8" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
 <title>آدوان | مسیر شما به سوی آیندهٔ دیجیتال</title>
+<link rel="canonical" href="https://adwan.ir/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="format-detection" content="telephone=no">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="آدوان">
+<meta property="og:locale" content="fa_IR">
+<meta property="og:url" content="https://adwan.ir/">
+<meta property="og:title" content="آدوان | مسیر شما به سوی آیندهٔ دیجیتال">
+<meta property="og:description" content="آدوان — مجموعه محصولات نرم‌افزاری، سرویس‌های ابری و راه‌حل‌های هوش مصنوعی برای کسب‌وکارها">
+<meta property="og:image" content="https://adwan.ir/og.jpg">
+<meta property="og:image:width" content="1392">
+<meta property="og:image:height" content="752">
+<meta property="og:image:alt" content="آدوان — مسیر شما به سوی آیندهٔ دیجیتال">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="آدوان | مسیر شما به سوی آیندهٔ دیجیتال">
+<meta name="twitter:description" content="محصولات نرم‌افزاری، سرویس‌های ابری و راه‌حل‌های هوش مصنوعی برای کسب‌وکارها">
+<meta name="twitter:image" content="https://adwan.ir/og.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://adwan.ir/#org","name":"آدوان","alternateName":"Advan","url":"https://adwan.ir/","logo":"https://adwan.ir/og.jpg","email":"hello@advan.ir","telephone":"+982191008800","address":{"@type":"PostalAddress","addressCountry":"IR","addressLocality":"تهران","streetAddress":"خیابان ولیعصر، برج فناوری آدوان، طبقهٔ ۹"}},{"@type":"WebSite","@id":"https://adwan.ir/#site","url":"https://adwan.ir/","name":"آدوان","inLanguage":"fa-IR","publisher":{"@id":"https://adwan.ir/#org"}}]}</script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44'%3E%3Crect x='2' y='2' width='40' height='40' rx='12' fill='%230a6ee0'/%3E%3Cpath d='M12 30c4-1 6-3 6.5-6.5C19 20 21 18 25 17.5 28.5 17 30.5 15 31.5 12' stroke='%23fff' stroke-width='2.6' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='12' cy='30' r='2.6' fill='%23fff'/%3E%3Ccircle cx='31.5' cy='12' r='2.6' fill='%23fff'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -546,127 +564,6 @@ footer{background:var(--bg-2);border-top:1px solid var(--border);padding:3.5rem 
 .post-body p{color:var(--text);font-size:.94rem;margin-bottom:.9rem;line-height:2}
 @media (max-width:560px){.pm-feats{grid-template-columns:1fr}.pm-head{flex-direction:row}}
 </style>
-<style>
-/* ============ پنل مدیریت ============ */
-#adminPanel{z-index:90;padding:0}
-#adminPanel .sheet{width:min(1120px,100vw);height:100dvh;max-height:100dvh;border-radius:0;padding:0;display:flex;overflow:hidden}
-.adm-side{width:235px;flex:none;background:var(--bg-2);border-inline-end:1px solid var(--border);display:flex;flex-direction:column;padding:1.1rem .8rem}
-.adm-side .logo{padding:.4rem .6rem 1.1rem;font-size:1.1rem;border-bottom:1px solid var(--border);margin-bottom:.9rem}
-.adm-side .logo .mark{width:34px;height:34px}
-.adm-nav{display:grid;gap:.2rem;flex:1;overflow:auto}
-.adm-nav button{display:flex;align-items:center;gap:.7rem;padding:.72rem .85rem;border-radius:12px;font-size:.88rem;font-weight:700;color:var(--muted);text-align:start;transition:all var(--tr);width:100%}
-.adm-nav button svg{width:17px;height:17px}
-.adm-nav button:hover{background:var(--soft);color:var(--text)}
-.adm-nav button.active{background:color-mix(in srgb,var(--accent) 11%,transparent);color:var(--accent-text)}
-.adm-nav button .cnt{margin-inline-start:auto;font-size:.68rem;font-weight:800;background:var(--accent);color:#fff;border-radius:99px;padding:.1rem .5rem}
-.adm-side .adm-foot{display:grid;gap:.4rem;border-top:1px solid var(--border);padding-top:.8rem;margin-top:.8rem}
-.adm-main{flex:1;overflow:auto;padding:clamp(1.2rem,3vw,2rem);scrollbar-width:thin}
-.adm-main h2{font-size:1.25rem;font-weight:900;margin-bottom:.3rem}
-.adm-main .adm-sub{color:var(--muted);font-size:.85rem;margin-bottom:1.6rem}
-.adm-list{display:grid;gap:.8rem}
-.adm-row{display:flex;align-items:center;gap:.9rem;padding:.9rem 1.1rem;border:1px solid var(--border);border-radius:15px;background:var(--card)}
-.adm-row .adm-row-ic{width:40px;height:40px;border-radius:12px;background:color-mix(in srgb,var(--accent) 10%,transparent);color:var(--accent-text);display:grid;place-items:center;flex:none}
-.adm-row .adm-row-ic svg{width:18px;height:18px}
-.adm-row b{font-size:.92rem;display:block}
-.adm-row small{color:var(--muted);font-size:.76rem;display:block}
-.adm-row .adm-row-body{flex:1;min-width:0}
-.adm-row .adm-row-acts{display:flex;gap:.4rem;flex:none}
-.adm-row .adm-row-acts button{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;color:var(--muted);transition:all var(--tr)}
-.adm-row .adm-row-acts button:hover{background:var(--soft);color:var(--text)}
-.adm-row .adm-row-acts button.del:hover{background:rgba(225,29,72,.12);color:#e11d48}
-.adm-row .adm-row-acts button svg{width:15px;height:15px}
-.adm-confirm{display:flex;align-items:center;gap:.6rem;font-size:.78rem;font-weight:700;color:#e11d48}
-.adm-confirm button{padding:.3rem .7rem;border-radius:8px;font-size:.75rem;font-weight:800}
-.adm-confirm .yes{background:#e11d48;color:#fff}
-.adm-confirm .no{background:var(--soft);color:var(--muted)}
-.adm-form{border:1px solid color-mix(in srgb,var(--accent) 35%,var(--border));border-radius:18px;padding:1.3rem;background:color-mix(in srgb,var(--accent) 4%,var(--card));margin-top:1rem;animation:popIn .35s var(--tr-slow)}
-.adm-form h3{font-size:1rem;font-weight:800;margin-bottom:1rem}
-.adm-form .f-row{grid-template-columns:1fr 1fr}
-.adm-form .field{margin-bottom:.85rem}
-.adm-form-actions{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:.6rem}
-.msg-card{border:1px solid var(--border);border-radius:16px;padding:1.1rem 1.3rem;background:var(--card);margin-bottom:.9rem}
-.msg-card .msg-top{display:flex;align-items:center;gap:.7rem;margin-bottom:.6rem;flex-wrap:wrap}
-.msg-card .msg-top b{font-size:.92rem}
-.msg-card .msg-top time{font-size:.72rem;color:var(--muted);margin-inline-start:auto}
-.msg-card .msg-sub{font-size:.78rem;color:var(--accent-text);font-weight:700;margin-bottom:.5rem}
-.msg-card p{font-size:.86rem;color:var(--muted);white-space:pre-line}
-.user-row{display:flex;align-items:center;gap:.9rem;padding:.8rem 1rem;border:1px solid var(--border);border-radius:14px;background:var(--card);margin-bottom:.7rem}
-.user-row .role-tag{font-size:.68rem;font-weight:800;padding:.22rem .6rem;border-radius:99px}
-.role-admin{background:rgba(225,29,72,.12);color:#e11d48}
-.role-user{background:color-mix(in srgb,var(--accent) 12%,transparent);color:var(--accent-text)}
-.adm-grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
-.adm-card{border:1px solid var(--border);border-radius:18px;padding:1.3rem;background:var(--card)}
-.adm-card h3{font-size:.95rem;font-weight:800;margin-bottom:.7rem;display:flex;align-items:center;gap:.5rem}
-.adm-card h3 svg{width:17px;height:17px;color:var(--accent)}
-.adm-card p{font-size:.8rem;color:var(--muted);margin-bottom:.9rem}
-.adm-hint{font-size:.78rem;color:var(--muted);background:var(--soft);border-radius:12px;padding:.75rem .95rem;line-height:1.9;margin-bottom:1.2rem}
-@media (max-width:860px){
-  #adminPanel .sheet{flex-direction:column}
-  .adm-side{width:100%;flex-direction:row;align-items:center;border-inline-end:none;border-bottom:1px solid var(--border);padding:.7rem 1rem;gap:.8rem;overflow-x:auto}
-  .adm-side .logo{border:none;margin:0;padding:.2rem .4rem;white-space:nowrap}
-  .adm-side .logo small{display:none}
-  .adm-nav{display:flex;flex:1;gap:.3rem;overflow-x:auto;scrollbar-width:none}
-  .adm-nav button{white-space:nowrap;padding:.55rem .8rem}
-  .adm-nav button .cnt{display:none}
-  .adm-side .adm-foot{border:none;margin:0;padding:0;display:flex;flex-direction:row}
-}
-/* ============ انیمیشن‌های عمومی ============ */
-.reveal{opacity:0;transform:translateY(36px) scale(.985);filter:blur(6px);transition:opacity .95s var(--ease-soft),transform .95s var(--ease-soft),filter .95s var(--ease-soft)}
-.reveal.in{opacity:1;transform:none;filter:none}
-[data-stagger]>*{opacity:0;transform:translateY(30px) scale(.99);filter:blur(4px);transition:opacity .85s var(--ease-soft),transform .85s var(--ease-soft),filter .85s var(--ease-soft)}
-[data-stagger].in>*{opacity:1;transform:none;filter:none}
-/* ============ نرمی و جانِ محیطی ============ */
-.orb-1{animation:orbFloat 13s ease-in-out infinite alternate,orbBreath 9.5s ease-in-out infinite}
-.orb-2{animation:orbFloat 15s ease-in-out infinite alternate-reverse,orbBreath 11.5s ease-in-out infinite reverse}
-@keyframes orbBreath{0%,100%{opacity:.5}50%{opacity:.92}}
-.hero-grid-lines{animation:gridBreath 12s ease-in-out infinite}
-@keyframes gridBreath{0%,100%{opacity:.32}50%{opacity:.62}}
-body::before{content:"";position:fixed;inset:-20%;z-index:-1;pointer-events:none;background:radial-gradient(42% 34% at 18% 22%,color-mix(in srgb,var(--accent) 7%,transparent),transparent 70%),radial-gradient(36% 30% at 82% 78%,color-mix(in srgb,var(--accent-2) 6%,transparent),transparent 70%);animation:auroraDrift 22s ease-in-out infinite alternate}
-@keyframes auroraDrift{from{transform:translate3d(0,-2%,0) scale(1)}to{transform:translate3d(3%,3%,0) scale(1.08)}}
-.hero-badge,.hero-hello,#heroTitle,.hero-lead,.hero-cta,.hero-trust,.scene-wrap{animation:heroIn .95s var(--ease-soft) backwards}
-.hero-badge{animation-delay:.02s}
-#heroTitle{animation-delay:.1s}
-.hero-lead{animation-delay:.18s}
-.hero-cta{animation-delay:.28s}
-.hero-trust{animation-delay:.4s}
-.scene-wrap{animation-delay:.22s}
-@keyframes heroIn{from{opacity:0;transform:translateY(30px);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
-.btn{transition:transform .5s var(--ease-spring),box-shadow .5s var(--ease-soft),background .35s var(--ease-soft),border-color .35s var(--ease-soft),color .35s var(--ease-soft)}
-.btn:active{transition-duration:.18s}
-.btn-primary:hover{transform:translateY(-3px);box-shadow:0 18px 42px -14px var(--accent)}
-.btn-ghost:hover,.btn-soft:hover,.btn-white:hover{transform:translateY(-2px)}
-.vcard,.bcard,.cinfo-card{position:relative;overflow:hidden}
-.vcard::after,.bcard::after,.cinfo-card::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(115deg,transparent 40%,color-mix(in srgb,var(--accent) 9%,transparent) 50%,transparent 60%);transform:translateX(-135%);transition:transform 1.15s var(--ease-soft);pointer-events:none}
-.vcard:hover::after,.bcard:hover::after,.cinfo-card:hover::after{transform:translateX(135%)}
-.adv-opt{transition:transform .5s var(--ease-spring),box-shadow .5s var(--ease-soft),background .35s,border-color .35s}
-/* ============ بهینه‌سازی رندر در دستگاه‌های لمسی ============ */
-@media (pointer:coarse){
-  .orb{filter:blur(55px)}
-  .orb-1,.orb-2{animation:orbFloat 14s ease-in-out infinite alternate}
-  .hero-grid-lines{animation:none;opacity:.38}
-  .reveal{filter:none;transition:opacity .8s var(--ease-soft),transform .8s var(--ease-soft)}
-  [data-stagger]>*{filter:none;transition:opacity .75s var(--ease-soft),transform .75s var(--ease-soft)}
-  .hero-badge,.hero-hello,#heroTitle,.hero-lead,.hero-cta,.hero-trust,.scene-wrap{animation-name:heroInSoft}
-}
-@keyframes heroInSoft{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
-/* ============ کاهش حرکت / غیرفعال‌سازی انیمیشن ============ */
-/* سیاست: پرچم OS فقط اسکرول نرم را ساکت می‌کند؛ انیمیشن‌ها روشن می‌مانند.
-   خاموشی کامل فقط با دکمهٔ خود سایت (html.no-anim) انجام می‌شود. */
-@media (prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-}
-html.no-anim *,html.no-anim *::before,html.no-anim *::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
-html.no-anim{scroll-behavior:auto}
-html.no-anim [data-stagger]>*,html.no-anim .reveal{opacity:1 !important;transform:none !important;filter:none !important}
-/* حالت سبک خودکار: اگر دستگاه لمسی ضعیف باشد، انیمیشن‌های پیوسته خاموش می‌شوند */
-html.lite .float-chip{animation:none}
-html.lite .orb-1,html.lite .orb-2{animation:none}
-html.lite .hero-grid-lines{display:none}
-html.lite body::before{animation:none}
-html.lite .cube{animation-duration:90s}
-html.lite .cube-shadow{animation:none}
-html.lite .hero-badge .dot,html.lite #chatFab .ping,html.lite .chat-head small i{animation:none}
-</style>
 <script>
 /* سنجش FPS در ۲ ثانیهٔ اول؛ اگر دستگاه لمسی ناتوان بود، حالت سبک فعال می‌شود */
 (function(){
@@ -843,6 +740,7 @@ html.lite .hero-badge .dot,html.lite #chatFab .ping,html.lite .chat-head small i
         </div>
         <div class="field"><label for="cfSubject">موضوع</label><input id="cfSubject" name="subject" type="text" placeholder="مثلاً درخواست دمو از هوش‌بان"></div>
         <div class="field"><label for="cfMsg">پیام شما</label><textarea id="cfMsg" name="msg" rows="4" required placeholder="کمی دربارهٔ نیازتان بنویسید…"></textarea><span class="fe">متن پیام را وارد کنید.</span></div>
+        <div id="cfTsContact" style="margin-bottom:1rem"></div>
         <button type="submit" class="btn btn-primary" data-mag style="width:100%">ارسال پیام<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg></button>
       </form>
     </div>
@@ -954,7 +852,7 @@ html.lite .hero-badge .dot,html.lite #chatFab .ping,html.lite .chat-head small i
       <div id="cfTsRegister" style="margin-bottom:1rem"></div>
       <button type="submit" class="btn btn-primary" style="width:100%">ایجاد حساب</button>
       <div class="auth-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>یک حساب برای همهٔ دنیای ادوان کافیه؛ همین ثبت‌نام در بقیهٔ محصولات هم کار میکنه.</span></div>
-      <div class="auth-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>اطلاعات حساب فقط در مرورگر شما ذخیره می‌شود و رمزها به‌صورت رمزنگاری‌شده (SHA-256) نگهداری می‌شوند.</span></div>
+      <div class="auth-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>یک حساب برای همهٔ محصولات آدوان؛ تأیید ایمیل الزامی است و رمز عبور فقط در سرویس احراز هویت نگهداری می‌شود.</span></div>
     </form>
   </div>
 </div>
@@ -1002,23 +900,8 @@ html.lite .hero-badge .dot,html.lite #chatFab .ping,html.lite .chat-head small i
 <div class="overlay" id="postModal" role="dialog" aria-modal="true" aria-labelledby="poTitle">
   <div class="sheet"><div id="poBody"></div></div>
 </div>
-<div class="overlay" id="adminPanel" role="dialog" aria-modal="true" aria-label="پنل مدیریت آدوان">
-  <div class="sheet">
-    <aside class="adm-side">
-      <span class="logo"><svg class="mark" viewBox="0 0 44 44" aria-hidden="true"><rect x="2" y="2" width="40" height="40" rx="12" fill="url(#lg1)"/><path d="M12 30c4-1 6-3 6.5-6.5C19 20 21 18 25 17.5 28.5 17 30.5 15 31.5 12" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round"/><circle cx="12" cy="30" r="2.6" fill="#fff"/><circle cx="31.5" cy="12" r="2.6" fill="#fff"/></svg><span>پنل مدیریت</span></span>
-      <nav class="adm-nav" id="admNav" aria-label="بخش‌های پنل مدیریت"></nav>
-      <div class="adm-foot">
-        <button class="btn btn-ghost btn-sm" id="admSiteBtn" style="width:100%">بازگشت به سایت</button>
-        <button class="btn btn-danger btn-sm" id="admLogoutBtn" style="width:100%">خروج از حساب</button>
-      </div>
-    </aside>
-    <main class="adm-main" id="admBody"></main>
-  </div>
-</div>
-
 <script>
 /* آدوان — اسکریپت اصلی (بخش ۱: ابزارها، داده‌ها، شخصی‌سازی) */
-const __SRC = document.documentElement.outerHTML; /* نسخهٔ خام صفحه برای ساخت فایل منتشرشده */
 
 /* ---------- ابزارهای پایه ---------- */
 const $=(s,r=document)=>r.querySelector(s);
@@ -1108,7 +991,17 @@ const DEFAULT_CONTENT = /*__CONTENT_START__*/{
 /* ---------- وضعیت برنامه ---------- */
 let content=LS.get('advan-content',null);
 if(!content||!content.products){content=clone(DEFAULT_CONTENT);}
-const saveContent=()=>LS.set('advan-content',content);
+/* محتوای منتشرشده از Supabase خوانده می‌شود؛ نسخهٔ محلی فقط کشِ نمایش سریع است */
+async function loadRemoteContent(){
+  if(!sb)return;
+  try{
+    const {data,error}=await sb.from('site_content').select('data').eq('id','main').maybeSingle();
+    if(error||!data||!data.data||!data.data.products)return;
+    content=Object.assign(clone(DEFAULT_CONTENT),data.data);
+    LS.set('advan-content',content);
+    renderAll();observeReveals();
+  }catch(e){}
+}
 let prefs=Object.assign({theme:'auto',accent:'blue',fs:'m',anim:true},LS.get('advan-prefs',{}));
 const savePrefs=()=>LS.set('advan-prefs',prefs);
 
@@ -1166,26 +1059,6 @@ function applyTheme(){
   document.documentElement.classList.toggle('no-anim',prefs.anim===false);
 }
 mqDark.addEventListener('change',()=>{if(prefs.theme==='auto')applyTheme()});
-
-/* ---------- ذخیرهٔ __SRC بعد از رندرهای اولیه؟ نه — فقط تمیزکاری تگ html ---------- */
-function cleanedSrc(){
-  return __SRC.replace(/^<html[^>]*>/i,'<html lang="fa" dir="rtl">');
-}
-function bakeSite(){
-  const json=JSON.stringify(content).replace(/<\//g,'<\\/');
-  const re=/(\/\*__CONTENT_START__\*\/)([\s\S]*?)(\/\*__CONTENT_END__\*\/)/;
-  let out;
-  if(re.test(cleanedSrc())){out=cleanedSrc().replace(re,(m,a,b,c)=>a+' '+json+' '+c)}
-  else{toast('خطا در ساخت فایل؛ از خروجی JSON استفاده کنید.','err');return}
-  downloadBlob(new Blob(['<!DOCTYPE html>\n'+out],{type:'text/html;charset=utf-8'}),'index.html');
-  toast('نسخهٔ به‌روزشدهٔ سایت دانلود شد؛ آن را جایگزین index.html کنید.');
-}
-function downloadBlob(blob,name){
-  const a=document.createElement('a');
-  a.href=URL.createObjectURL(blob);a.download=name;
-  document.body.append(a);a.click();
-  setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},600);
-}
 
 </script>
 
@@ -1408,28 +1281,64 @@ function initThemeBtn(){
 }
 /* فرم تماس و خبرنامه */
 function initForms(){
-  byId('contactForm').addEventListener('submit',e=>{
+  const cfForm=byId('contactForm');
+  cfForm.addEventListener('submit',async e=>{
     e.preventDefault();
-    const f=e.target;let ok=true;
+    let ok=true;
     const need=[['cfName',v=>v.trim().length>=2],['cfContact',v=>/.+@.+\..+/.test(v)||v.replace(/\D/g,'').length>=8],['cfMsg',v=>v.trim().length>=3]];
     need.forEach(([id,fn])=>{const inp=byId(id),w=inp.closest('.field');const good=fn(inp.value);w.classList.toggle('err',!good);inp.setAttribute('aria-invalid',String(!good));if(!good)ok=false});
     if(!ok){toast('لطفاً موارد خواسته‌شده را کامل کنید.','err');return}
-    const msgs=LS.get('advan-messages',[]);
-    msgs.unshift({id:uid(),name:byId('cfName').value.trim(),contact:byId('cfContact').value.trim(),subject:byId('cfSubject').value.trim()||'بدون موضوع',msg:byId('cfMsg').value.trim(),date:new Date().toISOString(),read:false});
-    LS.set('advan-messages',msgs);
-    f.reset();
-    toast('پیام شما ثبت شد؛ به‌زودی با شما تماس می‌گیریم.');
+    const btn=cfForm.querySelector('button[type="submit"]');
+    const label=btn.innerHTML;
+    btn.disabled=true;btn.textContent='در حال ارسال…';
+    try{
+      await contactApi({
+        type:'contact',
+        name:byId('cfName').value.trim(),
+        contact:byId('cfContact').value.trim(),
+        subject:byId('cfSubject').value.trim(),
+        message:byId('cfMsg').value.trim(),
+        token:getCaptchaToken('contact')
+      });
+      cfForm.reset();resetCaptcha('contact');
+      toast('پیام شما ثبت شد؛ به‌زودی با شما تماس می‌گیریم.');
+    }catch(err){
+      resetCaptcha('contact');
+      toast(contactErrMsg(err),'err');
+    }finally{
+      btn.disabled=false;btn.innerHTML=label;
+    }
   });
-  byId('newsForm').addEventListener('submit',e=>{
+  byId('newsForm').addEventListener('submit',async e=>{
     e.preventDefault();
     const em=byId('newsEmail').value.trim();
     if(!/.+@.+\..+/.test(em)){toast('ایمیل معتبر وارد کنید.','err');return}
-    const nl=LS.get('advan-newsletter',[]);
-    if(!nl.includes(em))nl.push(em);
-    LS.set('advan-newsletter',nl);
-    byId('newsEmail').value='';
-    toast('عضویت شما در خبرنامه ثبت شد.');
+    try{
+      await contactApi({type:'newsletter',email:em,token:getCaptchaToken('contact')});
+      byId('newsEmail').value='';
+      toast('عضویت شما در خبرنامه ثبت شد.');
+    }catch(err){
+      toast(contactErrMsg(err),'err');
+    }
   });
+}
+/* ارسال به Edge Function «contact» — کلید service_role فقط سمت سرور است */
+async function contactApi(payload){
+  const res=await fetch(SB_URL+'/functions/v1/contact',{
+    method:'POST',
+    headers:{'content-type':'application/json','apikey':SB_KEY,'authorization':'Bearer '+SB_KEY},
+    body:JSON.stringify(payload)
+  });
+  let body=null;try{body=await res.json()}catch(e){}
+  if(!res.ok){throw new Error((body&&(body.error||body.message))||('http_'+res.status))}
+  return body;
+}
+function contactErrMsg(err){
+  const m=String((err&&err.message)||err||'');
+  if(m==='captcha_failed')return 'اعتبارسنجی امنیتی انجام نشد؛ صفحه را دوباره بار کنید و تلاش کنید.';
+  if(m==='rate_limited')return 'تعداد پیام‌های شما زیاد بوده؛ کمی بعد دوباره تلاش کنید.';
+  if(m==='invalid_email'||m==='invalid_contact'||m==='invalid_message'||m==='invalid_name')return 'اطلاعات وارد‌شده معتبر نیست؛ لطفاً بازبینی کنید.';
+  return 'ارسال پیام ناموفق بود؛ لطفاً دوباره تلاش کنید یا با تلفن/ایمیل تماس بگیرید.';
 }
 function initCopyCards(){
   document.addEventListener('click',e=>{
@@ -1464,47 +1373,6 @@ byId('filters').addEventListener('click',e=>{
 <script>
 /* آدوان — بخش ۳: احراز هویت و پنل مدیریت */
 
-/* ---------- هش SHA-256 (با Web Crypto + جایگزین جاوااسکریپتی) ---------- */
-function jsSha256(ascii){
-  const K=[0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2];
-  const H=[0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19];
-  const bytes=[];for(let i=0;i<ascii.length;i++){const c=ascii.charCodeAt(i);if(c<128)bytes.push(c);else if(c<2048){bytes.push(192|c>>6,128|c&63)}else{bytes.push(224|c>>12,128|c>>6&63,128|c&63)}}
-  const bitLen=bytes.length*8;
-  bytes.push(128);
-  while(bytes.length%64!==56)bytes.push(0);
-  const hi=Math.floor(bitLen/4294967296),lo=bitLen>>>0;
-  [hi,lo].forEach(x=>bytes.push(x>>>24&255,x>>>16&255,x>>>8&255,x&255));
-  const w=new Array(64);
-  const rotr=(x,n)=>(x>>>n)|(x<<(32-n));
-  for(let off=0;off<bytes.length;off+=64){
-    for(let i=0;i<16;i++)w[i]=(bytes[off+i*4]<<24)|(bytes[off+i*4+1]<<16)|(bytes[off+i*4+2]<<8)|bytes[off+i*4+3];
-    for(let i=16;i<64;i++){const s0=rotr(w[i-15],7)^rotr(w[i-15],18)^(w[i-15]>>>3),s1=rotr(w[i-2],17)^rotr(w[i-2],19)^(w[i-2]>>>10);w[i]=(w[i-16]+s0+w[i-7]+s1)|0}
-    let[a,b,c,d,e,f,g,h]=H;
-    for(let i=0;i<64;i++){
-      const S1=rotr(e,6)^rotr(e,11)^rotr(e,25),ch=(e&f)^(~e&g),t1=(h+S1+ch+K[i]+w[i])|0;
-      const S0=rotr(a,2)^rotr(a,13)^rotr(a,22),maj=(a&b)^(a&c)^(b&c),t2=(S0+maj)|0;
-      h=g;g=f;f=e;e=(d+t1)|0;d=c;c=b;b=a;a=(t1+t2)|0;
-    }
-    [a,b,c,d,e,f,g,h].forEach((x,i)=>{H[i]=(H[i]+x)|0});
-  }
-  return H.map(x=>('00000000'+(x>>>0).toString(16)).slice(-8)).join('');
-}
-async function hashPw(pw,salt){
-  try{
-    if(window.crypto&&crypto.subtle){
-      const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(salt+':'+pw));
-      return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join('');
-    }
-  }catch(e){}
-  return jsSha256(salt+':'+pw);
-}
-const randHex=n=>Array.from({length:n},()=>'0123456789abcdef'[Math.floor(Math.random()*16)]).join('');
-
-/* ---------- کاربران و نشست ---------- */
-const getUsers=()=>LS.get('advan-users',[]);
-const setUsers=u=>LS.set('advan-users',u);
-const getSession=()=>LS.get('advan-session',null);
-const setSession=s=>s?LS.set('advan-session',s):LS.del('advan-session');
 function currentUser(){return AUTH.user}
 /* ---------- اتصال Supabase — یک حساب برای همهٔ اپ‌ها ---------- */
 const SB_URL='https://lshfhxzppmoulmxdrrap.supabase.co';
@@ -1547,7 +1415,6 @@ async function initSupabaseAuth(){
   authReadyResolve();updateAuthUI();
 }
 async function doSignOut(){if(sb){try{await sb.auth.signOut()}catch(e){}}AUTH.user=null;AUTH.profile=null;updateAuthUI();}
-let pendingAdmin=false;
 function updateAuthUI(){
   const area=byId('authArea'),u=currentUser();
   if(!u){
@@ -1558,14 +1425,14 @@ function updateAuthUI(){
     area.innerHTML=`<button class="user-chip" id="userChip" aria-haspopup="true" aria-expanded="false"><span class="avatar" aria-hidden="true">${esc(initial)}</span><span>${esc(u.name||u.u)}</span></button>
       <div class="user-menu" id="userMenu" role="menu">
         <div class="um-head">سلام، ${esc(u.name||u.u)} 👋</div>
-        ${u.role==='admin'?`<a href="#admin" id="umAdmin" role="menuitem">${I('sliders',16)}پنل مدیریت</a>`:''}
+        ${u.role==='admin'?`<a href="/admin.html" id="umAdmin" role="menuitem">${I('sliders',16)}پنل مدیریت</a>`:''}
         <button id="umSettings" role="menuitem">${I('settings',16)}شخصی‌سازی ظاهر</button>
         <button id="umLogout" role="menuitem">${I('logout',16)}خروج از حساب</button>
       </div>`;
     byId('userChip').addEventListener('click',e=>{e.stopPropagation();const m=byId('userMenu');m.classList.toggle('open');byId('userChip').setAttribute('aria-expanded',m.classList.contains('open')?'true':'false')});
     byId('umLogout').addEventListener('click',()=>{doSignOut();renderHeroHello();toast('از حساب خود خارج شدید.','info')});
     byId('umSettings').addEventListener('click',()=>{byId('userMenu').classList.remove('open');openSettings()});
-    const adm=byId('umAdmin');if(adm)adm.addEventListener('click',e=>{e.preventDefault();byId('userMenu').classList.remove('open');openAdmin()});
+    const adm=byId('umAdmin');if(adm)adm.addEventListener('click',()=>byId('userMenu').classList.remove('open'));
   }
   renderHeroHello();
   document.addEventListener('click',()=>{const m=byId('userMenu');if(m)m.classList.remove('open')},{once:true});
@@ -1576,7 +1443,6 @@ function renderHeroHello(){
   else{h.classList.remove('on');h.innerHTML=''}
 }
 function openAuth(asAdmin){
-  pendingAdmin=!!asAdmin;
   const cp=byId('checkEmailPanel');if(cp)cp.style.display='none';
   byId('loginForm').style.display='';byId('registerForm').style.display='none';
   byId('tabLogin').classList.add('active');byId('tabLogin').setAttribute('aria-selected','true');
@@ -1657,7 +1523,7 @@ async function doVerifyCode(){
   const user=AUTH.user;user.role=(AUTH.profile&&AUTH.profile.role==='admin')?'admin':'user';
   updateAuthUI();closeModal('authModal');byId('ceCode').value='';
   toast('ایمیل شما تأیید شد؛ خوش آمدید، '+(user.name||'')+'!');
-  if(location.hash==='#admin'&&user.role==='admin')openAdmin();
+  if(location.hash==='#admin'&&user.role==='admin')location.href='/admin.html';
 }
 window.__adwanShowCheckEmail=showCheckEmail;
 function isStrongPw(v){return v.length>=8&&/\p{L}/u.test(v)&&/\p{N}/u.test(v)}
@@ -1668,11 +1534,23 @@ function updatePwMeter(){
   m.querySelectorAll('i').forEach((el,idx)=>{el.className=idx<l?('on-'+l):''});
   lbl.textContent=v?(l===0?'خیلی ضعیف':l===1?'ضعیف':l===2?'خوب':'عالی'):'';
 }
-const cfWids={login:null,register:null};
+const cfWids={};
+let cfLoading=false;
+function mountCf(id){
+  if(!TURNSTILE_SITEKEY||cfWids[id]!=null||!window.turnstile)return;
+  const host=byId('cfTs'+id[0].toUpperCase()+id.slice(1));
+  if(!host)return;
+  try{cfWids[id]=window.turnstile.render(host,{sitekey:TURNSTILE_SITEKEY,theme:'auto'})}catch(e){}
+}
 function initTurnstile(){
-  if(!TURNSTILE_SITEKEY||cfWids.login!==null)return;
-  const s=document.createElement('script');s.src='https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
-  s.onload=()=>{try{cfWids.login=window.turnstile.render('#cfTsLogin',{sitekey:TURNSTILE_SITEKEY});cfWids.register=window.turnstile.render('#cfTsRegister',{sitekey:TURNSTILE_SITEKEY})}catch(e){}};
+  if(!TURNSTILE_SITEKEY)return;
+  if(window.turnstile){['login','register','contact'].forEach(mountCf);return}
+  if(cfLoading)return;
+  cfLoading=true;
+  const s=document.createElement('script');
+  s.src='https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+  s.onload=()=>{cfLoading=false;['login','register','contact'].forEach(mountCf)};
+  s.onerror=()=>{cfLoading=false};
   document.head.appendChild(s);
 }
 function getCaptchaToken(id){
@@ -1710,10 +1588,7 @@ function initAuthForms(){
     user.role=(AUTH.profile&&AUTH.profile.role==='admin')?'admin':'user';
     updateAuthUI();closeModal('authModal');byId('liPass').value='';
     toast('خوش آمدید، '+(user.name||u)+'!');
-    if(pendingAdmin){pendingAdmin=false;
-      if(user.role==='admin')openAdmin();else toast('این حساب دسترسی مدیر ندارد.','err');
-    }
-    if(location.hash==='#admin'&&user.role==='admin')openAdmin();
+    if(location.hash==='#admin'&&user.role==='admin')location.href='/admin.html';
   });
   byId('registerForm').addEventListener('submit',async e=>{
     e.preventDefault();
@@ -1748,324 +1623,6 @@ function initAuthForms(){
   if(mail)showCheckEmail(mail,false);
   toast(expired?'لینک تأیید باطل شده است (هر ایمیل تازه، لینک قبلی را بی‌اثر می‌کند). ایمیل تازه بگیرید و لینک یا کد همان را به کار ببرید.':'تأیید ایمیل ناموفق بود؛ دوباره تلاش کنید.','err');
 })();
-
-/* ---------- پنل مدیریت ---------- */
-let admTab='content';
-const ADM_TABS=[
-  ['content','محتوای سایت','sliders'],['products','محصولات','cpu'],['blog','بلاگ','file'],['faq','سوالات متداول','help'],
-  ['messages','پیام‌ها','mail'],['users','کاربران','users'],['settings','تنظیمات','settings']
-];
-function openAdmin(){
-  const u=currentUser();
-  if(!u||u.role!=='admin'){openAuth(true);return}
-  renderAdminNav();renderAdminTab();openModal('adminPanel');
-}
-function renderAdminNav(){
-  const msgs=LS.get('advan-messages',[]).filter(m=>!m.read).length;
-  byId('admNav').innerHTML=ADM_TABS.map(([id,label,icon])=>{
-    const cnt=(id==='messages'&&msgs)?`<span class="cnt">${faNum(msgs)}</span>`:'';
-    return `<button data-tab="${id}" class="${id===admTab?'active':''}">${I(icon,17)}${label}${cnt}</button>`;
-  }).join('');
-}
-function renderAdminTab(){
-  const body=byId('admBody');
-  const fn={content:admContent,products:admProducts,blog:admBlog,faq:admFaq,messages:admMessages,users:admUsers,settings:admSettings}[admTab];
-  body.innerHTML='';fn(body);
-  renderAdminNav();
-}
-byId('admNav').addEventListener('click',e=>{
-  const b=e.target.closest('[data-tab]');if(!b)return;
-  admTab=b.dataset.tab;renderAdminTab();
-});
-byId('admSiteBtn').addEventListener('click',()=>closeModal('adminPanel'));
-byId('admLogoutBtn').addEventListener('click',()=>{doSignOut();closeModal('adminPanel');toast('از حساب خود خارج شدید.','info')});
-
-/* فرم‌ساز کمکی */
-function fld(label,val,key,type='text',ph=''){
-  if(type==='textarea')return `<div class="field"><label>${esc(label)}</label><textarea rows="4" data-k="${esc(key)}" placeholder="${esc(ph)}">${esc(val||'')}</textarea></div>`;
-  return `<div class="field"><label>${esc(label)}</label><input type="${type}" data-k="${esc(key)}" value="${esc(val||'')}" placeholder="${esc(ph)}"></div>`;
-}
-function listFld(label,arr,key,rows=4){
-  return `<div class="field"><label>${esc(label)} <small style="color:var(--muted);font-weight:600">(هر خط یک مورد)</small></label><textarea rows="${rows}" data-list="${esc(key)}">${esc((arr||[]).join('\n'))}</textarea></div>`;
-}
-function collectForm(root,base){
-  const obj=clone(base);
-  $$('[data-k]',root).forEach(inp=>{setPath(obj,inp.dataset.k,inp.value)});
-  $$('[data-list]',root).forEach(ta=>{setPath(obj,ta.dataset.list,ta.value.split('\n').map(x=>x.trim()).filter(Boolean))});
-  return obj;
-}
-function setPath(obj,path,val){
-  const parts=path.split('.');let cur=obj;
-  for(let i=0;i<parts.length-1;i++){if(cur[parts[i]]===undefined||cur[parts[i]]===null||typeof cur[parts[i]]!=='object')cur[parts[i]]=isNaN(+parts[i+1])?{}:[];cur=cur[parts[i]]}
-  cur[parts[parts.length-1]]=val;
-}
-function persistAndRefresh(msg){
-  saveContent();renderAll();
-  toast(msg||'تغییرات ذخیره شد و در سایت اعمال شد.');
-}
-
-/* تب محتوا */
-function admContent(body){
-  const c=content,b=c.brand||{},h=c.hero||{},ct=c.contact||{},a=c.about||{};
-  body.innerHTML=`<h2>محتوای سایت</h2><p class="adm-sub">متن‌های اصلی صفحهٔ اصلی را ویرایش کنید.</p>
-  <div class="adm-card" style="margin-bottom:1.2rem"><h3>${I('info',17)}برند و هیرو</h3>
-    ${fld('نام برند',b.name,'brand.name')}${fld('نام لاتین',b.latin,'brand.latin')}
-    ${fld('شعار (تگ‌لاین)',b.tagline,'brand.tagline')}
-    ${fld('متن باج هیرو',h.badge,'hero.badge')}
-    ${fld('عنوان هیرو (می‌تواند شامل <span> باشد)',h.title,'hero.title')}
-    ${fld('توضیح هیرو',h.lead,'hero.lead','textarea')}
-    <div class="f-row">${fld('دکمهٔ اصلی',h.ctaA,'hero.ctaA')}${fld('دکمهٔ دوم',h.ctaB,'hero.ctaB')}</div>
-  </div>
-  <div class="adm-card" style="margin-bottom:1.2rem"><h3>${I('user',17)}دربارهٔ ما</h3>
-    ${listFld('پاراگراف‌های دربارهٔ ما',a.paras,'about.paras',5)}
-  </div>
-  <div class="adm-card"><h3>${I('phone',17)}اطلاعات تماس</h3>
-    <div class="f-row">${fld('تلفن',ct.phone,'contact.phone')}${fld('لینک تلفن (مثلاً +9821…)',ct.phoneLink,'contact.phoneLink')}</div>
-    ${fld('ایمیل',ct.email,'contact.email')}${fld('آدرس',ct.address,'contact.address')}
-    ${fld('ساعات کاری',ct.hours,'contact.hours')}${fld('متن فوتر',b.blurb,'brand.blurb')}
-  </div>
-  <div class="adm-form-actions"><button class="btn btn-primary" id="saveContentBtn">ذخیرهٔ تغییرات</button></div>`;
-  byId('saveContentBtn').addEventListener('click',()=>{content=collectForm(body,content);persistAndRefresh()});
-}
-
-/* تب محصولات */
-let editingProd=null;
-function admProducts(body){
-  body.innerHTML=`<h2>محصولات</h2><p class="adm-sub">${faNum(content.products.length)} محصول در ویترین — افزودن، ویرایش و حذف.</p>
-  <button class="btn btn-primary btn-sm" id="addProdBtn" style="margin-bottom:1.2rem">${I('plus',16)}افزودن محصول</button>
-  <div class="adm-list" id="prodList"></div><div id="prodFormWrap"></div>`;
-  const draw=()=>{
-    byId('prodList').innerHTML=content.products.map((p,i)=>`<div class="adm-row">
-      <span class="adm-row-ic">${I(p.icon||'cpu',18)}</span>
-      <div class="adm-row-body"><b>${esc(p.name)}</b><small>${esc(p.cat||'')} — ${esc(p.price||'')}</small></div>
-      <div class="adm-row-acts">
-        <button data-edit="${i}" aria-label="ویرایش" title="ویرایش">${I('edit',15)}</button>
-        <button class="del" data-del="${i}" aria-label="حذف" title="حذف">${I('trash',15)}</button>
-      </div></div>`).join('')||'<p class="adm-sub">محصولی وجود ندارد.</p>';
-  };
-  const form=(p,idx)=>{
-    byId('prodFormWrap').innerHTML=`<div class="adm-form"><h3>${idx===undefined?'محصول جدید':'ویرایش «'+esc(p.name)+'»'}</h3>
-      <div class="f-row">${fld('نام محصول',p.name,'p.name')}${fld('دسته‌بندی',p.cat,'p.cat')}</div>
-      <div class="f-row">${fld('آیکون (sparkles, cloud, chart, plug, shield, cpu)',p.icon,'p.icon')}${fld('برچسب (اختیاری)',p.badge,'p.badge')}</div>
-      ${fld('تگ‌لاین',p.tagline,'p.tagline')}
-      ${fld('توضیحات',p.desc,'p.desc','textarea')}
-      ${listFld('ویژگی‌ها',p.features,'p.features',4)}
-      ${fld('قیمت (متن آزاد)',p.price,'p.price')}
-      <div class="adm-form-actions"><button class="btn btn-primary btn-sm" id="saveProdBtn">ذخیره</button><button class="btn btn-ghost btn-sm" id="cancelProdBtn">انصراف</button></div></div>`;
-    byId('saveProdBtn').addEventListener('click',()=>{
-      const obj=collectForm(byId('prodFormWrap'),p||{});
-      if(!obj.name||!obj.name.trim()){toast('نام محصول الزامی است.','err');return}
-      obj.id=obj.id||uid();
-      if(idx===undefined)content.products.push(obj);else content.products[idx]=obj;
-      persistAndRefresh('محصول ذخیره شد.');editingProd=null;
-      admTab='products';renderAdminTab();
-    });
-    byId('cancelProdBtn').addEventListener('click',()=>{byId('prodFormWrap').innerHTML='';editingProd=null});
-  };
-  draw();
-  byId('addProdBtn').addEventListener('click',()=>form({id:'',name:'',cat:'نرم‌افزار',icon:'cpu',badge:'',tagline:'',desc:'',features:[],price:''}));
-  byId('prodList').addEventListener('click',e=>{
-    const ed=e.target.closest('[data-edit]'),dl=e.target.closest('[data-del]');
-    if(ed){editingProd=+ed.dataset.edit;form(content.products[editingProd],editingProd)}
-    if(dl){
-      const i=+dl.dataset.del,row=dl.closest('.adm-row');
-      const acts=row.querySelector('.adm-row-acts');
-      acts.innerHTML=`<span class="adm-confirm">حذف شود؟<button class="yes">بله</button><button class="no">خیر</button></span>`;
-      acts.querySelector('.yes').addEventListener('click',()=>{content.products.splice(i,1);persistAndRefresh('محصول حذف شد.');admTab='products';renderAdminTab()});
-      acts.querySelector('.no').addEventListener('click',()=>{admTab='products';renderAdminTab()});
-    }
-  });
-  if(editingProd!==null&&content.products[editingProd])form(content.products[editingProd],editingProd);
-}
-
-/* تب بلاگ */
-function admBlog(body){
-  body.innerHTML=`<h2>بلاگ</h2><p class="adm-sub">مدیریت مقاله‌های بلاگ.</p>
-  <button class="btn btn-primary btn-sm" id="addPostBtn" style="margin-bottom:1.2rem">${I('plus',16)}مقالهٔ جدید</button>
-  <div class="adm-list" id="blogList"></div><div id="blogFormWrap"></div>`;
-  const draw=()=>{
-    byId('blogList').innerHTML=(content.blog||[]).map((b,i)=>`<div class="adm-row">
-      <span class="adm-row-ic">${I(b.icon||'file',18)}</span>
-      <div class="adm-row-body"><b>${esc(b.title)}</b><small>${esc(b.cat||'')} — ${esc(b.date||'')}</small></div>
-      <div class="adm-row-acts"><button data-edit="${i}" aria-label="ویرایش">${I('edit',15)}</button><button class="del" data-del="${i}" aria-label="حذف">${I('trash',15)}</button></div></div>`).join('');
-  };
-  const form=(b,idx)=>{
-    byId('blogFormWrap').innerHTML=`<div class="adm-form"><h3>${idx===undefined?'مقالهٔ جدید':'ویرایش مقاله'}</h3>
-      ${fld('عنوان',b.title,'b.title')}
-      <div class="f-row">${fld('دسته',b.cat,'b.cat')}${fld('آیکون (sparkles, cloud, shield, file)',b.icon,'b.icon')}</div>
-      <div class="f-row">${fld('تاریخ',b.date,'b.date')}${fld('زمان مطالعه',b.mins,'b.mins')}</div>
-      ${fld('خلاصه',b.excerpt,'b.excerpt','textarea',2)}
-      ${listFld('متن مقاله (هر خط یک پاراگراف)',b.body,'b.body',7)}
-      <div class="adm-form-actions"><button class="btn btn-primary btn-sm" id="savePostBtn">ذخیره</button><button class="btn btn-ghost btn-sm" id="cancelPostBtn">انصراف</button></div></div>`;
-    byId('savePostBtn').addEventListener('click',()=>{
-      const obj=collectForm(byId('blogFormWrap'),clone(b)||{});
-      if(!obj.title||!obj.title.trim()){toast('عنوان الزامی است.','err');return}
-      obj.id=obj.id||uid();obj.body=obj.body||[];
-      if(idx===undefined)content.blog.unshift(obj);else content.blog[idx]=obj;
-      persistAndRefresh('مقاله ذخیره شد.');admTab='blog';renderAdminTab();
-    });
-    byId('cancelPostBtn').addEventListener('click',()=>{byId('blogFormWrap').innerHTML=''});
-  };
-  draw();
-  byId('addPostBtn').addEventListener('click',()=>form({id:'',title:'',cat:'',icon:'file',date:'',mins:'',excerpt:'',body:[]}));
-  byId('blogList').addEventListener('click',e=>{
-    const ed=e.target.closest('[data-edit]'),dl=e.target.closest('[data-del]');
-    if(ed)form(content.blog[+ed.dataset.edit],+ed.dataset.edit);
-    if(dl){
-      const i=+dl.dataset.del,acts=dl.closest('.adm-row-acts');
-      acts.innerHTML=`<span class="adm-confirm">حذف شود؟<button class="yes">بله</button><button class="no">خیر</button></span>`;
-      acts.querySelector('.yes').addEventListener('click',()=>{content.blog.splice(i,1);persistAndRefresh('مقاله حذف شد.');admTab='blog';renderAdminTab()});
-      acts.querySelector('.no').addEventListener('click',()=>{admTab='blog';renderAdminTab()});
-    }
-  });
-}
-
-/* تب سوالات متداول */
-function admFaq(body){
-  const draw=()=>{
-    body.innerHTML=`<h2>سوالات متداول</h2><p class="adm-sub">سؤال و پاسخ‌های بخش FAQ.</p>
-    <button class="btn btn-primary btn-sm" id="addFaqBtn" style="margin-bottom:1.2rem">${I('plus',16)}سؤال جدید</button>
-    <div id="faqFormWrap"></div><div class="adm-list" id="faqAdminList"></div>`;
-    byId('faqAdminList').innerHTML=(content.faq||[]).map((f,i)=>`<div class="adm-row">
-      <span class="adm-row-ic">${I('help',18)}</span>
-      <div class="adm-row-body"><b>${esc(f.q)}</b><small>${esc((f.a||'').slice(0,70))}…</small></div>
-      <div class="adm-row-acts"><button data-edit="${i}" aria-label="ویرایش">${I('edit',15)}</button><button class="del" data-del="${i}" aria-label="حذف">${I('trash',15)}</button></div></div>`).join('');
-    byId('addFaqBtn').addEventListener('click',()=>form(null));
-    byId('faqAdminList').addEventListener('click',e=>{
-      const ed=e.target.closest('[data-edit]'),dl=e.target.closest('[data-del]');
-      if(ed)form(content.faq[+ed.dataset.edit],+ed.dataset.edit);
-      if(dl){
-        const i=+dl.dataset.del,acts=dl.closest('.adm-row-acts');
-        acts.innerHTML=`<span class="adm-confirm">حذف شود؟<button class="yes">بله</button><button class="no">خیر</button></span>`;
-        acts.querySelector('.yes').addEventListener('click',()=>{content.faq.splice(i,1);persistAndRefresh('سؤال حذف شد.');renderAdminTab()});
-        acts.querySelector('.no').addEventListener('click',()=>renderAdminTab());
-      }
-    });
-  };
-  const form=(f,idx)=>{
-    f=f||{q:'',a:''};
-    byId('faqFormWrap').innerHTML=`<div class="adm-form"><h3>${idx===undefined?'سؤال جدید':'ویرایش سؤال'}</h3>
-      ${fld('پرسش',f.q,'f.q')}
-      ${fld('پاسخ',f.a,'f.a','textarea')}
-      <div class="adm-form-actions"><button class="btn btn-primary btn-sm" id="saveFaqBtn">ذخیره</button><button class="btn btn-ghost btn-sm" id="cancelFaqBtn">انصراف</button></div></div>`;
-    byId('saveFaqBtn').addEventListener('click',()=>{
-      const obj=collectForm(byId('faqFormWrap'),clone(f));
-      if(!obj.q||!obj.q.trim()){toast('متن پرسش الزامی است.','err');return}
-      if(idx===undefined)content.faq.push(obj);else content.faq[idx]=obj;
-      persistAndRefresh('سؤال ذخیره شد.');renderAdminTab();
-    });
-    byId('cancelFaqBtn').addEventListener('click',()=>{byId('faqFormWrap').innerHTML=''});
-  };
-  draw();
-}
-
-/* تب پیام‌ها */
-function admMessages(body){
-  const msgs=LS.get('advan-messages',[]);
-  body.innerHTML=`<h2>پیام‌های دریافتی</h2><p class="adm-sub">${msgs.length?faNum(msgs.length)+' پیام — پیام‌های فرم تماس در همین مرورگر ذخیره شده‌اند.':''}</p>
-  ${msgs.length?'<div id="msgsWrap"></div>':'<p class="adm-sub">هنوز پیامی دریافت نشده است.</p>'}
-  ${msgs.length?'<button class="btn btn-ghost btn-sm" id="clearMsgsBtn">'+I('trash',15)+'پاک کردن همه</button>':''}`;
-  if(msgs.length){
-    byId('msgsWrap').innerHTML=msgs.map((m,i)=>`<div class="msg-card ${m.read?'':'unread'}" style="${m.read?'':'border-color:color-mix(in srgb,var(--accent) 45%,var(--border))'}">
-      <div class="msg-top"><b>${esc(m.name)}</b><span class="role-tag role-user">${esc(m.contact)}</span><time>${esc(new Date(m.date).toLocaleDateString('fa-IR'))}</time></div>
-      ${m.subject&&m.subject!=='بدون موضوع'?`<div class="msg-sub">موضوع: ${esc(m.subject)}</div>`:''}
-      <p>${esc(m.msg)}</p>
-      <div class="adm-form-actions" style="margin-top:.8rem">
-        ${m.read?'':`<button class="btn btn-soft btn-sm" data-read="${i}">${I('eye',15)}خوانده شد</button>`}
-        <button class="btn btn-ghost btn-sm" data-mail="${i}">${I('mail',15)}پاسخ با ایمیل</button>
-        <button class="btn btn-ghost btn-sm" data-delmsg="${i}">${I('trash',15)}حذف</button>
-      </div></div>`).join('');
-    byId('msgsWrap').addEventListener('click',e=>{
-      const r=e.target.closest('[data-read]'),ml=e.target.closest('[data-mail]'),dl=e.target.closest('[data-delmsg]');
-      if(r){const ms=LS.get('advan-messages',[]);ms[+r.dataset.read].read=true;LS.set('advan-messages',ms);renderAdminTab()}
-      if(ml){const m=LS.get('advan-messages',[])[+ml.dataset.mail];location.href='mailto:'+encodeURIComponent(m.contact)+'?subject='+encodeURIComponent('پاسخ به پیام شما در سایت '+content.brand.name)}
-      if(dl){const ms=LS.get('advan-messages',[]);ms.splice(+dl.dataset.delmsg,1);LS.set('advan-messages',ms);toast('پیام حذف شد.','info');renderAdminTab()}
-    });
-    byId('clearMsgsBtn').addEventListener('click',()=>{
-      LS.del('advan-messages');toast('همهٔ پیام‌ها پاک شدند.','info');renderAdminTab();
-    });
-  }
-}
-
-/* تب کاربران */
-async function admUsers(body){
-  body.innerHTML=`<h2>کاربران</h2><p class="adm-sub">در حال دریافت…</p><div id="usersWrap"></div>`;
-  if(!sb){byId('usersWrap').innerHTML='<p class="adm-sub">سرویس در دسترس نیست.</p>';return}
-  let users,err;
-  try{const r=await sb.from('profiles').select('*').order('created_at',{ascending:false});users=r.data;err=r.error}catch(e){err=e}
-  if(err||!users){
-    byId('usersWrap').innerHTML=`<p class="adm-sub">دریافت کاربران ناموفق بود. اگر جدول profiles را هنوز نساخته‌اید، فایل supabase_setup.sql را در SQL Editor اجرا کنید.<br><small>${esc(String((err&&err.message)||err||''))}</small></p>`;
-    return;
-  }
-  const me=currentUser();
-  const weekAgo=Date.now()-7*864e5;
-  const fresh=users.filter(x=>x.created_at&&new Date(x.created_at).getTime()>weekAgo).length;
-  const admins=users.filter(x=>x.role==='admin').length;
-  body.querySelector('p.adm-sub').textContent=`حساب‌های مشترک میان همهٔ اپ‌ها — ${faNum(users.length)} حساب، ${faNum(admins)} مدیر، ${faNum(fresh)} ثبت‌نام در هفتهٔ اخیر.`;
-  byId('usersWrap').innerHTML=users.map(u=>`<div class="user-row">
-    <span class="avatar" aria-hidden="true">${esc((u.full_name||u.email||'ک').trim()[0]||'ک')}</span>
-    <div class="adm-row-body"><b>${esc(u.full_name||'—')}</b><small>${esc(u.email||'')}${u.created_at?' — '+esc(new Date(u.created_at).toLocaleDateString('fa-IR')):''}</small></div>
-    <span class="role-tag ${u.role==='admin'?'role-admin':'role-user'}">${u.role==='admin'?'مدیر':'کاربر'}</span>
-    ${me&&u.id!==me.id?`<div class="adm-row-acts">
-      <button data-promote="${esc(u.id)}" data-next="${u.role==='admin'?'user':'admin'}" title="${u.role==='admin'?'سلب دسترسی مدیر':'ارتقا به مدیر'}" aria-label="تغییر نقش">${I(u.role==='admin'?'user':'shield',15)}</button>
-    </div>`:''}
-  </div>`).join('');
-  byId('usersWrap').addEventListener('click',async e=>{
-    const pr=e.target.closest('[data-promote]');if(!pr)return;
-    const {error}=await sb.from('profiles').update({role:pr.dataset.next}).eq('id',pr.dataset.promote);
-    if(error){toast('تغییر نقش ناموفق بود: '+error.message,'err');return}
-    toast('نقش کاربر تغییر کرد.');renderAdminTab();sbRefreshProfile();
-  });
-}
-
-/* تب تنظیمات */
-function admSettings(body){
-  body.innerHTML=`<h2>تنظیمات</h2><p class="adm-sub">امنیت حساب، پشتیبان‌گیری محتوا و انتشار نسخهٔ به‌روز.</p>
-  <div class="adm-grid2">
-    <div class="adm-card"><h3>${I('lock',17)}تغییر رمز مدیر</h3>
-      ${fld('رمز فعلی','','pw.current','password')}${fld('رمز جدید (حداقل ۶ نویسه)','','pw.next','password')}${fld('تکرار رمز جدید','','pw.next2','password')}
-      <button class="btn btn-primary btn-sm" id="changePwBtn">تغییر رمز</button></div>
-    <div class="adm-card"><h3>${I('download',17)}پشتیبان محتوا</h3>
-      <p>خروجی JSON کل محتوای سایت را ذخیره کنید یا نسخهٔ پشتیبان قبلی را بازگردانید.</p>
-      <div class="adm-form-actions"><button class="btn btn-soft btn-sm" id="expJsonBtn">${I('download',15)}خروجی JSON</button><button class="btn btn-ghost btn-sm" id="impJsonBtn">${I('upload',15)}ورود JSON</button></div>
-      <textarea id="impJsonArea" rows="3" style="margin-top:.8rem;width:100%;border:1px solid var(--border-2);border-radius:12px;padding:.7rem;background:var(--bg);font-size:.75rem" placeholder='متن JSON را اینجا بچسبانید…'></textarea></div>
-    <div class="adm-card"><h3>${I('globe',17)}انتشار نسخهٔ به‌روز</h3>
-      <p>فایل کامل سایت را با محتوای فعلی دریافت کنید و به‌جای <b>index.html</b> قبلی در گیت‌هاب/کلادفلر قرار دهید تا همهٔ بازدیدکنندگان محتوای جدید را ببینند.</p>
-      <button class="btn btn-primary btn-sm" id="bakeBtn">${I('download',15)}دانلود index.html به‌روز</button></div>
-    <div class="adm-card"><h3>${I('refresh',17)}بازنشانی محتوا</h3>
-      <p>بازگرداندن همهٔ محتوا به مقادیر پیش‌فرض اولیه.</p>
-      <button class="btn btn-danger btn-sm" id="resetBtn">${I('refresh',15)}بازنشانی به پیش‌فرض</button></div>
-  </div>
-  <div class="adm-hint" style="margin-top:1.2rem">نکته: این سایت کاملاً ایستا است؛ محتوای ویرایش‌شده در مرورگر شما (localStorage) و پیام‌ها/کاربران در همان مرورگر ذخیره می‌شوند. برای انتشار محتوای جدید برای همه، از دکمهٔ «دانلود index.html به‌روز» استفاده کنید و فایل را روی هاست جایگزین کنید.</div>`;
-  byId('changePwBtn').addEventListener('click',async()=>{
-    const cur=body.querySelector('[data-k="pw.current"]').value,next=body.querySelector('[data-k="pw.next"]').value,next2=body.querySelector('[data-k="pw.next2"]').value;
-    const me=currentUser();
-    if((await hashPw(cur,me.salt))!==me.hash){toast('رمز فعلی اشتباه است.','err');return}
-    if(next.length<6){toast('رمز جدید باید حداقل ۶ نویسه باشد.','err');return}
-    if(next!==next2){toast('تکرار رمز مطابقت ندارد.','err');return}
-    const us=getUsers(),idx=us.findIndex(u=>u.u===me.u);
-    us[idx].hash=await hashPw(next,us[idx].salt);setUsers(us);
-    body.querySelector('[data-k="pw.current"]').value=body.querySelector('[data-k="pw.next"]').value=body.querySelector('[data-k="pw.next2"]').value='';
-    toast('رمز عبور با موفقیت تغییر کرد.');
-  });
-  byId('expJsonBtn').addEventListener('click',()=>{
-    downloadBlob(new Blob([JSON.stringify(content,null,2)],{type:'application/json;charset=utf-8'}),'advan-content.json');
-    toast('فایل JSON محتوا دانلود شد.');
-  });
-  byId('impJsonBtn').addEventListener('click',()=>{
-    try{
-      const obj=JSON.parse(byId('impJsonArea').value);
-      if(!obj.products||!obj.brand)throw 0;
-      content=obj;persistAndRefresh('محتوا از JSON بازگردانده شد.');
-    }catch(e){toast('JSON نامعتبر است.','err')}
-  });
-  byId('bakeBtn').addEventListener('click',bakeSite);
-  byId('resetBtn').addEventListener('click',()=>{
-    const btn=byId('resetBtn');
-    if(btn.dataset.arm){content=clone(DEFAULT_CONTENT);saveContent();renderAll();toast('محتوا به حالت پیش‌فرض بازگشت.');btn.dataset.arm='';btn.textContent='بازنشانی به پیش‌فرض';renderAdminTab()}
-    else{btn.dataset.arm='1';btn.textContent='مطمئن هستید؟ دوباره کلیک کنید';setTimeout(()=>{if(btn.dataset.arm){btn.dataset.arm='';btn.textContent='بازنشانی به پیش‌فرض'}},4000)}
-  });
-}
 
 </script>
 
@@ -2340,6 +1897,8 @@ function init(){
   initSupabaseAuth();
   renderAll();
   observeReveals();
+  loadRemoteContent();
+  initTurnstile();
   initCounters();
   initScroll();
   initMenu();
@@ -2357,12 +1916,13 @@ function init(){
   byId('settingsBtn').addEventListener('click',openSettings);
   byId('ctaB').addEventListener('click',()=>byId('chatFab').click());
   const openHashTarget=async()=>{
-    if(location.hash==='#admin'||location.hash==='#login'){
-      await authReady;
-      const u=currentUser();
-      if(u&&u.role==='admin')openAdmin();else openAuth(true);
-      history.replaceState(null,'',location.pathname+location.search);
-    }
+    if(location.hash!=='#admin'&&location.hash!=='#login')return;
+    const wantAdmin=location.hash==='#admin';
+    history.replaceState(null,'',location.pathname+location.search);
+    await authReady;
+    const u=currentUser();
+    if(wantAdmin&&u&&u.role==='admin'){location.href='/admin.html';return}
+    openAuth(wantAdmin);
   };
   window.addEventListener('hashchange',openHashTarget);
   openHashTarget();
