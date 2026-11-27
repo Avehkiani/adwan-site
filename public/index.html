@@ -989,15 +989,32 @@ const DEFAULT_CONTENT = /*__CONTENT_START__*/{
 }/*__CONTENT_END__*/;
 
 /* ---------- وضعیت برنامه ---------- */
-let content=LS.get('advan-content',null);
-if(!content||!content.products){content=clone(DEFAULT_CONTENT);}
+/* ادغام ایمن با پیش‌فرض: ردیف site_content می‌تواند ناقص یا خالی باشد؛ هر کلید یا شیء غایب از
+   DEFAULT_CONTENT پر می‌شود. رشته/آرایهٔ خالی مقدار صریح کاربر است و جایگزین نمی‌شود. */
+const isMergeable=v=>!!v&&typeof v==='object'&&!Array.isArray(v);
+function mergeContent(base,patch){
+  const out=clone(base);
+  if(!isMergeable(patch))return out;
+  for(const k of Object.keys(patch)){
+    const p=patch[k],b=out[k];
+    if(p===undefined||p===null)continue;
+    if(isMergeable(p)){out[k]=isMergeable(b)?mergeContent(b,p):p;continue}
+    out[k]=p;
+  }
+  return out;
+}
+let content=mergeContent(DEFAULT_CONTENT,LS.get('advan-content',null));
 /* محتوای منتشرشده از Supabase خوانده می‌شود؛ نسخهٔ محلی فقط کشِ نمایش سریع است */
 async function loadRemoteContent(){
   if(!sb)return;
   try{
     const {data,error}=await sb.from('site_content').select('data').eq('id','main').maybeSingle();
-    if(error||!data||!data.data||!data.data.products)return;
-    content=Object.assign(clone(DEFAULT_CONTENT),data.data);
+    if(error){
+      /* جدول ساخته نشده، RLS بسته است یا شبکه قطع شد → پیش‌فرض/کش قبلی نمایش داده می‌شود */
+      console.warn('[advan] محتوای سایت خوانده نشد؛ پیش‌فرض استفاده می‌شود.',error.message||error);
+      return;
+    }
+    content=mergeContent(DEFAULT_CONTENT,data&&data.data);
     LS.set('advan-content',content);
     renderAll();observeReveals();
   }catch(e){}

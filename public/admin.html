@@ -57,6 +57,7 @@ h2{font-size:1.25rem;font-weight:900;margin-bottom:.3rem}
 .tag{display:inline-block;padding:.2rem .6rem;border-radius:99px;font-size:.72rem;font-weight:800}
 .tag.admin{background:rgba(79,110,247,.14);color:var(--accent)}
 .tag.user{background:rgba(48,209,88,.13);color:var(--ok)}
+.tag.bad{background:rgba(255,69,58,.14);color:var(--err)}
 select.role{border:1px solid var(--border);background:var(--bg);color:var(--text);border-radius:9px;padding:.3rem .5rem;font:inherit;font-size:.78rem;font-weight:700}
 #toast{position:fixed;bottom:1.4rem;inset-inline-start:50%;transform:translateX(50%);background:var(--text);color:var(--bg);padding:.7rem 1.3rem;border-radius:12px;font-weight:700;font-size:.88rem;opacity:0;pointer-events:none;transition:opacity .3s;z-index:99;max-width:90vw}
 #toast.on{opacity:1}
@@ -99,8 +100,7 @@ const faNum=n=>fa(Number(n||0).toLocaleString('en-US'));
 const fdate=iso=>{try{return iso?new Date(iso).toLocaleDateString('fa-IR')+' — '+new Date(iso).toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'}):'—'}catch(e){return '—'}};
 const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
 
-const TABS=[['content','محتوای سایت'],['products','محصولات'],['blog','بلاگ'],['faq','سوالات متداول'],['messages','پیام‌ها'],['users','کاربران'],['settings','تنظیمات']];
-const EMPTY_CONTENT={brand:{name:'آدوان',latin:'ADWAN.IR',tagline:'',blurb:''},hero:{badge:'',title:'',lead:'',ctaA:'مشاهدهٔ محصولات',ctaB:''},about:{paras:[],values:[],stats:[]},products:[],blog:[],faq:[],contact:{}};
+const TABS=[['content','محتوای سایت'],['products','محصولات'],['blog','بلاگ'],['faq','سوالات متداول'],['messages','پیام‌ها'],['users','کاربران'],['status','وضعیت'],['settings','تنظیمات']];
 
 let ME=null, content=null, unread=0, tab='content';
 
@@ -151,11 +151,20 @@ async function refreshUnread(){
     unread=count||0;
   }catch(e){unread=0}
 }
+/* ردیف ناقص را به شکل قابل ویرایش درمی‌آورد (همان کاری که سایت با پیش‌فرض می‌کند) */
+function normalizeContent(c){
+  if(!c||typeof c!=='object'||Array.isArray(c))return null;
+  const obj=clone(c);
+  ['brand','hero','about','contact'].forEach(k=>{obj[k]=(obj[k]&&typeof obj[k]==='object'&&!Array.isArray(obj[k]))?obj[k]:{}});
+  ['products','blog','faq'].forEach(k=>{obj[k]=Array.isArray(obj[k])?obj[k]:[]});
+  ['paras','values','stats'].forEach(k=>{obj.about[k]=Array.isArray(obj.about[k])?obj.about[k]:[]});
+  return obj;
+}
 async function loadContent(){
   let data=null,error=null;
   try{const r=await sb.from('site_content').select('data').eq('id','main').maybeSingle();data=r.data;error=r.error}catch(e){error=e}
   if(error){toast('خواندن محتوا ناموفق بود: '+((error.message)||error))}
-  content=(data&&data.data&&data.data.products)?data.data:null;
+  content=normalizeContent(data&&data.data);
   return content;
 }
 
@@ -168,18 +177,19 @@ function draw(){
     tab=b.dataset.tab;draw();
   });
   const pane=byId('pane');
-  ({content:tabContent,products:tabProducts,blog:tabBlog,faq:tabFaq,messages:tabMessages,users:tabUsers,settings:tabSettings})[tab](pane);
+  ({content:tabContent,products:tabProducts,blog:tabBlog,faq:tabFaq,messages:tabMessages,users:tabUsers,status:tabStatus,settings:tabSettings})[tab](pane);
 }
 
 /* ---------- تب محتوا ---------- */
 function tabContent(pane){
   if(!content){
-    pane.innerHTML=`<h2>محتوای سایت</h2><p class="sub">محتوایی در دیتابیس پیدا نشد. با ساخت ردیف اولیه شروع کنید.</p>
-      <button class="btn primary" id="seedBtn">ساخت محتوای اولیه</button>`;
-    byId('seedBtn').addEventListener('click',async()=>{
-      content=clone(EMPTY_CONTENT);
-      if(await saveContent('محتوای اولیه ساخته شد؛ اکنون فیلدها را پر کنید.'))draw();
-    });
+    /* ردیف محتوا نیست؛ عمداً ردیف خالی ساخته نمی‌شود تا معلوم بماند محتوا جا افتاده است. */
+    pane.innerHTML=`<h2>محتوای سایت</h2>
+      <div class="card"><h3>ردیف محتوا در دیتابیس نیست</h3>
+        <p class="muted">سایت در این وضعیت خالی نیست و با محتوای پیش‌فرض داخلی نمایش داده می‌شود، اما از پنل قابل ویرایش نیست. برای ساخت ردیف، بخش <code>seed</code> فایل <code>supabase_setup.sql</code> را یک‌بار در SQL Editor اجرا کنید.</p>
+        <div class="actions"><button class="btn primary sm" id="gotoStatus">دیدن تب وضعیت</button></div>
+      </div>`;
+    byId('gotoStatus').addEventListener('click',()=>{tab='status';draw()});
     return;
   }
   const b=content.brand||{},h=content.hero||{},ct=content.contact||{},a=content.about||{};
@@ -453,6 +463,87 @@ function tabSettings(pane){
       if(await saveContent('محتوا از JSON بازگردانده شد.'))draw();
     }catch(e){toast('JSON نامعتبر است.')}
   });
+}
+
+/* ---------- تب وضعیت ---------- */
+function isMissingTable(e){
+  return (e&&e.code==='42P01')||/does not exist|Could not find the table|schema cache/i.test(String((e&&e.message)||''));
+}
+async function checkSiteContent(){
+  let data=null,error=null;
+  try{const r=await sb.from('site_content').select('data,updated_at').eq('id','main').maybeSingle();data=r.data;error=r.error}catch(e){error=e}
+  if(error){
+    return {ok:false,label:'جدول site_content',detail:isMissingTable(error)?'ساخته نشده یا شناسایی نمی‌شود ('+String(error.message||error)+')':'خطای خواندن: '+String((error&&error.message)||error)};
+  }
+  if(!data)return {ok:false,label:'ردیف محتوای سایت',detail:'جدول هست ولی ردیف main وجود ندارد؛ سایت با محتوای پیش‌فرض داخلی نمایش داده می‌شود.'};
+  const d=(data.data&&typeof data.data==='object'&&!Array.isArray(data.data))?data.data:{};
+  const missing=['brand','hero','about','products','blog','faq','contact'].filter(k=>{
+    const v=d[k];
+    if(v===undefined||v===null)return true;
+    return (typeof v==='object'&&!Array.isArray(v)&&!Object.keys(v).length);
+  });
+  const emptyLists=['products','blog','faq'].filter(k=>Array.isArray(d[k])&&!d[k].length);
+  if(missing.length)return {ok:false,label:'ردیف محتوای سایت ناقص است',detail:'این بخش‌ها در ردیف نیستند: '+missing.join('، ')+' — سایت آن‌ها را از پیش‌فرض پر می‌کند، ولی در پنل ویرایش‌پذیر نیستند. با یک‌بار ذخیره در تب «محتوای سایت» ردیف کامل می‌شود.'};
+  return {ok:true,label:'ردیف محتوای سایت',detail:'کامل است'+(emptyLists.length?' (خالی: '+emptyLists.join('، ')+')':'')+(data.updated_at?' — آخرین ذخیره: '+fdate(data.updated_at):'')+'.'};
+}
+async function checkTable(name,fa){
+  const label='جدول '+name+' ('+fa+')';
+  let error=null,count=null;
+  try{const r=await sb.from(name).select('*',{count:'exact',head:true});error=r.error;count=r.count}catch(e){error=e}
+  if(error)return {ok:false,label:label,detail:isMissingTable(error)?'ساخته نشده — کل supabase_setup.sql را در SQL Editor اجرا کنید.':'خطا: '+String((error&&error.message)||error)};
+  return {ok:true,label:label,detail:'در دسترس است'+(typeof count==='number'?' — '+faNum(count)+' ردیف':'')+'.'};
+}
+async function checkContactFn(){
+  try{
+    const res=await fetch(SB_URL+'/functions/v1/contact',{
+      method:'POST',
+      headers:{'content-type':'application/json','apikey':SB_KEY,'authorization':'Bearer '+SB_KEY},
+      body:'{}' /* payload عمداً ناقص است تا هیچ پیامی ثبت نشود */
+    });
+    let body=null;try{body=await res.json()}catch(e){}
+    const err=String((body&&body.error)||'');
+    if(res.status===404)return {ok:false,label:'تابع contact',detail:'استقرار نیافته (HTTP 404) — دستور: supabase functions deploy contact'};
+    if(err==='invalid_name')return {ok:true,label:'تابع contact',detail:'در دسترس است؛ کپچا در سمت سرور اجباری نیست (TURNSTILE_SECRET ست نشده): supabase secrets set TURNSTILE_SECRET=...'};
+    if(err==='captcha_failed')return {ok:true,label:'تابع contact',detail:'در دسترس است و کپچای سمت سرور فعال است.'};
+    if(err==='server_not_configured')return {ok:false,label:'تابع contact',detail:'اجرا می‌شود ولی SUPABASE_SERVICE_ROLE_KEY به آن نمی‌رسد.'};
+    return {ok:!!res.ok,label:'تابع contact',detail:'پاسخ نامنتظره: HTTP '+res.status+' '+JSON.stringify(body||{})};
+  }catch(e){
+    return {ok:false,label:'تابع contact',detail:'درخواست ناموفق (استقرارنیافته/CORS/شبکه): '+String((e&&e.message)||e)};
+  }
+}
+async function checkTurnstileKey(){
+  try{
+    const res=await fetch('/index.html',{cache:'no-store'});
+    if(!res.ok)throw new Error('HTTP '+res.status);
+    const html=await res.text();
+    const m=html.match(/TURNSTILE_SITEKEY\s*=\s*'([^']*)'/);
+    if(!m)return {ok:false,label:'کلید عمومی Turnstile',detail:'در index.html پیدا نشد.'};
+    if(!m[1].trim())return {ok:false,label:'کلید عمومی Turnstile',detail:'خالی است؛ ویجت کپچا در فرم‌های ورود و تماس رندر نمی‌شود. مقدار TURNSTILE_SITEKEY را در public/index.html پر کنید.'};
+    return {ok:true,label:'کلید عمومی Turnstile',detail:'ست شده ('+m[1].slice(0,6)+'…).'};
+  }catch(e){
+    return {ok:false,label:'کلید عمومی Turnstile',detail:'خواندن index.html ناموفق: '+String((e&&e.message)||e)};
+  }
+}
+async function tabStatus(pane){
+  pane.innerHTML=`<h2>وضعیت</h2><p class="sub">بررسی خودکار پیکربندی؛ هر ردیف قرمز همان چیزی است که جا افتاده.</p>
+  <div class="card"><div id="statusList"><p class="muted">در حال بررسی…</p></div>
+    <div class="actions"><button class="btn primary sm" id="recheckBtn">بررسی مجدد</button></div>
+  </div>`;
+  const run=async()=>{
+    byId('statusList').innerHTML='<p class="muted">در حال بررسی…</p>';
+    const results=await Promise.all([
+      checkSiteContent(),
+      checkTable('messages','پیام‌های فرم تماس'),
+      checkTable('newsletter','خبرنامه'),
+      checkContactFn(),
+      checkTurnstileKey()
+    ]);
+    const bad=results.filter(r=>!r.ok).length;
+    byId('statusList').innerHTML=`<p class="muted" style="margin-bottom:.8rem">${bad?'⚠️ '+faNum(bad)+' مورد نیاز به رسیدگی دارد.':'✅ همه‌چیز درست است؛ چیزی جا نیفتاده.'}</p>`+
+      results.map(r=>`<div class="row"><div class="grow"><b>${esc(r.label)}</b><small>${esc(r.detail)}</small></div>${r.ok?'<span class="tag user">سالم</span>':'<span class="tag bad">مشکل</span>'}</div>`).join('');
+  };
+  byId('recheckBtn').addEventListener('click',run);
+  run();
 }
 
 /* ---------- راه‌اندازی ---------- */
